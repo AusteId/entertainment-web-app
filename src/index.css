@@ -31,7 +31,7 @@
     @apply text-white text-hs font-medium;
   }
 
-  .body-sm {
+  .body-md {
     @apply text-white text-bm font-light;
   }
 
