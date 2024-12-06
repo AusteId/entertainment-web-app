@@ -1,0 +1,15 @@
+button {
+    width: 140px; 
+    height: 60px; 
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+.list-text-color ul li:nth-child(even) {
+font-size: 10px;
+margin-top: 4.6px;
+color: rgb(127, 127, 127);
+}
+
+.list-text-color ul li {
+    color: rgb(185, 185, 185);
+}
