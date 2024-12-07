@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "concurrently \"json-server ./data/data.json -p 7777\" \"vite\"",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
@@ -11,10 +12,12 @@
   },
   "dependencies": {
     "axios": "^1.7.9",
+    "concurrently": "^9.1.0",
+    "dotenv": "^16.4.7",
     "json-server": "^1.0.0-beta.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-form-hook": "^0.0.1",
+    "react-hook-form": "^7.54.0",
     "react-router": "^7.0.2"
   },
   "devDependencies": {

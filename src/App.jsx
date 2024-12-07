@@ -6,8 +6,9 @@ import { MainLayout } from './layouts/MainLayout';
 // Pages
 import NotFoundPage from './pages/NotFoundPage';
 import HomePage from './pages/HomePage';
-import RegistrationPage from './pages/RegistrationPage';
 import MoviesPage from './pages/MoviesPage';
+import TvSeriesPage from './pages/TvSeriesPage';
+import BookmarkedPage from './pages/BookmarkedPage';
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
       <Routes>
         <Route element={<MainLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="registration" element={<RegistrationPage />} />
           <Route path="movies" element={<MoviesPage />} />
+          <Route path="tv-series" element={<TvSeriesPage />} />
+          <Route path="bookmarked" element={<BookmarkedPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
