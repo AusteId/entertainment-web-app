@@ -1,24 +1,56 @@
-import { useForm } from "react-form-hook";
+import { useForm } from "react-hook-form"
 
 const SignUpForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+
+
+    const formSubmitHandler = () => {
+
+    }
+
     return (
         < div className=" flex justify-center min-h-screen items-center">
             <section className="grid border rounded-[1.25rem] bg-darkBlue w-[25rem] h-[26.125rem]">
                 <h1 className="text-white font-medium text-hl font-outfit pt-[2rem] pl-[2rem] pb-[2.5rem]">Sign Up</h1>
-                <form className="grid" noValidate>
-                    <div className="px-[2rem] pb-[1.5rem]">
-                        <input type="email" placeholder="Email address" className="bg-darkBlue border-b border-lightBlue w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] placeholder:leading-[1.5] py-[0.25rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white" {...register("email", {
+                <form onSubmit={handleSubmit(formSubmitHandler)} className="grid" noValidate>
+                    <div className="px-[2rem] pb-[1.5rem] relative">
+                        <input type="email" placeholder="Email address" className={`text-bm bg-darkBlue border-b ${errors.password ? "border-red" : "border-lightBlue"} w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] placeholder:leading-[1.5] py-[0.25rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white`} {...register("email", {
                             required: "Can't be empty",
-                        })}/>
+                            pattern: {
+                                value: /^(?=.{1,254}$)(?=.{1,64}@)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+                                message: "Invalid email address",
+                            },
+                        })}
+                        />
+                        <p className="font-outfit text-red text-bs font-medium whitespace-nowrap absolute top-0 right-[3.06rem]">{errors.email?.message}</p>
                     </div>
-                    <div className="px-[2rem] pb-[1.5rem]">
-                        <input type="password" placeholder="Password" className="bg-darkBlue border-b border-lightBlue w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white" {...register("password", {
+                    <div className="px-[2rem] pb-[1.5rem] relative">
+                        <input type="password" placeholder="Password" className={`text-bm bg-darkBlue border-b ${errors.password ? "border-red" : "border-lightBlue"} w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white`} {...register("password", {
                             required: "Can't be empty",
-                        })}/>
+                            minLength: {
+                                value: 8,
+                                message: "Password must be at least 8 characters long",
+                            },
+                            pattern: {
+                                value: /^(?=.*[a-z])(?=.*[A-Z]).+$/,
+                                message: "Password must contain both uppercase and lowercase letters",
+                            }
+                        })} />
+                        <p className={`font-outfit text-red ${errors.password?.message.includes("empty") ? "text-bs" : "text-[0.7rem]"} font-medium whitespace-nowrap absolute top-0 right-[3.06rem]`}>{errors.password?.message}</p>
                     </div>
-                    <div className="px-[2rem] pb-[1.5rem]">
-                        <input type="password" placeholder="Repeat password" className="bg-darkBlue border-b border-lightBlue w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white" /> </div>
+                    <div className="px-[2rem] pb-[1.5rem] relative">
+                        <input type="password" placeholder="Repeat password" className={`text-bm bg-darkBlue border-b ${errors.password ? "border-red" : "border-lightBlue"} w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white`} {...register("repeatPassword", {
+                            required: "Can't be empty",
+                            minLength: {
+                                value: 8,
+                                message: "Password must be at least 8 characters long",
+                            },
+                            pattern: {
+                                value: /^(?=.*[a-z])(?=.*[A-Z]).+$/,
+                                message: "Password must contain both uppercase and lowercase letters",
+                            }
+                        })} />
+                        <p className={`font-outfit text-red ${errors.repeatPassword?.message.includes("empty") ? "text-bs" : "text-[0.7rem]"} font-medium whitespace-nowrap absolute top-0 right-[3.06rem]`}>{errors.repeatPassword?.message}</p></div>
                     <button className="text-white pb-[1.5rem]">Create an account</button>
                 </form>
                 <div className="inline-block text-center pb-[2rem]">
