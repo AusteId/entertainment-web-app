@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { getByEmail } from "../api/get";
 import { addUser } from "../api/post";
+import {generateHash} from "../utils/passwordHash";
 
 const SignUpForm = () => {
     const { register, handleSubmit, formState: { errors }, reset, setError } = useForm();
@@ -35,7 +36,9 @@ const SignUpForm = () => {
                 setErrorMessage("Passwords do not match");
             } else {
                 const { repeatPassword, ...userData } = data;
-                const newUser = await addUser(userData);
+                const hashedPassword = await generateHash(data.password);
+                const newUser = {...userData, password: hashedPassword};
+                await addUser(newUser);
                 setUsers(prev => [...prev, newUser]);
                 reset();
                 setErrorMessage("");
