@@ -1,16 +1,43 @@
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { getByEmail } from "../api/get";
+import { addUser } from "../api/post";
 
 const SignUpForm = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const [users, setUsers] = useState([]);
+    const [error, setError] = useState("");
 
+    const checkIfEmailExists = async (data) => {
+        const email = data.email;
+        const isUserExist = await getByEmail(email);
+        if (isUserExist && isUserExist.length > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-    const formSubmitHandler = () => {
-
+    const formSubmitHandler = async (data) => {
+        try {
+            const isEmailExist = await checkIfEmailExists(data);
+            if (!isEmailExist) {
+                const newUser = await addUser(data);
+                setUsers(prev => [...prev, newUser]);
+                reset();
+                setError("");
+            } else {
+                setError("email", { type: "manual", message: "This email already exists" });
+            }
+        }
+        catch (error) {
+            setError(error.message)
+        }
     }
 
     return (
         < div className=" flex justify-center min-h-screen items-center">
-            <section className="grid border rounded-[1.25rem] bg-darkBlue w-[25rem] h-[26.125rem]">
+            <section className="grid border rounded-[1.25rem] bg-darkBlue w-[20.4375rem] h-[26.25rem] md:w-[25rem] md:h-[26.125rem]">
                 <h1 className="text-white font-medium text-hl font-outfit pt-[2rem] pl-[2rem] pb-[2.5rem]">Sign Up</h1>
                 <form onSubmit={handleSubmit(formSubmitHandler)} className="grid" noValidate>
                     <div className="px-[2rem] pb-[1.5rem] relative">

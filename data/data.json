@@ -1,5 +1,12 @@
 {
-  "users": [{}],
+  "users": [
+    {
+      "id": "dc43",
+      "email": "bb@bb.com",
+      "password": "Password",
+      "repeatPassword": "Password"
+    }
+  ],
   "movies": [
     {
       "title": "Beyond Earth",
