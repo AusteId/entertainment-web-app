@@ -33,11 +33,16 @@ export const BasicCard = () => {
         return (
           <div key={Card.id}>
             <div className="relative group mb-2 bg-dark/25 ">
+            <picture>
+            <source media="(max-width: 568px)" srcSet={Card.thumbnail.regular.small} alt="thumbnail" />
+            <source media="(max-width: 768px)" srcSet={Card.thumbnail.regular.medium} alt="thumbnail" />
+            <source media="(min-width: 768px)" srcSet={Card.thumbnail.regular.large} alt="thumbnail" />
               <img
                 src={Card.thumbnail.regular.large}
                 alt="thumbnail"
                 className="rounded-md group-hover:brightness-50 duration-200"
               />
+              </picture>
               <button
                 class="absolute  flex items-center opacity-0 group-hover:opacity-100 rounded-full 
   duration-200 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
