@@ -4,8 +4,8 @@ import { NavLink } from "react-router";
 const navItems = [
   { to: "/#", icon: "icon-nav-home.svg", alt: "Home" },
   { to: "/movies", icon: "icon-nav-movies.svg", alt: "Movies" },
-  { to: "/series", icon: "icon-nav-tv-series.svg", alt: "Series" },
-  { to: "/bookmark", icon: "icon-nav-bookmark.svg", alt: "Bookmark" },
+  { to: "/tv-series", icon: "icon-nav-tv-series.svg", alt: "Series" },
+  { to: "/bookmarked", icon: "icon-nav-bookmark.svg", alt: "Bookmark" },
 ];
 
 // Logo component
@@ -16,9 +16,7 @@ const Logo = () => (
       alt="Logo"
       className="
       w-[25px] h-[20px]
-      md:w-[32px] md:h-[25.6px]
-      xl:w-[32px] xl:h-[25.6px]"
-    />
+      md:w-[32px] md:h-[25.6px]" />
   </NavLink>
 );
 
@@ -30,19 +28,18 @@ const NavIcon = ({ to, icon, alt, className = "" }) => (
       `group relative flex items-center justify-center ${
         isActive ? "filter brightness-[4]" : ""
       } ${className}`
-    }
-  >
+    }>
     <div
       className="
-      bg-lightBlue transition duration-500 group-hover:bg-red
-      w-[16px] h-[16px]
-      md:w-[20px] md:h-[20px]"
+        bg-lightBlue transition duration-500 group-hover:bg-red
+        w-[16px] h-[16px]
+        md:w-[20px] md:h-[20px]"
       style={{
         mask: `url('/assets/${icon}') center/contain no-repeat`,
         WebkitMask: `url('/assets/${icon}') center/contain no-repeat`,
       }}
-      aria-label={alt}
-    ></div>
+      aria-label={alt}>
+    </div>
   </NavLink>
 );
 
@@ -55,8 +52,7 @@ const Avatar = () => (
       className="rounded-full border border-white
       w-[24px] h-[24px]
       md:w-[32px] md:h-[32px]
-      xl:w-[40px] xl:h-[40px]"
-    />
+      xl:w-[40px] xl:h-[40px]" />
   </NavLink>
 );
 
@@ -66,30 +62,26 @@ const Navbar = () => (
     <nav className="bg-darkBlue flex items-center justify-between p-4
     sm:p-5
     md:rounded-2xl md:m-[24px]
-    xl:p-0 xl:pt-[36px] xl:h-screen xl:w-[96px] xl:flex-col xl:m-0 xl:left-[32px] xl:top-[36px] xl:sticky
-    2xl:h-[960px]">
+    xl:p-0 xl:pt-[36px] xl:h-screen xl:w-[96px] xl:flex-col xl:m-0 xl:left-[32px] xl:top-[0px] xl:sticky
+    2xl:h-[960px] 2xl:mt-[36px]">
+      
       {/* Logo */}
-      <div className="
-      md:ml-[16px]
-      lg:mt-[16px]">
+      <div className="flex justify-center items-center xl:mt-[32px]">
         <Logo />
       </div>
 
       {/* Icons */}
-      <div className="flex
-      space-x-[24px]
+      <div className="flex items-center space-x-[20px] space-y-[0px] 
       md:space-x-[32px]
-      xl:space-x-0 xl:flex-col xl:items-center xl:space-y-[32px]">
+      xl:space-x-[0px] xl:flex-col xl:pt-[80px] xl:space-y-[40px]">
         {navItems.map(({ to, icon, alt }) => (
           <NavIcon key={to} to={to} icon={icon} alt={alt} />
         ))}
       </div>
 
       {/* Avatar */}
-      <div className="
-      md:mr-[16px]
-      lg:mb-[16px]
-      xl:mr-0 xl:mb-[32px]">
+      <div className="flex justify-center items-center
+      xl:mt-auto xl:mb-[32px]">
         <Avatar />
       </div>
     </nav>
