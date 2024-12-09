@@ -2,9 +2,7 @@
 
 <ul>
 <li>npm i</li>
-<li>windows os: npx json-server .\data\data.json -p 7777</li>
-<li>linux os: npx json-server data/data.json -p 7777</li>
-<li>npm run dev</li>
+<li>npm run start</li>
 </ul>
 
 # API endpoints
