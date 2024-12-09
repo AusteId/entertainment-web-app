@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { getByEmail } from "../api/get";
 import { addUser } from "../api/post";
-import {generateHash} from "../utils/passwordHash";
+import { generateHash } from "../utils/passwordHash";
+import Button from "./shared/Button";
 
 const SignUpForm = () => {
     const { register, handleSubmit, formState: { errors }, reset, setError } = useForm();
@@ -37,7 +38,7 @@ const SignUpForm = () => {
             } else {
                 const { repeatPassword, ...userData } = data;
                 const hashedPassword = await generateHash(data.password);
-                const newUser = {...userData, password: hashedPassword};
+                const newUser = { ...userData, password: hashedPassword };
                 await addUser(newUser);
                 setUsers(prev => [...prev, newUser]);
                 reset();
@@ -93,7 +94,9 @@ const SignUpForm = () => {
                             }
                         })} />
                         <p className={`font-outfit text-bs text-red ${errors.repeatPassword?.message.includes("empty") ? "absolute top-0 right-[3.06rem]" : "pt-1 text-[0.9rem] text-wrap"} font-medium whitespace-nowrap`}>{errors.repeatPassword?.message}</p></div>
-                    <button className="text-white pb-[1.5rem]">Create an account</button>
+                    <div className="pb-[1.5rem] text-center">
+                        <Button buttonText="Create an account" />
+                    </div>
                 </form>
                 <div className="inline-block text-center pb-[2rem]">
                     <p className="text-white text-bm font-outfit font-medium">Already have an account?<span className="text-red pl-[0.5rem] font-outfit font-medium"><a href="#">Login</a></span></p>
