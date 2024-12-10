@@ -28,8 +28,10 @@ export default function HomePage() {
                   Logout
                 </span>
               </h2>
+              {/* <h1 className='heading-lg'>{title}</h1> */}
               <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10'>
                 <BasicCard />
+              {/* <MoviesList movies={filteredMovies} /> */}
               </div>
             </div>
           </div>
@@ -40,5 +42,27 @@ export default function HomePage() {
         </div>
       )}
     </main>
+    // <main>
+    //   {userData.userId ? (
+    //     <div className='h-screen flex gap-3 p-4'>
+    //       <div className='flex-1'></div>
+    //       <Search onSearch={() => {}} />
+    //       <h2 className='heading-lg text-white font-outfit mb-8'>
+    //         Recommended for you{' '}
+    //         <span
+    //           onClick={() => handleLogout()}
+    //           className='text-red hover:underline cursor-pointer'
+    //         >
+    //           Logout
+    //         </span>
+    //       </h2>
+    //       <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 '>
+    //         <BasicCard />
+    //       </div>
+    //     </div>
+    //   ) : (
+    //     <FormSwitcher />
+    //   )}
+    // </main>
   );
 }
