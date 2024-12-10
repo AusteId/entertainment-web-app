@@ -1,6 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router';
 import UserContextProvider from './service/UserContextProvider';
+
+// Layouts
 import { MainLayout } from './layouts/MainLayout';
+
+// Pages
 import NotFoundPage from './pages/NotFoundPage';
 import HomePage from './pages/HomePage';
 import MoviesPage from './pages/MoviesPage';
