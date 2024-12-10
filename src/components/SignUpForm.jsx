@@ -55,9 +55,9 @@ const SignUpForm = () => {
     return (
         <>
             <div className="flex justify-center">
-                <img src={logo} alt="logo" className="pt-[3rem] md:pt-[5.5rem] xl:pt[4.9rem]" />
+                <img src={logo} alt="logo" className="pt-[3rem] pb-[3.65rem] md:pt-[5.5rem] md:pb-[4.53rem] lg:pt-[4.9rem]lg:pb-[5.19rem] xl:pt[4.9rem]" />
             </div>
-            < div className=" flex justify-center min-h-screen items-center">
+            < div className=" flex justify-center /*min-h-screen items-center*/">
                 <section className="grid border rounded-[1.25rem] bg-darkBlue w-[20.4375rem] min-h-[26.25rem] md:w-[25rem] md:min-h-[26.125rem]">
                     <h1 className="text-white font-medium text-hl font-outfit pt-[2rem] pl-[2rem] pb-[2.5rem]">Sign Up</h1>
                     <form onSubmit={handleSubmit(formSubmitHandler)} className="flex flex-col" noValidate>
@@ -101,7 +101,7 @@ const SignUpForm = () => {
                             })} />
                             <p className={`font-outfit text-bs text-red ${errors.repeatPassword?.message.includes("empty") ? "absolute top-0 right-[3.06rem]" : "pt-1 text-[0.9rem] text-wrap"} font-medium whitespace-nowrap`}>{errors.repeatPassword?.message}</p></div>
                         <div className="pb-[1.5rem] px-[1.5rem] text-center">
-                            <Button buttonText="Create an account" />
+                            <Button type={"submit"}>Create an account</Button>
                         </div>
                     </form>
                     <div className="inline-block text-center pb-[2rem]">

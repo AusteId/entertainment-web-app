@@ -1,3 +1,10 @@
+import NavBar from "./../components/NavBar";
+
 export default function BookmarkedPage() {
-  return <main>Bookmarked page</main>;
+  return (
+    <>
+      <NavBar />
+      <main>Bookmarked page</main>;
+    </>
+  );
 }
