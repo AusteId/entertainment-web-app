@@ -1,50 +1,39 @@
-import { useEffect, useState } from "react";
 import "./BasicCard.css";
 
-export const BasicCard = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:7777/movies");
-        const data = await response.json();
-        setData(data);
-        setLoading(false);
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
+export const BasicCard = (movie) => {
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:7777/movies");
+  //       const data = await response.json();
+  //       setData(data);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       setError(error.message);
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+  console.log(movie)
 
   return (
     <>
-      {data.map((Card) => {
-        return (
-          <div key={Card.id}>
+{/* 
+          <div key={movie.id}>
             <div className="relative group mb-2 bg-dark/25 ">
-            <picture>
-            <source media="(max-width: 768px)" srcSet={Card.thumbnail.regular.small} alt="thumbnail" />
-            <source media="(max-width: 1023px)" srcSet={Card.thumbnail.regular.medium} alt="thumbnail" />
-            <source media="(min-width: 1024px)" srcSet={Card.thumbnail.regular.large} alt="thumbnail" />
-              <img
-                src={Card.thumbnail.regular.large}
-                alt="thumbnail"
-                className="rounded-md group-hover:brightness-50 duration-200"
-              />
+              <picture>
+                <source media="(max-width: 768px)" srcSet={movie.thumbnail.regular.small} alt="thumbnail" />
+                <source media="(max-width: 1023px)" srcSet={movie.thumbnail.regular.medium} alt="thumbnail" />
+                <source media="(min-width: 1024px)" srcSet={movie.thumbnail.regular.large} alt="thumbnail" />
+                <img
+                  src={movie.thumbnail.regular.large}
+                  alt="thumbnail"
+                  className="rounded-md group-hover:brightness-50 duration-200"
+                />
               </picture>
               <button
-                class="absolute  flex items-center opacity-0 group-hover:opacity-100 rounded-full 
+                className="absolute  flex items-center opacity-0 group-hover:opacity-100 rounded-full 
   duration-200 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
               >
                 <svg
@@ -67,10 +56,10 @@ export const BasicCard = () => {
             </div>
             <div className="list-text-color">
               <ul className="flex text-bs font-ligth font-outfit">
-                <li className="pr-3">{Card.year}</li>
+                <li className="pr-3">{movie.year}</li>
                 <li>&#9679;</li>
                 <li className="pl-3 pr-3 flex">
-                  {Card.category === "Movie" ? (
+                  {movie.category === "Movie" ? (
                     <svg
                       className="mt-1 mr-2"
                       width="16"
@@ -85,7 +74,7 @@ export const BasicCard = () => {
                         opacity=".75"
                       />
                     </svg>
-                  ) : Card.category === "TV Series" ? (
+                  ) : movie.category === "TV Series" ? (
                     <svg
                       className="mt-1 mr-2"
                       width="16"
@@ -101,18 +90,16 @@ export const BasicCard = () => {
                       />
                     </svg>
                   ) : null}
-                  {Card.category}
+                  {movie.category}
                 </li>
                 <li>&#9679;</li>
-                <li className="pl-3">{Card.rating}</li>
+                <li className="pl-3">{movie.rating}</li>
               </ul>
             </div>
-            <h2 className="text-hm text-white font-bold font-medium font-outfit">
-              {Card.title}
+            <h2 className="text-hm text-white font-medium font-outfit">
+              {movie.title}
             </h2>
-          </div>
-        );
-      })}
+          </div> */}
     </>
   );
 };

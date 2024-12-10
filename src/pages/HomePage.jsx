@@ -1,13 +1,13 @@
- JIRA-FP-4-loginform
 import { LoginForm } from "../components/LoginForm";
+import MoviesList from "../components/MoviesList";
 
 import { BasicCard } from "../components/shared/BasicCard";
 import NavBar from "./../components/NavBar";
- master
 
 export default function HomePage() {
   return (
     <>
+    <MoviesList/>
     <NavBar />
     <main>
       {/* <h1 className='heading-lg'>Home page cia</h1> */}

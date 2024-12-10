@@ -42,3 +42,11 @@ export const getUserByEmail = async (email) => {
     return { error: "Unexpected error" };
   }
 };
+
+export const apiGetAllUsers =()=>{
+  try {
+    
+  } catch (e) {
+    
+  }
+}
