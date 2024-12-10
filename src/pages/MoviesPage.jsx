@@ -1,3 +1,10 @@
+import NavBar from "./../components/NavBar";
+
 export default function MoviesPage() {
-  return <main>Movies page</main>;
+  return (
+    <>
+      <NavBar />
+      <main>Movies page</main>;
+    </>
+  );
 }

@@ -1,3 +1,10 @@
+import NavBar from "./../components/NavBar";
+
 export default function TvSeriesPage() {
-  return <main>Tv Series</main>;
+  return (
+    <>
+      <NavBar />
+      <main>Tv Series</main>;
+    </>
+  );
 }
