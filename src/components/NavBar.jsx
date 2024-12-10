@@ -15,8 +15,9 @@ const Logo = () => (
       src="/assets/logo.svg"
       alt="Logo"
       className="
-      w-[25px] h-[20px]
-      md:w-[32px] md:h-[25.6px]" />
+      w-[1.5625rem] h-[1.25rem]
+      md:w-[2rem] md:h-[1.6rem]" />
+      
   </NavLink>
 );
 
@@ -32,8 +33,8 @@ const NavIcon = ({ to, icon, alt, className = "" }) => (
     <div
       className="
         bg-lightBlue transition duration-500 group-hover:bg-red
-        w-[16px] h-[16px]
-        md:w-[20px] md:h-[20px]"
+        w-[1rem] h-[1rem]
+        md:w-[1.25rem] md:h-[1.25rem]"
       style={{
         mask: `url('/assets/${icon}') center/contain no-repeat`,
         WebkitMask: `url('/assets/${icon}') center/contain no-repeat`,
@@ -50,9 +51,9 @@ const Avatar = () => (
       src="/assets/image-avatar.png"
       alt="Avatar"
       className="rounded-full border border-white
-      w-[24px] h-[24px]
-      md:w-[32px] md:h-[32px]
-      xl:w-[40px] xl:h-[40px]" />
+      w-[1.5rem] h-[1.5rem]
+      md:w-[2rem] md:h-[2rem]
+      xl:w-[2.5rem] xl:h-[2.5rem]" />
   </NavLink>
 );
 
@@ -61,19 +62,19 @@ const Navbar = () => (
   <div className="flex flex-col xl:flex-row">
     <nav className="bg-darkBlue flex items-center justify-between p-4
     sm:p-5
-    md:rounded-2xl md:m-[24px]
-    xl:p-0 xl:pt-[36px] xl:h-screen xl:w-[96px] xl:flex-col xl:m-0 xl:left-[32px] xl:top-[0px] xl:sticky
-    2xl:h-[960px] 2xl:mt-[36px]">
+    md:rounded-2xl md:m-[1.5rem]
+    xl:p-0 xl:pt-[2.25rem] xl:h-screen xl:w-[6rem] xl:flex-col xl:m-0 xl:left-[2rem] xl:top-[0px] xl:sticky
+    2xl:h-[60rem] 2xl:mt-[2.25rem]">
       
       {/* Logo */}
-      <div className="flex justify-center items-center xl:mt-[32px]">
+      <div className="flex justify-center items-center xl:mt-[2rem]">
         <Logo />
       </div>
 
       {/* Icons */}
-      <div className="flex items-center space-x-[20px] space-y-[0px] 
-      md:space-x-[32px]
-      xl:space-x-[0px] xl:flex-col xl:pt-[80px] xl:space-y-[40px]">
+      <div className="flex items-center space-x-[1.25rem] space-y-[0px] 
+      md:space-x-[2rem]
+      xl:space-x-[0px] xl:flex-col xl:pt-[5rem] xl:space-y-[2.5rem]">
         {navItems.map(({ to, icon, alt }) => (
           <NavIcon key={to} to={to} icon={icon} alt={alt} />
         ))}
@@ -81,15 +82,15 @@ const Navbar = () => (
 
       {/* Avatar */}
       <div className="flex justify-center items-center
-      xl:mt-auto xl:mb-[32px]">
+      xl:mt-auto xl:mb-[2rem]">
         <Avatar />
       </div>
     </nav>
 
     {/* Main Content */}
     <div className="flex flex-col flex-1 p-6
-    md:mt-6
-    lg:ml-24 lg:mt-0">
+    md:mt-[1.5rem]
+    lg:ml-[6rem] lg:mt-0">
       <p className="text-white">Main Content</p>
     </div>
   </div>
