@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router';
+import UserContextProvider from './service/UserContextProvider';
 
 // Layouts
 import { MainLayout } from './layouts/MainLayout';
@@ -12,17 +13,19 @@ import BookmarkedPage from './pages/BookmarkedPage';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path="movies" element={<MoviesPage />} />
-          <Route path="tv-series" element={<TvSeriesPage />} />
-          <Route path="bookmarked" element={<BookmarkedPage />} />
-        </Route>
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+    <UserContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path='movies' element={<MoviesPage />} />
+            <Route path='tv-series' element={<TvSeriesPage />} />
+            <Route path='bookmarked' element={<BookmarkedPage />} />
+          </Route>
+          <Route path='*' element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
+    </UserContextProvider>
   );
 }
 
