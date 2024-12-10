@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router';
 
+// Navigation items configuration
 const navItems = [
   { to: '/#', icon: 'icon-nav-home.svg', alt: 'Home' },
   { to: '/movies', icon: 'icon-nav-movies.svg', alt: 'Movies' },
@@ -10,32 +11,27 @@ const navItems = [
 
 // Logo component
 const Logo = () => (
-  <NavLink to='/#'>
+  <NavLink to="/#">
     <img
-      src='/assets/logo.svg'
-      alt='Logo'
-      className='
-      w-[1.5625rem] h-[1.25rem]
-      md:w-[2rem] md:h-[1.6rem]'
+      src="/assets/logo.svg"
+      alt="Logo"
+      className="w-[1.5625rem] h-[1.25rem] md:w-[2rem] md:h-[1.6rem]"
     />
   </NavLink>
 );
 
-// NavIcon component
-const NavIcon = ({ to, icon, alt, className = '' }) => (
+// Navigation Icon component
+const NavIcon = ({ to, icon, alt }) => (
   <NavLink
     to={to}
     className={({ isActive }) =>
       `group relative flex items-center justify-center ${
         isActive ? 'filter brightness-[4]' : ''
-      } ${className}`
+      }`
     }
   >
     <div
-      className='
-        bg-lightBlue transition duration-500 group-hover:bg-red
-        w-[1rem] h-[1rem]
-        md:w-[1.25rem] md:h-[1.25rem]'
+      className="bg-lightBlue transition duration-500 group-hover:bg-red w-[1rem] h-[1rem] md:w-[1.25rem] md:h-[1.25rem]"
       style={{
         mask: `url('/assets/${icon}') center/contain no-repeat`,
         WebkitMask: `url('/assets/${icon}') center/contain no-repeat`,
@@ -47,60 +43,41 @@ const NavIcon = ({ to, icon, alt, className = '' }) => (
 
 // Avatar component
 const Avatar = () => (
-  <NavLink to='/profile'>
+  <NavLink to="/profile">
     <img
-      src='/assets/image-avatar.png'
-      alt='Avatar'
-      className='rounded-full border border-white
-      w-[1.5rem] h-[1.5rem]
-      md:w-[2rem] md:h-[2rem]
-      xl:w-[2.5rem] xl:h-[2.5rem]'
+      src="/assets/image-avatar.png"
+      alt="Avatar"
+      className="rounded-full border border-white w-[1.5rem] h-[1.5rem] md:w-[2rem] md:h-[2rem] xl:w-[2.5rem] xl:h-[2.5rem]"
     />
   </NavLink>
 );
 
 // Navbar component
 const Navbar = () => (
-  <div className='flex flex-col xl:flex-row'>
-    <nav
-      className='bg-darkBlue flex items-center justify-between p-4
-    sm:p-5
-    md:rounded-2xl md:m-[1.5rem]
-    xl:p-0 xl:pt-[2.25rem] xl:h-screen xl:w-[6rem] xl:flex-col xl:m-0 xl:left-[2rem] xl:top-[0px] xl:sticky
-    2xl:h-[60rem] 2xl:mt-[2.25rem]'
+  <nav
+    className="bg-darkBlue md:rounded-2xl sticky z-10 top-0 flex flex-row h-full p-[1rem] md:p-[1.25rem] md:m-[1.5rem] lg:flex-col lg:w-[6rem] 2xl:h-[60rem]"
+  >
+    {/* Logo */}
+    <div className="flex justify-start items-center w-full lg:justify-center lg:items-center lg:mt-[2.25rem]">
+      <Logo />
+    </div>
+
+    {/* Navigation Icons */}
+    <div
+      className="flex flex-row w-full justify-center space-x-[1.25rem] md:space-x-[2rem] lg:flex-col lg:space-x-0 lg:space-y-[2.5rem] lg:pt-[4.5rem]"
     >
-      {/* Logo */}
-      <div className='flex justify-center items-center xl:mt-[2rem]'>
-        <Logo />
-      </div>
+      {navItems.map(({ to, icon, alt }) => (
+        <NavIcon key={to} to={to} icon={icon} alt={alt} />
+      ))}
+    </div>
 
-      {/* Icons */}
-      <div
-        className='flex items-center space-x-[1.25rem] space-y-[0px] 
-      md:space-x-[2rem]
-      xl:space-x-[0px] xl:flex-col xl:pt-[5rem] xl:space-y-[2.5rem]'
-      >
-        {navItems.map(({ to, icon, alt }) => (
-          <NavIcon key={to} to={to} icon={icon} alt={alt} />
-        ))}
-      </div>
-
-      {/* Avatar */}
-      <div
-        className='flex justify-center items-center
-      xl:mt-auto xl:mb-[2rem]'
-      >
-        <Avatar />
-      </div>
-    </nav>
-
-    {/* Main Content */}
-    {/* <div className="flex flex-col flex-1 p-6
-    md:mt-[1.5rem]
-    lg:ml-[6rem] lg:mt-0">
-      <p className="text-white">Main Content</p>
-    </div> */}
-  </div>
+    {/* Avatar */}
+    <div
+      className="flex w-full justify-end lg:justify-center items-center mt-auto lg:mb-[2rem]"
+    >
+      <Avatar />
+    </div>
+  </nav>
 );
 
 export default Navbar;
