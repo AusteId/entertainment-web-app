@@ -16,12 +16,12 @@ export const LoginForm = ({ onSignUp }) => {
   const onSubmit = async (formData) => {
     try {
       const userId = await apiLoginUser(formData);
-
+      console.log(userId);
       if (userId.error) {
         setError(userId.error);
       } else {
         // user.setLoggedIn(userId.id);
-        console.log("24: ", userId);
+        //console.log("24: ", userId);
       }
     } catch (e) {
       setError(e);
