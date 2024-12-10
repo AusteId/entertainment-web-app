@@ -9,6 +9,16 @@
       "id": "20c1",
       "email": "bbb@bbb.com",
       "password": "e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a"
+    },
+    {
+      "id": "d0e4",
+      "email": "jonas@pastas.lt",
+      "password": "e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a"
+    },
+    {
+      "id": "46de",
+      "email": "algis@pastas.lt",
+      "password": "e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a"
     }
   ],
   "movies": [
