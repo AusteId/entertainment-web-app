@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-dark;
+  }
+}
+
+@layer components {
+  .wrapper {
+    @apply max-w-[1440px] mx-auto;
+  }
+
+  .heading-lg {
+    @apply text-white text-hl font-light;
+  }
+
+  .heading-md {
+    @apply text-white text-hm font-light;
+  }
+
+  .heading-sm {
+    @apply text-white text-hm font-medium;
+  }
+
+  .heading-xs {
+    @apply text-white text-hs font-medium;
+  }
+
+  .body-md {
+    @apply text-white text-bm font-light;
+  }
+
+  .body-sm {
+    @apply text-white text-bs font-light;
+  }
+}
