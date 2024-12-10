@@ -1,3 +1,4 @@
+import { Bookmark } from "./Bookmark.jsx";
 import { useEffect, useState } from "react";
 import "./BasicCard.css";
 
@@ -33,15 +34,27 @@ export const BasicCard = () => {
         return (
           <div key={Card.id}>
             <div className="relative group mb-2 bg-dark/25 ">
-            <picture>
-            <source media="(max-width: 768px)" srcSet={Card.thumbnail.regular.small} alt="thumbnail" />
-            <source media="(max-width: 1023px)" srcSet={Card.thumbnail.regular.medium} alt="thumbnail" />
-            <source media="(min-width: 1024px)" srcSet={Card.thumbnail.regular.large} alt="thumbnail" />
-              <img
-                src={Card.thumbnail.regular.large}
-                alt="thumbnail"
-                className="rounded-md group-hover:brightness-50 duration-200"
-              />
+              <picture>
+                <source
+                  media="(max-width: 768px)"
+                  srcSet={Card.thumbnail.regular.small}
+                  alt="thumbnail"
+                />
+                <source
+                  media="(max-width: 1023px)"
+                  srcSet={Card.thumbnail.regular.medium}
+                  alt="thumbnail"
+                />
+                <source
+                  media="(min-width: 1024px)"
+                  srcSet={Card.thumbnail.regular.large}
+                  alt="thumbnail"
+                />
+                <img
+                  src={Card.thumbnail.regular.large}
+                  alt="thumbnail"
+                  className="rounded-md group-hover:brightness-50 duration-200"
+                />
               </picture>
               <button
                 class="absolute  flex items-center opacity-0 group-hover:opacity-100 rounded-full 
@@ -64,6 +77,9 @@ export const BasicCard = () => {
                   Play
                 </p>
               </button>
+          
+              <Bookmark />
+           
             </div>
             <div className="list-text-color">
               <ul className="flex text-bs font-ligth font-outfit">
