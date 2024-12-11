@@ -11,11 +11,11 @@ export const Bookmark = ({ movieId, bookmarks }) => {
 
   useEffect(() => {
     isBookmarked();
-  }, []);
+  }, [bookmarks]);
 
   // Patikrinam ar yra bookmarked filmų
   const isBookmarked = () => {
-    if (bookmarks && bookmarks.includes(user.user)) {
+    if (bookmarks && bookmarks.includes(user.userId)) {
       setBookmarked(true);
       return;
     } else {
@@ -30,21 +30,20 @@ export const Bookmark = ({ movieId, bookmarks }) => {
         // remove from bookmarks
         // ištrinam iš duomenų bazės bookmarks masvyo pagal user id
         const res = await apiRemoveBookmark(user.user, movieId);
-        if (res.success) {
+        {
           setBookmarked(false);
         }
       } else {
         // set bookmarks
         // įrašom į bookmarks masyvą userio Id
         const res = await apiSetBookmark(user.user, movieId);
-        if (res.success) {
+        {
           setBookmarked(true);
         }
       }
     } catch (error) {
       console.error("Error updating bookmark:", error);
       setBookmarked((prev) => !prev);
-  
     }
   };
 
