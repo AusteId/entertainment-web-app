@@ -1,10 +1,12 @@
 import { BasicCard } from "../components/shared/BasicCard";
+import { TrendingCarousel } from "../components/shared/TrendingCarousel";
 
 export default function HomePage() {
   return (
     <>
     <main>
       <h1 className='heading-lg'>Home page cia</h1>
+      <TrendingCarousel/>
     </main>
     <div>
     <h2 className="heading-lg text-white font-outfit mb-8">Recommended for you</h2>
