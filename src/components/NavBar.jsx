@@ -101,7 +101,7 @@ const Avatar = () => {
 // Navbar component
 const Navbar = () => (
   <div className='flex flex-col xl:flex-row z-10 top-0 sticky '>
-    <nav className='bg-darkBlue flex items-center justify-between p-4 sm:p-5 md:rounded-2xl md:m-[1.5rem] xl:p-0 xl:pt-[2.25rem] xl:h-[60rem] xl:w-[6rem] xl:flex-col xl:m-0 xl:left-0 xl:top-0 xl:sticky'>
+    <nav className='bg-darkBlue flex items-center justify-between p-4 sm:p-5 md:rounded-2xl md:m-[1.5rem] xl:p-0 xl:pt-[0rem] xl:h-screen 2xl:h-[60rem] xl:w-[6rem] xl:flex-col xl:m-0 xl:left-0 xl:top-0 xl:sticky'>
       {/* Logo */}
       <div className='flex justify-center items-center xl:mt-[2rem]'>
         <Logo />
