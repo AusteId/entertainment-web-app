@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router';
 import { useUserContext } from '../service/UserContextProvider';
 
-// Navigation items
 const navItems = [
   { to: '/#', icon: 'icon-nav-home.svg', alt: 'Home' },
   { to: '/movies', icon: 'icon-nav-movies.svg', alt: 'Movies' },
@@ -22,46 +21,42 @@ const Logo = () => (
 );
 
 // NavIcon component
-const NavIcon = ({ to, icon, alt, className = '' }) => {
-  const iconStyles = {
-    mask: `url('/assets/${icon}') center/contain no-repeat`,
-    WebkitMask: `url('/assets/${icon}') center/contain no-repeat`,
-  };
+const NavIcon = ({ to, icon, alt }) => (
+  <NavLink
+    to={to}
+    className={({ isActive }) =>
+      `group relative flex items-center justify-center ${isActive ? 'filter brightness-[4]' : ''}`
+    }
+  >
+    <div
+      className='bg-lightBlue transition duration-500 group-hover:bg-red w-[1rem] h-[1rem] md:w-[1.25rem] md:h-[1.25rem]'
+      style={{
+        mask: `url('/assets/${icon}') center/contain no-repeat`,
+        WebkitMask: `url('/assets/${icon}') center/contain no-repeat`,
+      }}
+      aria-label={alt}
+    />
+  </NavLink>
+);
 
-  return (
-    <NavLink
-      to={to}
-      className={({ isActive }) => `group relative flex items-center justify-center ${isActive ? 'filter brightness-[4]' : ''} ${className}`}
-    >
-      <div
-        className='bg-lightBlue transition duration-500 group-hover:bg-red w-[1rem] h-[1rem] md:w-[1.25rem] md:h-[1.25rem]'
-        style={iconStyles}
-        aria-label={alt}
-      ></div>
-    </NavLink>
-  );
-};
-
-// Avatar component with dropdown
+// Avatar component with logout functionality
 const Avatar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { setUserLoggedOut } = useUserContext(); 
+  const { setUserLoggedOut } = useUserContext();
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => setIsDropdownOpen(prev => !prev);
 
-  const handleClickOutside = useCallback((event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsDropdownOpen(false);
-    }
-  }, []);
-
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
     };
-  }, [handleClickOutside]);
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleLogout = () => {
     setUserLoggedOut();
@@ -74,16 +69,15 @@ const Avatar = () => {
         <img
           src="/assets/image-avatar.png"
           alt="Avatar"
-          className="rounded-full border border-white
-            w-[1.5rem] h-[1.5rem] md:w-[2rem] md:h-[2rem] xl:w-[2.5rem] xl:h-[2.5rem]"
+          className="rounded-full border border-white w-[1.5rem] h-[1.5rem] md:w-[2rem] md:h-[2rem] xl:w-[2.5rem] xl:h-[2.5rem]"
         />
       </NavLink>
 
+      {/* Dropdown Menu */}
       {isDropdownOpen && (
         <div
           ref={dropdownRef}
-          className="absolute right-0 mt-2 xl:mt-0 xl:left-[4rem] xl:bottom-0 bg-darkBlue text-darkBlue border-2 border-lightBlue rounded-2xl shadow-lg p-[0.5rem]
-          flex flex-col space-y-2 w-40"
+          className="absolute right-0 mt-2 xl:left-[4rem] xl:bottom-0 bg-darkBlue text-darkBlue border-2 border-lightBlue rounded-2xl shadow-lg p-[0.5rem] flex flex-col space-y-2 w-40"
         >
           <NavLink
             to="/profile"
@@ -105,31 +99,27 @@ const Avatar = () => {
 };
 
 // Navbar component
-const Navbar = () => {
-  const navContainerClasses = 'bg-darkBlue flex items-center justify-between p-4 z-10 top-0 sticky sm:p-5 md:rounded-2xl md:m-[1.5rem] xl:p-0 xl:pt-[2.25rem] xl:h-screen xl:w-[6rem] xl:flex-col xl:m-0 xl:left-0 xl:top-0 xl:sticky';
+const Navbar = () => (
+  <div className='flex flex-col xl:flex-row z-10 top-0 sticky '>
+    <nav className='bg-darkBlue flex items-center justify-between p-4 sm:p-5 md:rounded-2xl md:m-[1.5rem] xl:p-0 xl:pt-[2.25rem] xl:h-[60rem] xl:w-[6rem] xl:flex-col xl:m-0 xl:left-0 xl:top-0 xl:sticky'>
+      {/* Logo */}
+      <div className='flex justify-center items-center xl:mt-[2rem]'>
+        <Logo />
+      </div>
 
-  return (
-    <div className='flex flex-col xl:flex-row z-10 top-0 sticky'>
-      <nav className={navContainerClasses}>
-        {/* Logo */}
-        <div className='flex justify-center items-center xl:mt-[2rem]'>
-          <Logo />
-        </div>
+      {/* Nav Icons */}
+      <div className='flex items-center space-x-[1.25rem] md:space-x-[2rem] xl:space-x-0 xl:flex-col xl:pt-[5rem] xl:space-y-[3rem]'>
+        {navItems.map(({ to, icon, alt }) => (
+          <NavIcon key={to} to={to} icon={icon} alt={alt} />
+        ))}
+      </div>
 
-        {/* Icons */}
-        <div className='flex items-center space-x-[1.25rem] md:space-x-[2rem] xl:space-x-0 xl:flex-col xl:pt-[5rem] xl:space-y-[3rem]'>
-          {navItems.map(({ to, icon, alt }) => (
-            <NavIcon key={to} to={to} icon={icon} alt={alt} />
-          ))}
-        </div>
-
-        {/* Avatar and Dropdown */}
-        <div className='flex justify-center items-center xl:mt-auto xl:mb-[4rem]'>
-          <Avatar />
-        </div>
-      </nav>
-    </div>
-  );
-};
+      {/* Avatar with Dropdown */}
+      <div className='flex justify-center items-center xl:mt-auto xl:mb-[4rem]'>
+        <Avatar />
+      </div>
+    </nav>
+  </div>
+);
 
 export default Navbar;
