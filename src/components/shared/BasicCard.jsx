@@ -1,9 +1,11 @@
 import './BasicCard.css';
+import { Bookmark } from './Bookmark';
 
 export const BasicCard = ({ Card }) => {
   return (
     <div key={Card.id}>
       <div className='relative group mb-2 bg-dark/25 '>
+        <Bookmark movieId={Card.id} bookmarks={Card.bookmarks} />
         <picture>
           <source
             media='(max-width: 768px)'

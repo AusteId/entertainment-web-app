@@ -37,7 +37,11 @@ export const apiGetMoviesByCategory = async (category) => {
     return { error: 'Unexpected error' };
   }
 };
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 553365e2103d4e37ca304017f0930c6166cb8d7b
 export const apiGetMovieById = async (movieId) => {
   try {
     const res = await axios.get(API_MOVIES_URL + `/${movieId}`);
@@ -46,7 +50,11 @@ export const apiGetMovieById = async (movieId) => {
     return { error: e };
   }
 };
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 553365e2103d4e37ca304017f0930c6166cb8d7b
 /**
  * Funkcija atrenka tuos filmus, kurios
  * bookmarkino userId
@@ -61,7 +69,11 @@ export const apiGetBookmarked = async (userId) => {
     return { error: 'Unexpected error' };
   }
 };
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 553365e2103d4e37ca304017f0930c6166cb8d7b
 export const apiSetBookmark = async (userId, movieId) => {
   try {
     const res = await apiGetMovieById(movieId);
@@ -82,7 +94,11 @@ export const apiSetBookmark = async (userId, movieId) => {
     }
   } catch (e) {}
 };
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 553365e2103d4e37ca304017f0930c6166cb8d7b
 export const apiRemoveBookmark = async (userId, movieId) => {
   const res = await apiGetMovieById(movieId);
   try {
@@ -94,7 +110,11 @@ export const apiRemoveBookmark = async (userId, movieId) => {
     return { error: e };
   }
 };
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 553365e2103d4e37ca304017f0930c6166cb8d7b
 export const apiGetBookmarkedMovies = async (userId) => {
   try {
     const allMovies = await axios.get(API_MOVIES_URL);
@@ -108,5 +128,8 @@ export const apiGetBookmarkedMovies = async (userId) => {
     return { error: e };
   }
 };
+<<<<<<< HEAD
  
  
+=======
+>>>>>>> 553365e2103d4e37ca304017f0930c6166cb8d7b

@@ -3,6 +3,7 @@ import { useUserContext } from '../../service/UserContextProvider';
 import { apiRemoveBookmark, apiSetBookmark } from '../../api/movies';
 import bookmarkEmpty from '/assets/icon-bookmark-empty.svg';
 import bookmarkFull from '/assets/icon-bookmark-full.svg';
+<<<<<<< HEAD
  
 export const Bookmark = ({ movieId, bookmarks }) => {
   const userData = useUserContext();
@@ -12,6 +13,17 @@ export const Bookmark = ({ movieId, bookmarks }) => {
     isBookmarked();
   }, []);
  
+=======
+
+export const Bookmark = ({ movieId, bookmarks }) => {
+  const userData = useUserContext();
+  const [bookmarked, setBookmarked] = useState(false);
+
+  useEffect(() => {
+    isBookmarked();
+  }, []);
+
+>>>>>>> 553365e2103d4e37ca304017f0930c6166cb8d7b
   // Patikrinam ar yra bookmarked filmų
   const isBookmarked = () => {
     if (bookmarks && bookmarks.includes(userData.userId)) {
@@ -22,7 +34,11 @@ export const Bookmark = ({ movieId, bookmarks }) => {
       return;
     }
   };
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 553365e2103d4e37ca304017f0930c6166cb8d7b
   const handleBookmark = async () => {
     if (bookmarked) {
       // ištrinam iš duomenų bazės bookmarks masvyo pagal user id
@@ -47,5 +63,8 @@ export const Bookmark = ({ movieId, bookmarks }) => {
     </div>
   );
 };
+<<<<<<< HEAD
  
  
+=======
+>>>>>>> 553365e2103d4e37ca304017f0930c6166cb8d7b
