@@ -19,13 +19,24 @@ export const Search = ({ onSearch }) => {
     }
   };
 
+  const handleInput = (e) => {
+    if (e.key === 'Enter') {
+      console.log('Enter: ', e.target.value);
+      onSearch(e.target.value);
+    }
+  };
+
   return (
     <div className='w-full flex items-center gap-3'>
       <img src={search} alt='search icon' />
       <input
         className='py-2 bg-dark w-full outline-none heading-md border-b border-b-dark focus:border-b-lightBlue focus:border-b focus:outline-none caret-red'
         id='search'
-        onChange={(e) => onSearch(e.target.value)}
+        onChange={(e) => {
+          onSearch(e.target.value);
+          console.log(e.target.value);
+        }}
+        // onKeyDown={(e) => (e.key === 'Enter' ? onSearch(e.target.value) : null)}
         type='text'
         autoComplete='off'
         placeholder={renderPlaceholder()}

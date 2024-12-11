@@ -41,9 +41,7 @@
       "isBookmarked": false,
       "isTrending": true,
       "id": "4832",
-      "bookmarks": [
-        "46de"
-      ]
+      "bookmarks": []
     },
     {
       "title": "Bottom Gear",
@@ -64,9 +62,7 @@
       "isBookmarked": false,
       "isTrending": true,
       "id": "2a4b",
-      "bookmarks": [
-        "46de"
-      ]
+      "bookmarks": []
     },
     {
       "title": "Undiscovered Cities",
@@ -87,7 +83,7 @@
       "isBookmarked": false,
       "isTrending": true,
       "id": "4850",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "1998",
@@ -108,7 +104,7 @@
       "isBookmarked": false,
       "isTrending": true,
       "id": "f35c",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "Dark Side of the Moon",
@@ -129,9 +125,7 @@
       "isBookmarked": true,
       "isTrending": true,
       "id": "5b19",
-      "bookmarks": [
-        "46de"
-      ]
+      "bookmarks": []
     },
     {
       "title": "The Great Lands",
@@ -148,7 +142,7 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "d8bc",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "The Diary",
@@ -165,7 +159,7 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "124f",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "Earth’s Untouched",
@@ -182,7 +176,7 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "0bd2",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "No Land Beyond",
@@ -199,7 +193,7 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "bbde",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "During the Hunt",
@@ -235,7 +229,9 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "4235",
-      "bookmarks": ["d0e4"]
+      "bookmarks": [
+        "d0e4"
+      ]
     },
     {
       "title": "Same Answer II",
@@ -252,7 +248,7 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "d220",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "Below Echo",
@@ -269,7 +265,9 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "bc03",
-      "bookmarks":[]
+      "bookmarks": [
+        "46de"
+      ]
     },
     {
       "title": "The Rockies",
@@ -286,7 +284,9 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "610b",
-      "bookmarks": ["d0e4"]
+      "bookmarks": [
+        "d0e4"
+      ]
     },
     {
       "title": "Relentless",
@@ -303,7 +303,7 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "5eae",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "Community of Ours",
@@ -320,7 +320,9 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "881f",
-      "bookmarks": ["d0e4"]
+      "bookmarks": [
+        "d0e4"
+      ]
     },
     {
       "title": "Van Life",
@@ -337,7 +339,7 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "3c97",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "The Heiress",
@@ -354,7 +356,7 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "05fc",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "Off the Track",
@@ -371,7 +373,7 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "950e",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "Whispering Hill",
@@ -388,7 +390,7 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "c6e8",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "112",
@@ -405,7 +407,7 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "44ef",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "Lone Heart",
@@ -422,7 +424,7 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "6b42",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "Production Line",
@@ -439,7 +441,7 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "f989",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "Dogs",
@@ -456,7 +458,9 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "15b1",
-      "bookmarks":[]
+      "bookmarks": [
+        "46de"
+      ]
     },
     {
       "title": "Asia in 24 Days",
@@ -473,7 +477,7 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "52de",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "The Tasty Tour",
@@ -490,7 +494,7 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "d42f",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "Darker",
@@ -507,7 +511,9 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "b8d6",
-      "bookmarks": ["d0e4"]
+      "bookmarks": [
+        "d0e4"
+      ]
     },
     {
       "title": "Unresolved Cases",
@@ -524,7 +530,7 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "e010",
-      "bookmarks":[]
+      "bookmarks": []
     },
     {
       "title": "Mission: Saturn",
@@ -541,7 +547,7 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "cfbf",
-      "bookmarks":[]
+      "bookmarks": []
     }
   ]
 }
