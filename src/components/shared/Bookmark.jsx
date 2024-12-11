@@ -38,7 +38,7 @@ export const Bookmark = ({ movieId, bookmarks }) => {
   return (
     <div
       onClick={handleBookmark}
-      className='absolute top-2 right-2 w-10 h-10 bg-lightBlue rounded-full flex items-center justify-center opacity-70 cursor-pointer z-50'
+      className='absolute top-2 right-2 w-10 h-10 bg-lightBlue rounded-full flex items-center justify-center opacity-70 cursor-pointer z-40'
     >
       <img
         src={`${bookmarked ? bookmarkFull : bookmarkEmpty}`}
