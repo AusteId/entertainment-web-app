@@ -22,7 +22,7 @@ function App() {
             <Route path='tv-series' element={<TvSeriesPage />} />
             <Route path='bookmarked' element={<BookmarkedPage />} />
           </Route>
-         <Route path='*' element={<NotFoundPage />} />
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </UserContextProvider>
