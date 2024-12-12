@@ -36,7 +36,7 @@ export const LoginForm = ({ onSignUp }) => {
         <img
           src={logo}
           alt='logo'
-          className='pt-[3rem] pb-[3.65rem] md:pt-[5.5rem] md:pb-[4.53rem] lg:pt-[4.9rem]lg:pb-[5.19rem] xl:pt[4.9rem]'
+          className='pt-[3rem] md:pt-[5.5rem] lg:pt-[4.9rem] xl:pt[4.9rem]'
         />
       </div>
       <div className='box'>
@@ -51,9 +51,9 @@ export const LoginForm = ({ onSignUp }) => {
               type='email'
               autoComplete='on'
               placeholder='Email address'
-              className='form_text'
+              className='form_text focus:outline-none focus:!border-white'
               {...register('email', {
-                required: 'Please enter email',
+                required: "Can't be empty",
                 pattern: {
                   value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
                   message: 'Invalid email address',
@@ -70,9 +70,9 @@ export const LoginForm = ({ onSignUp }) => {
               type='password'
               autoComplete='off'
               placeholder='Password'
-              className='form_text'
+              className='form_text focus:outline-none focus:!border-white'
               {...register('password', {
-                required: 'Please enter password',
+                required: "Can't be empty",
               })}
             />
             {errors.password && (
