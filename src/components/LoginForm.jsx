@@ -80,7 +80,7 @@ export const LoginForm = ({ onSignUp }) => {
             )}
           </div>
           <div className='w-full flex justify-center mb-5'>
-            <Button type={'submit'}>Create an account</Button>
+            <Button type={'submit'}>Login to your account</Button>
           </div>
 
           <div
