@@ -1,20 +1,55 @@
-button {
-    width: 117px; 
-    height: 48px; 
+.desktop-only {
+  display: none;
+}
+
+/* Show button only on desktop screens */
+@media (min-width: 1024px) {
+  .desktop-only {
+    display: flex;
+    width: 117px;
+    height: 48px;
     background-color: rgba(255, 255, 255, 0.2);
   }
+}
 
 .list-text-color ul li:nth-child(even) {
-font-size: 10px;
-margin-top: 4.6px;
-color: rgb(127, 127, 127);
+  margin-top: 8px;
 }
 
 .list-text-color ul li {
-    color: rgb(185, 185, 185);
+  color: rgb(255, 255, 255);
+  opacity: 0.75;
 }
 
 .play-image {
-margin-left: 9px;
-margin-right: 24px;
+  margin-left: 9px;
+  margin-right: 24px;
+}
+
+.body-s {
+  font-family: Outfit;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.show-icon {
+  margin-top: 2px;
+  margin-right: 6px;
+}
+.oval-gap {
+  margin-inline: 8px;
+}
+
+.thumbnail-img {
+  width: 280px;
+  height: 174px;
+}
+
+@media (max-width: 1023px) {
+  .thumbnail-img {
+    width: 220px;
+    height: 140px;
+  }
 }
