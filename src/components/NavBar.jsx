@@ -11,13 +11,11 @@ const navItems = [
 
 // Logo component
 const Logo = () => (
-  <NavLink to='/#'>
     <img
       src='/assets/logo.svg'
       alt='Logo'
       className='w-[1.5625rem] h-[1.25rem] md:w-[2rem] md:h-[1.6rem]'
     />
-  </NavLink>
 );
 
 // NavIcon component
@@ -100,7 +98,7 @@ const Avatar = () => {
 
 // Navbar component
 const Navbar = () => (
-  <div className='flex flex-col xl:flex-row z-50 top-0 sticky '>
+  <div className='flex flex-col xl:ml-[2rem] xl:mr-[1rem] xl:flex-row w-screen xl:w-[6rem] z-50 top-0 xl:sticky '>
     <nav className='bg-darkBlue flex items-center justify-between p-4 sm:p-5 md:rounded-2xl md:m-[1.5rem] xl:p-0 xl:pt-[0rem] xl:h-screen 2xl:h-[60rem] xl:w-[6rem] xl:flex-col xl:m-0 xl:left-0 xl:top-0 xl:sticky'>
       {/* Logo */}
       <div className='flex justify-center items-center xl:mt-[2rem]'>
