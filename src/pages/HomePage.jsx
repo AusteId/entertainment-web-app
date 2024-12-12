@@ -24,9 +24,7 @@ export default function HomePage() {
     }
   };
 
-  const handleLogout = () => {
-    userData.setUserLoggedOut();
-  };
+
 
   const handleSearch = (textString) => {
     const cleanText = textString.replace(/[^a-zA-Z0-9À-ž\s]/gi, '');
@@ -46,12 +44,6 @@ export default function HomePage() {
 
   return (
     <div className="w-full flex flex-col gap-4 body-md p-4">
-      <span
-        onClick={() => handleLogout()}
-        className="text-red hover:underline cursor-pointer"
-      >
-        Logout
-      </span>
       {/*       Vieta trending slideriui - kur jis???        */}
       <Search onSearch={(searchString) => handleSearch(searchString)} />
 
