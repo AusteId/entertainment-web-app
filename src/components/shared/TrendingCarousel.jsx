@@ -58,7 +58,7 @@ export const TrendingCarousel = () => {
   return (
     <div className="carousel-container">
       <div
-        className="carousel"
+        className="carousel flex gap-4"
         ref={carouselRef}
         onMouseDown={mouseDownHandler}
         onMouseLeave={mouseLeaveHandler}
@@ -66,8 +66,8 @@ export const TrendingCarousel = () => {
         onMouseMove={mouseMoveHandler}
       >
         {trendingMovies.map((Card) => (
-          <div className="carousel-item mr-5 " key={Card.id}>
-            <div className="relative group mb-2 bg-dark/25">
+          <div className="carousel-item " key={Card.id}>
+            <div className="relative group bg-dark/25">
               <picture>
                 <source
                   media="(max-width: 768px)"
