@@ -5,6 +5,7 @@ import MoviesList from '../components/MoviesList';
 
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
+  const [searchText, setSearchText] = useState('');
   const [filteredMovies, setFilteredMovies] = useState([]);
 
   const category = 'TV Series';
@@ -19,17 +20,26 @@ export default function MoviesPage() {
     setFilteredMovies(series);
   };
 
-  const handleSearch = (searchText) => {
-    console.log(searchText);
-    setFilteredMovies([
-      ...movies.filter((movie) => (movie.title = searchText)),
-    ]);
+  const handleSearch = (textString) => {
+    const cleanText = textString.replace(/[^a-zA-Z0-9À-ž\s]/gi, '');
+
+    if (cleanText === '') {
+      setFilteredMovies([...movies]);
+    } else {
+      setFilteredMovies([
+        ...movies.filter((movie) =>
+          movie.title.toLowerCase().includes(cleanText.toLowerCase())
+        ),
+      ]);
+    }
+
+    setSearchText(cleanText);
   };
 
   return (
-    <div className='w-full flex flex-col gap-2 body-md p-4'>
+    <div className="w-full flex flex-col gap-2 body-md p-4">
       <Search onSearch={(searchString) => handleSearch(searchString)} />
-      <MoviesList movies={filteredMovies} heading={'Heading'} />
+      <MoviesList movies={filteredMovies} searchText={searchText} />
     </div>
   );
 }

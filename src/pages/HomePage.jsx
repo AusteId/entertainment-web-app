@@ -6,17 +6,17 @@ import MoviesList from '../components/MoviesList';
 
 export default function HomePage() {
   const userData = useUserContext();
-  const [heading, setHeading] = useState('Recommended for you');
+  const [searchText, setSearchText] = useState('');
   const [trending, setTrending] = useState([]);
   const [recommended, setRecommended] = useState([]);
   const [filteredRecommended, setFilteredRecommended] = useState([]);
 
   useEffect(() => {
-    if (userData.userId) getHomeMovies();
+    if (userData.userId) getHomeMovies(userData.userId);
   }, []);
 
   const getHomeMovies = async (userId) => {
-    const homeMovies = await apiGetHomeMovies(userData.userId);
+    const homeMovies = await apiGetHomeMovies(userId);
     if (!homeMovies.error) {
       setTrending(homeMovies.trendingMovies);
       setRecommended(homeMovies.recommendedMovies);
@@ -28,18 +28,34 @@ export default function HomePage() {
     userData.setUserLoggedOut();
   };
 
-  const handleSearch = (textString) => {};
+  const handleSearch = (textString) => {
+    const cleanText = textString.replace(/[^a-zA-Z0-9À-ž\s]/gi, '');
+
+    if (cleanText === '') {
+      setFilteredRecommended([...recommended]);
+    } else {
+      setFilteredRecommended([
+        ...recommended.filter((movie) =>
+          movie.title.toLowerCase().includes(cleanText.toLowerCase())
+        ),
+      ]);
+    }
+
+    setSearchText(cleanText);
+  };
 
   return (
-    <div className='w-full flex flex-col gap-4 body-md p-4'>
+    <div className="w-full flex flex-col gap-4 body-md p-4">
       <span
         onClick={() => handleLogout()}
-        className='text-red hover:underline cursor-pointer'
+        className="text-red hover:underline cursor-pointer"
       >
         Logout
       </span>
+      {/*       Vieta trending slideriui - kur jis???        */}
       <Search onSearch={(searchString) => handleSearch(searchString)} />
-      <MoviesList movies={filteredRecommended} heading={heading} />
+
+      <MoviesList movies={filteredRecommended} searchText={searchText} />
     </div>
   );
 }

@@ -10,7 +10,7 @@ export const MainLayout = () => {
     <main className='max-w-[1440px] h-screen mx-auto'>
       {userData.userId ? (
         <>
-          <div className='flex flex-col lg:flex-row h-full'>
+          <div className='flex flex-col xl:flex-row'>
             <Navbar />
             <div className='flex-1'>
               <Outlet />

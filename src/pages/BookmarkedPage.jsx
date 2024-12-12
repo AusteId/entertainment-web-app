@@ -10,6 +10,7 @@ export default function BookmarkedPage() {
   const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
     if (userData.userId) {
@@ -30,12 +31,26 @@ export default function BookmarkedPage() {
     setFilteredMovies(movies);
   };
 
-  const handleSearch = (searchText) => {};
+  const handleSearch = (textString) => {
+    const cleanText = textString.replace(/[^a-zA-Z0-9À-ž\s]/gi, '');
+
+    if (cleanText === '') {
+      setFilteredMovies([...movies]);
+    } else {
+      setFilteredMovies([
+        ...movies.filter((movie) =>
+          movie.title.toLowerCase().includes(cleanText.toLowerCase())
+        ),
+      ]);
+    }
+
+    setSearchText(cleanText);
+  };
 
   return (
-    <div className='w-full flex flex-col gap-2 body-md p-4'>
+    <div className="w-full flex flex-col gap-2 body-md p-4">
       <Search onSearch={(searchString) => handleSearch(searchString)} />
-      <MoviesList movies={filteredMovies} heading={'Tratatam'} />
+      <MoviesList movies={filteredMovies} searchText={searchText} />
     </div>
   );
 }
