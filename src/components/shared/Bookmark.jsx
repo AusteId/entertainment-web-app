@@ -3,7 +3,7 @@ import { useUserContext } from '../../service/UserContextProvider';
 import { apiRemoveBookmark, apiSetBookmark } from '../../api/movies';
 import bookmarkEmpty from '/assets/icon-bookmark-empty.svg';
 import bookmarkFull from '/assets/icon-bookmark-full.svg';
-
+import './Bookmark.css'
 export const Bookmark = ({ movieId, bookmarks }) => {
   const userData = useUserContext();
   const [bookmarked, setBookmarked] = useState(false);
@@ -38,11 +38,12 @@ export const Bookmark = ({ movieId, bookmarks }) => {
   return (
     <div
       onClick={handleBookmark}
-      className='absolute top-2 right-2 w-10 h-10 bg-lightBlue rounded-full flex items-center justify-center opacity-70 cursor-pointer z-40'
+      className='absolute top-3 bookmark right-3 w-8 h-8 rounded-full flex items-center justify-center cursor-pointer z-40'
     >
       <img
         src={`${bookmarked ? bookmarkFull : bookmarkEmpty}`}
         alt='bookmark'
+        className='bookmark-image'
       />
     </div>
   );

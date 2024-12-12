@@ -239,10 +239,7 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "4235",
-      "bookmarks": [
-        "d0e4",
-        "46de"
-      ]
+      "bookmarks": []
     },
     {
       "title": "Same Answer II",
@@ -295,10 +292,7 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "610b",
-      "bookmarks": [
-        "d0e4",
-        "46de"
-      ]
+      "bookmarks": []
     },
     {
       "title": "Relentless",
@@ -334,9 +328,7 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "881f",
-      "bookmarks": [
-        "d0e4"
-      ]
+      "bookmarks": []
     },
     {
       "title": "Van Life",
@@ -525,9 +517,7 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "b8d6",
-      "bookmarks": [
-        "d0e4"
-      ]
+      "bookmarks": []
     },
     {
       "title": "Unresolved Cases",
