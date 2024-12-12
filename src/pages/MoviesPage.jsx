@@ -8,7 +8,7 @@ export default function MoviesPage() {
   const [searchText, setSearchText] = useState('');
   const [filteredMovies, setFilteredMovies] = useState([]);
 
-  const category = 'TV Series';
+  const category = 'Movie';
 
   useEffect(() => {
     getMovies(category);
