@@ -21,7 +21,9 @@ const MoviesList = ({ movies = [], searchText }) => {
   };
 
   if (movies.length > 0 && searchText !== '')
-    listHeading = `Found ${movies.length} results for '${searchText}'`;
+    listHeading = `Found ${movies.length} ${
+      movies.length > 1 ? 'results' : 'result'
+    } for '${searchText}'`;
 
   if (movies.length === 0 && searchText !== '')
     listHeading = `Nothing found for '${searchText}'`;
@@ -30,14 +32,41 @@ const MoviesList = ({ movies = [], searchText }) => {
 
   return (
     <section className="flex flex-col">
-      <h1 className="text-[1.25rem] md:text-hl p-0 text-white font-outfit  font-medium tracking-[-0.0195rem] pb-[1.5rem] self-start">
-        {listHeading}
-      </h1>
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[0.94rem] md:gap-x-[1.81rem] xl:gap-x-[2.5rem] gap-y-[1rem] md:gap-y-[1.5rem] xl:gap-y-[2rem] self-center">
-        {movies.map((movie) => (
-          <BasicCard key={movie.id} Card={movie} />
-        ))}
-      </div>
+      {location.pathname === '/bookmarked' && searchText === '' ? (
+        <>
+          <h2 className="text-[1.25rem] md:text-hl p-0 text-white font-outfit  font-medium tracking-[-0.0195rem] pb-[1.5rem] self-start">
+            Bookmarked Movies
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[0.94rem] md:gap-x-[1.81rem] xl:gap-x-[2.5rem] gap-y-[1rem] md:gap-y-[1.5rem] xl:gap-y-[2rem] self-center">
+            {movies
+              .filter((movie) => movie.category === 'Movie')
+              .map((movie) => (
+                <BasicCard key={movie.id} Card={movie} />
+              ))}
+          </div>
+          <h2 className="text-[1.25rem] md:text-hl p-0 text-white font-outfit  font-medium tracking-[-0.0195rem] pb-[1.5rem] self-start">
+            Bookmarked TV Series
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[0.94rem] md:gap-x-[1.81rem] xl:gap-x-[2.5rem] gap-y-[1rem] md:gap-y-[1.5rem] xl:gap-y-[2rem] self-center">
+            {movies
+              .filter((movie) => movie.category === 'TV Series')
+              .map((movie) => (
+                <BasicCard key={movie.id} Card={movie} />
+              ))}
+          </div>
+        </>
+      ) : (
+        <>
+          <h1 className="text-[1.25rem] md:text-hl p-0 text-white font-outfit  font-medium tracking-[-0.0195rem] pb-[1.5rem] self-start">
+            {listHeading}
+          </h1>
+          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[0.94rem] md:gap-x-[1.81rem] xl:gap-x-[2.5rem] gap-y-[1rem] md:gap-y-[1.5rem] xl:gap-y-[2rem] self-center">
+            {movies.map((movie) => (
+              <BasicCard key={movie.id} Card={movie} />
+            ))}
+          </div>
+        </>
+      )}
     </section>
   );
 };
