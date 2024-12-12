@@ -1,0 +1,11 @@
+.bookmark {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.bookmark:hover {
+background-color: rgb(255, 255, 255);
+}
+
+.bookmark:hover .bookmark-image {
+    filter: invert(1) sepia(1) saturate(5) hue-rotate(180deg);
+  }
