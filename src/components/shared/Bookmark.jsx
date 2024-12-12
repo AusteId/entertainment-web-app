@@ -3,15 +3,15 @@ import { useUserContext } from '../../service/UserContextProvider';
 import { apiRemoveBookmark, apiSetBookmark } from '../../api/movies';
 import bookmarkEmpty from '/assets/icon-bookmark-empty.svg';
 import bookmarkFull from '/assets/icon-bookmark-full.svg';
- 
+import './Bookmark.css'
 export const Bookmark = ({ movieId, bookmarks }) => {
   const userData = useUserContext();
   const [bookmarked, setBookmarked] = useState(false);
- 
+
   useEffect(() => {
     isBookmarked();
   }, []);
- 
+
   // Patikrinam ar yra bookmarked filmų
   const isBookmarked = () => {
     if (bookmarks && bookmarks.includes(userData.userId)) {
@@ -22,7 +22,7 @@ export const Bookmark = ({ movieId, bookmarks }) => {
       return;
     }
   };
- 
+
   const handleBookmark = async () => {
     if (bookmarked) {
       // ištrinam iš duomenų bazės bookmarks masvyo pagal user id
@@ -38,14 +38,13 @@ export const Bookmark = ({ movieId, bookmarks }) => {
   return (
     <div
       onClick={handleBookmark}
-      className='absolute top-2 right-2 w-10 h-10 bg-lightBlue rounded-full flex items-center justify-center opacity-70 cursor-pointer z-50'
+      className='absolute top-2 bookmark right-1 w-10 h-10 rounded-full flex items-center justify-center cursor-pointer z-40'
     >
       <img
         src={`${bookmarked ? bookmarkFull : bookmarkEmpty}`}
         alt='bookmark'
+        className='bookmark-image'
       />
     </div>
   );
 };
- 
- 

@@ -1,18 +1,18 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
 
 // pradine user steito busena
 const initUserState = {
-  userId: "",
-  // unBookmarkId: '',
-  BookmarkedMovies: [],
+  userId: '',
+  unBookmarkId: '',
 };
 
 export const UserContext = createContext();
 
 const getInitialUserState = () => {
-  const userId = localStorage.getItem("movieUserId");
+  const userId = localStorage.getItem('movieUserId');
   if (userId) {
-    return { userId, bookmarkedMovies: [] };
+    const user = { userId: userId, unBookmarkId: '' };
+    return user;
   } else {
     return initUserState;
   }
@@ -22,28 +22,22 @@ const UserContextProvider = (props) => {
   const [userData, setUserData] = useState(getInitialUserState);
 
   const setUserLoggedIn = (userId) => {
-    localStorage.setItem("movieUserId", userId);
-    setUserData((prevData) => ({...prevData, userId}))
+    localStorage.setItem('movieUserId', userId);
+    setUserData({ ...userData, userId: userId });
   };
 
   const setUserLoggedOut = () => {
-    localStorage.removeItem("movieUserId");
-    setUserData((prevData) => ({...prevData, userId:'', bookmarkedMovies: [] }))
+    localStorage.removeItem('movieUserId');
+    setUserData({ ...userData, userId: '' });
   };
 
-  const toggleBookmark = (movieId) => {
-  setUserData((prevData) => {
-    const isBookmarked = prevData.bookmarkedMovies.includes(movieId);
-    const updatedBookmarkedMovies = isBookmarked
-      ? prevData.bookmarkedMovies.filter((id) => id !== movieId)
-      : [...prevData.bookmarkedMovies, movieId];
-    
-    return { ...prevData, bookmarkedMovies: updatedBookmarkedMovies };
-  });
-};
+  const setUnBookmark = (movieId) => {
+    setUserData({ ...userData, unBookmarkId: movieId });
+  };
+
   return (
     <UserContext.Provider
-      value={{ ...userData, setUserLoggedIn, setUserLoggedOut, toggleBookmark }}
+      value={{ ...userData, setUserLoggedIn, setUserLoggedOut, setUnBookmark }}
     >
       {props.children}
     </UserContext.Provider>
