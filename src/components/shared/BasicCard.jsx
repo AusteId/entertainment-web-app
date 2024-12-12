@@ -4,8 +4,10 @@ import { Bookmark } from './Bookmark';
 export const BasicCard = ({ Card }) => {
   return (
     <div key={Card.id}>
-      <div className='relative group mb-2 bg-dark/25 '>
+
+      <div className='relative'>
         <Bookmark movieId={Card.id} bookmarks={Card.bookmarks} />
+        <div className='relative group mb-2 bg-dark/25 '>
         <picture>
           <source
             media='(max-width: 768px)'
@@ -33,9 +35,9 @@ export const BasicCard = ({ Card }) => {
   duration-200 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
         >
           <svg
-            className='mr-4 ml-3'
-            width='40'
-            height='40'
+            className='play-image'
+            width='30'
+            height='30'
             viewBox='0 0 30 30'
             xmlns='http://www.w3.org/2000/svg'
           >
@@ -45,7 +47,7 @@ export const BasicCard = ({ Card }) => {
               fill='#FFF'
             />
           </svg>
-          <p className='text-hm text-white font-medium font-outfit'>Play</p>
+          <p className='heading-xs text-white font-outfit play-text'>Play</p>
         </button>
       </div>
       <div className='list-text-color'>
@@ -89,6 +91,7 @@ export const BasicCard = ({ Card }) => {
           <li>&#9679;</li>
           <li className='pl-3'>{Card.rating}</li>
         </ul>
+      </div>
       </div>
       <h2 className='text-hm text-white font-medium font-outfit'>
         {Card.title}
