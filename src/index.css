@@ -16,7 +16,7 @@
   }
 
   .heading-lg {
-    @apply text-white text-hl font-light;
+    @apply text-white text-hl font-medium;
   }
 
   .heading-md {
