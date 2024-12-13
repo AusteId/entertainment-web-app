@@ -3,6 +3,7 @@ import { Search } from '../components/Search';
 import { apiGetHomeMovies } from '../api/movies';
 import { useEffect, useState } from 'react';
 import MoviesList from '../components/MoviesList';
+import { TrendingCarousel } from '../components/shared/TrendingCarousel';
 
 export default function HomePage() {
   const userData = useUserContext();
@@ -39,10 +40,9 @@ export default function HomePage() {
   };
 
   return (
-    <div className="w-full flex flex-col gap-4 body-md p-4">
-      {/*       Vieta trending slideriui - kur jis???        */}
+    <div className='w-full flex flex-col gap-4 body-md p-4'>
       <Search onSearch={(searchString) => handleSearch(searchString)} />
-
+      <TrendingCarousel trendingMovies={trending} />
       <MoviesList movies={filteredRecommended} searchText={searchText} />
     </div>
   );
