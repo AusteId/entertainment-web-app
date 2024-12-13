@@ -42,7 +42,9 @@ export const LoginForm = ({ onSignUp }) => {
       <div className='box'>
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
           <div className='text'>
-            {error && <p className='text_center'>{error}</p>}
+            {error && !errors.email && !errors.password && (
+              <p className='text_center'>{error}</p>
+            )}
           </div>
           <h1>Login</h1>
           <div className={`input_box ${errors.password ? 'error' : ''}`}>
