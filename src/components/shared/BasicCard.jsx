@@ -114,7 +114,7 @@ export const BasicCard = ({ Card }) => {
           </ul>
         </div>
       </div>
-      <h2 className="heading-xs text-white font-medium font-outfit">
+      <h2 className="heading-xs text-white font-medium font-outfit title-font">
         {Card.title}
       </h2>
     </div>
