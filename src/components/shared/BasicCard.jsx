@@ -6,7 +6,7 @@ export const BasicCard = ({ Card }) => {
     <div key={Card.id}>
       <div className="relative">
         <Bookmark movieId={Card.id} bookmarks={Card.bookmarks} />
-        <div className="relative group mb-2 bg-dark/25 ">
+        <div className="relative group mb-2 bg-dark/25 cursor-pointer">
           <picture>
             <source
               media="(max-width: 768px)"
