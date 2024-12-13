@@ -24,22 +24,18 @@ export default function HomePage() {
     }
   };
 
-
-
   const handleSearch = (textString) => {
-    const cleanText = textString.replace(/[^a-zA-Z0-9À-ž\s]/gi, '');
-
-    if (cleanText === '') {
-      setFilteredRecommended([...recommended]);
-    } else {
+    if (textString) {
       setFilteredRecommended([
         ...recommended.filter((movie) =>
-          movie.title.toLowerCase().includes(cleanText.toLowerCase())
+          movie.title.toLowerCase().includes(textString.toLowerCase())
         ),
       ]);
+    } else {
+      setFilteredRecommended([...recommended]);
     }
 
-    setSearchText(cleanText);
+    setSearchText(textString);
   };
 
   return (

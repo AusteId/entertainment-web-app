@@ -32,19 +32,17 @@ export default function BookmarkedPage() {
   };
 
   const handleSearch = (textString) => {
-    const cleanText = textString.replace(/[^a-zA-Z0-9À-ž\s]/gi, '');
-
-    if (cleanText === '') {
-      setFilteredMovies([...movies]);
-    } else {
+    if (textString) {
       setFilteredMovies([
         ...movies.filter((movie) =>
-          movie.title.toLowerCase().includes(cleanText.toLowerCase())
+          movie.title.toLowerCase().includes(textString.toLowerCase())
         ),
       ]);
+    } else {
+      setFilteredMovies([...movies]);
     }
 
-    setSearchText(cleanText);
+    setSearchText(textString);
   };
 
   return (

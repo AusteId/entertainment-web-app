@@ -8,7 +8,7 @@ export default function MoviesPage() {
   const [searchText, setSearchText] = useState('');
   const [filteredMovies, setFilteredMovies] = useState([]);
 
-  const category = 'TV Series';
+  const category = 'Movie';
 
   useEffect(() => {
     getMovies(category);
@@ -21,19 +21,17 @@ export default function MoviesPage() {
   };
 
   const handleSearch = (textString) => {
-    const cleanText = textString.replace(/[^a-zA-Z0-9À-ž\s]/gi, '');
-
-    if (cleanText === '') {
-      setFilteredMovies([...movies]);
-    } else {
+    if (textString) {
       setFilteredMovies([
         ...movies.filter((movie) =>
-          movie.title.toLowerCase().includes(cleanText.toLowerCase())
+          movie.title.toLowerCase().includes(textString.toLowerCase())
         ),
       ]);
+    } else {
+      setFilteredMovies([...movies]);
     }
 
-    setSearchText(cleanText);
+    setSearchText(textString);
   };
 
   return (
