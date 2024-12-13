@@ -28,19 +28,16 @@ export const Search = ({ onSearch }) => {
   };
 
   return (
-    <div className="w-full flex items-center gap-[0.5rem]">
-      <img src={search} alt="search icon" />
+    <div className='w-full flex items-center gap-[0.5rem]'>
+      <img src={search} alt='search icon' />
       <input
-        className="py-2 bg-dark w-full xl:w-[68rem] 2xl:w-[84rem] outline-none heading-md border-b border-b-dark focus:border-b-lightBlue focus:border-b focus:outline-none caret-red"
-        id="search"
+        className='py-2 bg-dark w-full xl:w-[68rem] 2xl:w-[84rem] cursor-pointer outline-none heading-md border-b border-b-dark focus:border-b-lightBlue focus:border-b focus:outline-none caret-red'
+        id='search'
         value={value}
-        // onChange={(e) => e.target.value === '' && onSearch('')}
         onChange={handleOnSearch}
-        type="text"
-        autoComplete="off"
+        type='text'
+        autoComplete='off'
         maxLength={50}
-        // pattern="[A-z0-9À-ž\s]"
-        // pattern="([^\s][A-z0-9À-ž\s]+)"
         placeholder={renderPlaceholder()}
       />
     </div>

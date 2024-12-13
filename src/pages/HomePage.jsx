@@ -42,6 +42,9 @@ export default function HomePage() {
   return (
     <div className='w-full flex flex-col gap-4 body-md p-4'>
       <Search onSearch={(searchString) => handleSearch(searchString)} />
+      <h2 className='text-[1.25rem] md:text-hl p-0 text-white font-outfit  font-medium tracking-[-0.0195rem] pb-[1.5rem] self-start'>
+        Trending
+      </h2>
       <TrendingCarousel trendingMovies={trending} />
       <MoviesList movies={filteredRecommended} searchText={searchText} />
     </div>
