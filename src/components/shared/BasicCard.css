@@ -53,3 +53,30 @@
     height: 140px;
   }
 }
+
+@media (max-width: 374px) {
+  .title-font {
+    font-family: Outfit;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-right: 6px;
+  }
+  .oval-gap {
+    margin-inline: 6px;
+    width: 2px;
+    height: 2px;
+  }
+  .body-s {
+    font-family: Outfit;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .show-icon {
+    width: 10px ;
+    height: 10px;
+  }
+}
