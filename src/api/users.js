@@ -7,7 +7,7 @@ export const apiLoginUser = async (formData) => {
     const user = await getUserByEmail(formData.email);
 
     if (user) {
-      const pass = checkPassword(formData.password, user.password);
+      const pass = await checkPassword(formData.password, user.password);
 
       if (!pass) {
         return { error: "Incorrect email or password. Try again " };

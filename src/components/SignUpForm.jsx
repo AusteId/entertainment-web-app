@@ -67,12 +67,12 @@ const SignUpForm = ({ onLogin }) => {
         <img
           src={logo}
           alt='logo'
-          className='pt-[3rem] pb-[3.65rem] md:pt-[5.5rem] md:pb-[4.53rem] lg:pt-[4.9rem]lg:pb-[5.19rem] xl:pt[4.9rem]'
+          className='pt-[3rem] md:pt-[5.5rem] lg:pt-[4.9rem] xl:pt[4.9rem]'
         />
       </div>
       <div className=' flex justify-center /*min-h-screen items-center*/'>
-        <section className='grid border rounded-[1.25rem] bg-darkBlue w-[20.4375rem] min-h-[26.25rem] md:w-[25rem] md:min-h-[26.125rem]'>
-          <h1 className='text-white font-medium text-hl font-outfit pt-[2rem] pl-[2rem] pb-[2.5rem]'>
+        <section className='grid rounded-[1.25rem] bg-darkBlue w-[20.4375rem] min-h-[26.25rem] md:w-[25rem] md:min-h-[26.125rem]'>
+          <h1 className='text-white font-light text-hl font-outfit pt-[2rem] pl-[2rem] pb-[2.5rem] tracking-[-0.03125rem]'>
             Sign Up
           </h1>
           <form
@@ -85,24 +85,24 @@ const SignUpForm = ({ onLogin }) => {
                 type='email'
                 placeholder='Email address'
                 className={`text-bm bg-darkBlue border-b ${
-                  errors.password ? 'border-red' : 'border-lightBlue'
+                  errors.email ? 'border-red' : 'border-lightBlue'
                 } placeholder:font-outfit placeholder:font-light placeholder:text-bm w-full md:w-[21rem]
-                        h-[2.3125rem] pl-[1rem] placeholder:leading-[1.5] py-[0.25rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white`}
+                        h-[2.3125rem] pl-[1rem] placeholder:leading-[1.5] py-[0.25rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white hover:cursor-pointer`}
                 {...register('email', {
                   required: "Can't be empty",
                   pattern: {
                     value:
-                      /^(?=.{1,254}$)(?=.{1,64}@)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+                      /^(?=.{1,254}$)(?=.{1,64}@)(?!\.)(?!.*\.\.)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]{1,253}\.[A-Za-z]{2,}$/,
                     message: 'Invalid email address',
-                  },
+                  }
                 })}
               />
               <p
-                className={`font-outfit text-bs text-red ${
+                className={`font-outfit text-[0.85rem] text-red ${
                   errors.email?.message.includes('empty')
                     ? 'absolute top-0 right-[3.06rem]'
                     : 'pt-1'
-                } font-medium whitespace-nowrap`}
+                } font-light whitespace-nowrap leading-[1.8rem]`}
               >
                 {errors.email?.message}
               </p>
@@ -113,7 +113,7 @@ const SignUpForm = ({ onLogin }) => {
                 placeholder='Password'
                 className={`text-bm bg-darkBlue border-b ${
                   errors.password ? 'border-red' : 'border-lightBlue'
-                } w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white`}
+                } w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white hover:cursor-pointer`}
                 {...register('password', {
                   required: "Can't be empty",
                   minLength: {
@@ -121,18 +121,18 @@ const SignUpForm = ({ onLogin }) => {
                     message: 'Password must be at least 8 characters long',
                   },
                   pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z]).+$/,
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?!.*\u200B)(?!.*\u200C)(?!.*\u200D)(?!.*\uFEFF).{8,}$/,
                     message:
                       'Password must contain both uppercase and lowercase letters',
                   },
                 })}
               />
               <p
-                className={`font-outfit text-bs text-red ${
+                className={`font-outfit text-[0.85rem] text-red ${
                   errors.password?.message.includes('empty')
                     ? 'absolute top-0 right-[3.06rem]'
                     : 'pt-1 text-[0.9rem] text-wrap'
-                } font-medium whitespace-nowrap`}
+                } font-light whitespace-nowrap leading-[1.8rem] leading-snug`}
               >
                 {errors.password?.message}
               </p>
@@ -142,8 +142,8 @@ const SignUpForm = ({ onLogin }) => {
                 type='password'
                 placeholder='Repeat password'
                 className={`text-bm bg-darkBlue border-b ${
-                  errors.password ? 'border-red' : 'border-lightBlue'
-                } w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white`}
+                  errors.repeatPassword ? 'border-red' : 'border-lightBlue'
+                } w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white hover:cursor-pointer`}
                 {...register('repeatPassword', {
                   required: "Can't be empty",
                   minLength: {
@@ -151,18 +151,18 @@ const SignUpForm = ({ onLogin }) => {
                     message: 'Password must be at least 8 characters long',
                   },
                   pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z]).+$/,
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?!.*\u200B)(?!.*\u200C)(?!.*\u200D)(?!.*\uFEFF).{8,}$/,
                     message:
                       'Password must contain both uppercase and lowercase letters',
                   },
                 })}
               />
               <p
-                className={`font-outfit text-bs text-red ${
+                className={`font-outfit text-[0.85rem] text-red ${
                   errors.repeatPassword?.message.includes('empty')
                     ? 'absolute top-0 right-[3.06rem]'
                     : 'pt-1 text-[0.9rem] text-wrap'
-                } font-medium whitespace-nowrap`}
+                } font-light whitespace-nowrap leading-[1.8rem] leading-snug`}
               >
                 {errors.repeatPassword?.message}
               </p>
@@ -175,9 +175,9 @@ const SignUpForm = ({ onLogin }) => {
             onClick={onLogin}
             className='inline-block text-center pb-[2rem] cursor-pointer'
           >
-            <p className='text-white text-bm font-outfit font-medium'>
+            <p className='text-white text-bm font-outfit font-light'>
               Already have an account?
-              <span className='text-red pl-[0.5rem] font-outfit font-medium'>
+              <span className='text-red pl-[0.5rem] font-outfit font-light'>
                 <a href='#'>Login</a>
               </span>
             </p>
