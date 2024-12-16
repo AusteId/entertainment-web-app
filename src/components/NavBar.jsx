@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { NavLink } from 'react-router';
 import { useUserContext } from '../service/UserContextProvider';
 
@@ -11,14 +11,14 @@ const navItems = [
 
 // Logo component
 const Logo = () => (
-    <img
-      src='/assets/logo.svg'
-      alt='Logo'
-      className='w-[1.5625rem] h-[1.25rem] md:w-[2rem] md:h-[1.6rem]'
-    />
+  <img
+    src='/assets/logo.svg'
+    alt='Logo'
+    className='w-[1.5625rem] h-[1.25rem] md:w-[2rem] md:h-[1.6rem]'
+  />
 );
 
-// NavIcon component
+// NavIcon component with text on hover
 const NavIcon = ({ to, icon, alt }) => (
   <NavLink
     to={to}
@@ -34,8 +34,36 @@ const NavIcon = ({ to, icon, alt }) => (
       }}
       aria-label={alt}
     />
+    
+    {/* Text that will appear on hover to the right of the icon */}
+    <span className='absolute left-full ml-3 text-md text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+      {alt}
+    </span>
   </NavLink>
 );
+
+// Dropdown Menu Component
+const DropdownMenu = ({ isOpen, onLogout, onClose }) => {
+  return isOpen ? (
+    <div
+      className="absolute right-0 mt-2 xl:left-[4rem] xl:bottom-0 bg-darkBlue text-darkBlue border-2 border-lightBlue rounded-2xl shadow-lg p-[0.5rem] flex flex-col space-y-2 w-40"
+    >
+      <NavLink
+        to="/profile"
+        className="text-sm bg-lightBlue hover:bg-white border border-dark rounded-lg p-2 text-center"
+        onClick={onClose}
+      >
+        Profile
+      </NavLink>
+      <button
+        className="text-sm bg-lightBlue hover:bg-white border border-dark rounded-lg text-center"
+        onClick={onLogout}
+      >
+        Sign Out
+      </button>
+    </div>
+  ) : null;
+};
 
 // Avatar component with logout functionality
 const Avatar = () => {
@@ -45,16 +73,16 @@ const Avatar = () => {
 
   const toggleDropdown = () => setIsDropdownOpen(prev => !prev);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
-      }
-    };
+  const handleClickOutside = useCallback((event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsDropdownOpen(false);
+    }
+  }, []);
 
+  useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [handleClickOutside]);
 
   const handleLogout = () => {
     setUserLoggedOut();
@@ -62,7 +90,7 @@ const Avatar = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative group">
       <NavLink to="#" onClick={toggleDropdown}>
         <img
           src="/assets/image-avatar.png"
@@ -70,36 +98,26 @@ const Avatar = () => {
           className="rounded-full border border-white w-[1.5rem] h-[1.5rem] md:w-[2rem] md:h-[2rem] xl:w-[2.5rem] xl:h-[2.5rem]"
         />
       </NavLink>
+      
+      {/* Text that will appear on hover to the right of the avatar */}
+      <span className='absolute left-full ml-[-2rem] xl:ml-1 text-md text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+        Avatar
+      </span>
 
       {/* Dropdown Menu */}
-      {isDropdownOpen && (
-        <div
-          ref={dropdownRef}
-          className="absolute right-0 mt-2 xl:left-[4rem] xl:bottom-0 bg-darkBlue text-darkBlue border-2 border-lightBlue rounded-2xl shadow-lg p-[0.5rem] flex flex-col space-y-2 w-40"
-        >
-          <NavLink
-            to="/profile"
-            className="text-sm bg-lightBlue hover:bg-white border border-dark rounded-lg p-2 text-center"
-            onClick={() => setIsDropdownOpen(false)}
-          >
-            Profile
-          </NavLink>
-          <button
-            className="text-sm bg-lightBlue hover:bg-white border border-dark rounded-lg text-center"
-            onClick={handleLogout}
-          >
-            Sign Out
-          </button>
-        </div>
-      )}
+      <DropdownMenu
+        isOpen={isDropdownOpen}
+        onLogout={handleLogout}
+        onClose={() => setIsDropdownOpen(false)}
+      />
     </div>
   );
 };
 
 // Navbar component
 const Navbar = () => (
-  <div className='flex flex-col xl:ml-[2rem] xl:mr-[1rem] xl:flex-row w-screen xl:w-[6rem] z-50 top-0 xl:sticky '>
-    <nav className='bg-darkBlue flex items-center justify-between p-4 sm:p-5 md:rounded-2xl md:m-[1.5rem] xl:p-0 xl:pt-[0rem] xl:h-screen 2xl:h-[60rem] xl:w-[6rem] xl:flex-col xl:m-0 xl:left-0 xl:top-0 xl:sticky'>
+  <div className='flex flex-col sticky top-0 xl:ml-[2rem] xl:mr-[1rem] xl:flex-row w-screen xl:w-[6rem] z-50'>
+    <nav className='bg-darkBlue sticky top-0 xl:sticky xl:top-8 xl:left-0 xl:h-[calc(100vh-4rem)] xl:mt-[2rem] xl:mb-[2rem] flex items-center justify-between p-4 sm:p-5 md:rounded-2xl md:m-[1.5rem] xl:p-0 xl:pt-[0rem] xl:w-[6rem] xl:flex-col xl:m-0'>
       {/* Logo */}
       <div className='flex justify-center items-center xl:mt-[2rem]'>
         <Logo />
