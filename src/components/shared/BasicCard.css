@@ -42,7 +42,7 @@
   margin-inline: 8px;
 }
 
-@media (max-width: 374px) {
+@media (max-width: 375px) {
   .title-font {
     font-family: Outfit;
     font-size: 14px;
