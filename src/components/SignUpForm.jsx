@@ -71,7 +71,7 @@ const SignUpForm = ({ onLogin }) => {
         />
       </div>
       <div className=' flex justify-center /*min-h-screen items-center*/'>
-        <section className='grid rounded-[1.25rem] bg-darkBlue w-[20.4375rem] min-h-[26.25rem] md:w-[25rem] md:min-h-[26.125rem]'>
+        <section className='grid rounded-[0.625rem] md:rounded-[1.25rem] bg-darkBlue w-[20.4375rem] min-h-[26.25rem] md:w-[25rem] md:min-h-[26.125rem]'>
           <h1 className='text-white font-light text-hl font-outfit pt-[2rem] pl-[2rem] pb-[2.5rem] tracking-[-0.03125rem]'>
             Sign Up
           </h1>
@@ -83,11 +83,12 @@ const SignUpForm = ({ onLogin }) => {
             <div className='px-[1.5rem] pb-[1.5rem] md:px-[2rem] relative'>
               <input
                 type='email'
+                aria-label='Enter your email address'
                 placeholder='Email address'
                 className={`text-bm bg-darkBlue border-b ${
                   errors.email ? 'border-red' : 'border-lightBlue'
                 } placeholder:font-outfit placeholder:font-light placeholder:text-bm w-full md:w-[21rem]
-                        h-[2.3125rem] pl-[1rem] placeholder:leading-[1.5] py-[0.25rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white hover:cursor-pointer`}
+                        h-[2.3125rem] pl-[1rem] placeholder:leading-[1.5] py-[0.25rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white hover:cursor-pointer placeholder:opacity-50`}
                 {...register('email', {
                   required: "Can't be empty",
                   pattern: {
@@ -110,10 +111,11 @@ const SignUpForm = ({ onLogin }) => {
             <div className='px-[1.5rem] pb-[1.5rem] md:px-[2rem] relative'>
               <input
                 type='password'
+                aria-label='Enter password'
                 placeholder='Password'
                 className={`text-bm bg-darkBlue border-b ${
                   errors.password ? 'border-red' : 'border-lightBlue'
-                } w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white hover:cursor-pointer`}
+                } w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white hover:cursor-pointer placeholder:opacity-50`}
                 {...register('password', {
                   required: "Can't be empty",
                   minLength: {
@@ -140,10 +142,11 @@ const SignUpForm = ({ onLogin }) => {
             <div className='px-[1.5rem] pb-[1.5rem] md:px-[2rem] relative'>
               <input
                 type='password'
+                aria-label='Repeat your password'
                 placeholder='Repeat password'
                 className={`text-bm bg-darkBlue border-b ${
                   errors.repeatPassword ? 'border-red' : 'border-lightBlue'
-                } w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white hover:cursor-pointer`}
+                } w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white hover:cursor-pointer placeholder:opacity-50`}
                 {...register('repeatPassword', {
                   required: "Can't be empty",
                   minLength: {
@@ -162,7 +165,7 @@ const SignUpForm = ({ onLogin }) => {
                   errors.repeatPassword?.message.includes('empty')
                     ? 'absolute top-0 right-[3.06rem]'
                     : 'pt-1 text-[0.9rem] text-wrap'
-                } font-light whitespace-nowrap leading-[1.8rem] leading-snug`}
+                } font-light whitespace-nowrap leading-[1.8rem]`}
               >
                 {errors.repeatPassword?.message}
               </p>

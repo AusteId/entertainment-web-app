@@ -48,6 +48,7 @@ export const LoginForm = ({ onSignUp }) => {
             <input
               id="email"
               type="email"
+              aria-label='Enter your email address'
               autoComplete="on"
               placeholder="Email address"
               className="form_text"
@@ -67,6 +68,7 @@ export const LoginForm = ({ onSignUp }) => {
             <input
               id="password"
               type="password"
+              aria-label='Enter your password'
               autoComplete="off"
               placeholder="Password"
               className="form_text"
