@@ -33,6 +33,7 @@ export const Search = ({ onSearch }) => {
       <input
         className='py-2 bg-dark w-full xl:w-[68rem] 2xl:w-[84rem] cursor-pointer outline-none heading-md border-b border-b-dark focus:border-b-lightBlue focus:border-b focus:outline-none caret-red'
         id='search'
+        aria-label='Search for movies or TV series'
         value={value}
         onChange={handleOnSearch}
         type='text'
