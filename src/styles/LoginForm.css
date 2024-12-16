@@ -106,15 +106,15 @@ textarea:focus {
 /*logo*/
 /* Default padding */
 .logo-login {
-  padding-top: 4.9rem;
-  padding-bottom: 5.37rem;
+  padding-top: 3rem;
+  padding-bottom: 3.65rem;
   margin-bottom: -4.688rem;
 }
 
 /* Medium devices (md breakpoint) */
 @media (min-width: 768px) {
   .logo-login {
-    padding-top: 5.5rem;
+    padding-top: 5rem;
     padding-bottom: 4.53rem;
   }
 }
@@ -123,7 +123,7 @@ textarea:focus {
 @media (min-width: 1024px) {
   .logo-login {
     padding-top: 4.9rem;
-    padding-bottom: 5.19rem;
+    padding-bottom: 5.37rem;
   }
 }
 
@@ -134,16 +134,15 @@ textarea:focus {
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .box {
-    width:100%; /* Adjust width for small screens */
+    width: 100%; /* Adjust width for small screens */
     height: 22.813rem;
     width: 20.438rem;
     border-radius: 0.63rem;
-  
   }
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .heading-login {
     padding-top: 1.5rem;
     padding-left: 1.5rem;
@@ -156,5 +155,3 @@ input:-webkit-autofill {
   -webkit-text-fill-color: white !important; /* Ensure autofilled text is white */
   transition: background-color 5000s ease-in-out 0s; /* Prevent quick style flash */
 }
-
-
