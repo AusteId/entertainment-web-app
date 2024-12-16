@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_MOVIES_URL } from '../helpers/constants';
- 
+
 /**
  * Funkcija atrenka trending ir recommended masyvus
  * @param {*} userId
@@ -11,7 +11,7 @@ export const apiGetHomeMovies = async (userId) => {
     const res = await axios.get(API_MOVIES_URL);
     // trending tiesiog filtruojam
     const trending = res.data.filter((movie) => movie.isTrending);
- 
+
     // recommnded - visi filmai, išskyrus trending
     // ir duoto naudotojo bookmarkus
     const recommended = res.data.filter(
@@ -22,7 +22,7 @@ export const apiGetHomeMovies = async (userId) => {
     return { error: 'Unexpected error' };
   }
 };
- 
+
 /**
  * Funkcija grąžina filtruotą masyvą pagal kategoriją
  * @param {*} category
@@ -59,6 +59,7 @@ export const apiGetBookmarked = async (userId) => {
     return { error: 'Unexpected error' };
   }
 };
+
 export const apiSetBookmark = async (userId, movieId) => {
   try {
     const res = await apiGetMovieById(movieId);
@@ -68,28 +69,34 @@ export const apiSetBookmark = async (userId, movieId) => {
         const bookmarksArr = [...res.bookmarks, userId];
         await axios.patch(API_MOVIES_URL + `/${movieId}`, {
           bookmarks: bookmarksArr,
+          isBookmarked: true,
         });
       } else {
         // sukuriam nauja masyva ir pridedam zyma
         const bookmarksArr = [userId];
         await axios.patch(API_MOVIES_URL + `/${movieId}`, {
           bookmarks: bookmarksArr,
+          isBookmarked: true,
         });
       }
     }
   } catch (e) {}
 };
+
 export const apiRemoveBookmark = async (userId, movieId) => {
   const res = await apiGetMovieById(movieId);
   try {
     const bookmarksArr = res.bookmarks.filter((id) => id !== userId);
+    const isBookmarked = bookmarksArr.length > 0 ? true : false;
     await axios.patch(API_MOVIES_URL + `/${movieId}`, {
       bookmarks: bookmarksArr,
+      isBookmarked: isBookmarked,
     });
   } catch (e) {
     return { error: e };
   }
 };
+
 export const apiGetBookmarkedMovies = async (userId) => {
   try {
     const allMovies = await axios.get(API_MOVIES_URL);
@@ -99,6 +106,30 @@ export const apiGetBookmarkedMovies = async (userId) => {
         bookmarked = [...bookmarked, movie];
     });
     return bookmarked;
+  } catch (e) {
+    return { error: e };
+  }
+};
+
+export const apiGetAllMovies = async () => {
+  try {
+    const res = await axios.get(API_MOVIES_URL);
+    return res.data;
+  } catch (e) {
+    return { error: e };
+  }
+};
+
+export const apiGetMovieCategoriesAndRatings = async () => {
+  try {
+    const res = await axios.get(API_MOVIES_URL);
+    let catArray = [];
+    let ratArray = [];
+    res.data.forEach((item) => {
+      if (!catArray.includes(item.category)) catArray.push(item.category);
+      if (!ratArray.includes(item.rating)) ratArray.push(item.rating);
+    });
+    return { categories: catArray, ratings: ratArray };
   } catch (e) {
     return { error: e };
   }

@@ -3,27 +3,32 @@
     {
       "id": "bdba",
       "email": "aaa@aaa.com",
-      "password": "e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a"
+      "password": "e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a",
+      "role": "USER"
     },
     {
       "id": "20c1",
       "email": "bbb@bbb.com",
-      "password": "e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a"
+      "password": "e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a",
+      "role": "USER"
     },
     {
       "id": "d0e4",
       "email": "jonas@pastas.lt",
-      "password": "e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a"
+      "password": "e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a",
+      "role": "USER"
     },
     {
       "id": "46de",
       "email": "algis@pastas.lt",
-      "password": "e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a"
+      "password": "e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a",
+      "role": "ADMIN"
     },
     {
       "id": "5da5",
       "email": "jonas1@pastas.lt",
-      "password": "19513fdc9da4fb72a4a05eb66917548d3c90ff94d5419e1f2363eea89dfee1dd"
+      "password": "19513fdc9da4fb72a4a05eb66917548d3c90ff94d5419e1f2363eea89dfee1dd",
+      "role": "USER"
     }
   ],
   "movies": [
@@ -43,10 +48,12 @@
       "year": 2019,
       "category": "Movie",
       "rating": "PG",
-      "isBookmarked": false,
+      "isBookmarked": true,
       "isTrending": true,
       "id": "4832",
-      "bookmarks": []
+      "bookmarks": [
+        "46de"
+      ]
     },
     {
       "title": "Bottom Gear",
@@ -106,7 +113,7 @@
       "year": 2021,
       "category": "Movie",
       "rating": "18+",
-      "isBookmarked": false,
+      "isBookmarked": true,
       "isTrending": true,
       "id": "f35c",
       "bookmarks": [
@@ -146,10 +153,12 @@
       "year": 2019,
       "category": "Movie",
       "rating": "E",
-      "isBookmarked": false,
+      "isBookmarked": true,
       "isTrending": false,
       "id": "d8bc",
-      "bookmarks": []
+      "bookmarks": [
+        "46de"
+      ]
     },
     {
       "title": "The Diary",
