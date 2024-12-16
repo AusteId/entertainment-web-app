@@ -168,7 +168,7 @@ const SignUpForm = ({ onLogin }) => {
               </p>
             </div>
             <div className='pb-[1.5rem] px-[1.5rem] text-center'>
-              <Button type={'submit'}>Create an account</Button>
+              <Button type={'submit'} >Create an account</Button>
             </div>
           </form>
           <div

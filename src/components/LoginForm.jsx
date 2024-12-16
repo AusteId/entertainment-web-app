@@ -1,21 +1,21 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import Button from '../components/shared/Button';
-import { useUserContext } from '../service/UserContextProvider';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import Button from "../components/shared/Button";
+import { useUserContext } from "../service/UserContextProvider";
 
-import '../styles/LoginForm.css';
-import { apiLoginUser } from '../api/users';
+import "../styles/LoginForm.css";
+import { apiLoginUser } from "../api/users";
 
-import logo from '/assets/logo.svg';
+import logo from "/assets/logo.svg";
 
 export const LoginForm = ({ onSignUp }) => {
   const userData = useUserContext();
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: { email: '', password: '' } });
+  } = useForm({ defaultValues: { email: "", password: "" } });
 
   const onSubmit = async (formData) => {
     try {
@@ -32,67 +32,69 @@ export const LoginForm = ({ onSignUp }) => {
 
   return (
     <>
-      <div className='flex justify-center'>
-        <img
-          src={logo}
-          alt='logo'
-          className='pt-[3rem] md:pt-[5.5rem] lg:pt-[4.9rem] xl:pt[4.9rem]'
-        />
+      <div className="flex justify-center">
+        <img src={logo} alt="logo" className="logo-login" />
       </div>
-      <div className='box'>
+
+      <div className="box md:w-[25rem]">
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
-          <div className='text'>
+          <div className="text">
             {error && !errors.email && !errors.password && (
-              <p className='text_center'>{error}</p>
+              <p className="text_center">{error}</p>
             )}
           </div>
-          <h1>Login</h1>
-          <div className={`input_box ${errors.password ? 'error' : ''}`}>
+          <h1 className="heading-login">Login</h1>
+          <div className={`input_box ${errors.password ? "error" : ""}`}>
             <input
-              id='email'
-              type='email'
-              autoComplete='on'
-              placeholder='Email address'
-              className='form_text focus:outline-none focus:!border-white'
-              {...register('email', {
+              id="email"
+              type="email"
+              autoComplete="on"
+              placeholder="Email address"
+              className="form_text"
+              {...register("email", {
                 required: "Can't be empty",
                 pattern: {
                   value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                  message: 'Invalid email address',
+                  message: "Invalid email address",
                 },
               })}
             />
             {errors.email && (
-              <p className='error_message'>{errors.email.message}</p>
+              <p className="error_message">{errors.email.message}</p>
             )}
           </div>
-          <div className={`input_box ${errors.password ? 'error' : ''}`}>
+          <div className={`input_box ${errors.password ? "error" : ""}`}>
             <input
-              id='password'
-              type='password'
-              autoComplete='off'
-              placeholder='Password'
-              className='form_text focus:outline-none focus:!border-white'
-              {...register('password', {
+              id="password"
+              type="password"
+              autoComplete="off"
+              placeholder="Password"
+              className="form_text"
+              {...register("password", {
                 required: "Can't be empty",
               })}
             />
             {errors.password && (
-              <p className='error_message'>{errors.password.message}</p>
+              <p className="error_message">{errors.password.message}</p>
             )}
           </div>
-          <div className='w-full flex justify-center mb-5'>
-            <Button type={'submit'}>Login to your account</Button>
-          </div>
 
+          <div className="  pb-[1.5rem] text-center">
+            <Button
+              type={"submit"}
+              className="w-[320px] sm:w-[320px] md:w-[400px] lg:w-[500px]"
+            >
+              Login to your account
+            </Button>
+          </div>
           <div
             onClick={onSignUp}
-            className='inline-block text-center pb-[2rem] cursor-pointer w-full'
+            className="inline-block text-center pb-[2rem] cursor-pointer w-full"
           >
-            <p className='text-white text-bm font-outfit font-medium'>
+            <p className="text-white text-bm font-outfit font-light">
               Don't have an account?
-              <span className='text-red pl-[0.5rem] font-outfit font-medium'>
-                <a href='#'>Sign Up</a>
+              <span className="text-red pl-[0.5rem] font-outfit font-light">
+                <a href="#">Sign Up</a>
               </span>
             </p>
           </div>
