@@ -22,11 +22,13 @@ const UserContextProvider = (props) => {
   const [userData, setUserData] = useState(getInitialUserState);
 
   const setUserLoggedIn = (userId) => {
+    localStorage.removeItem('formLogin');
     localStorage.setItem('movieUserId', userId);
     setUserData({ ...userData, userId: userId });
   };
 
   const setUserLoggedOut = () => {
+    localStorage.removeItem('formLogin');
     localStorage.removeItem('movieUserId');
     setUserData({ ...userData, userId: '' });
   };
