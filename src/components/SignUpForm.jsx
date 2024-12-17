@@ -88,7 +88,7 @@ const SignUpForm = ({ onLogin }) => {
                 className={`text-bm bg-darkBlue border-b ${
                   errors.email ? 'border-red' : 'border-lightBlue'
                 } placeholder:font-outfit placeholder:font-light placeholder:text-bm w-full md:w-[21rem]
-                        h-[2.3125rem] pl-[1rem] placeholder:leading-[1.5] py-[0.25rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white hover:cursor-pointer placeholder:opacity-50`}
+                        h-[2.3125rem] pl-[1rem] placeholder:leading-[1.5] py-[0.25rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white cursor-pointer placeholder:opacity-50`}
                 {...register('email', {
                   required: "Can't be empty",
                   pattern: {
@@ -115,7 +115,7 @@ const SignUpForm = ({ onLogin }) => {
                 placeholder='Password'
                 className={`text-bm bg-darkBlue border-b ${
                   errors.password ? 'border-red' : 'border-lightBlue'
-                } w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white hover:cursor-pointer placeholder:opacity-50`}
+                } w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white cursor-pointer placeholder:opacity-50`}
                 {...register('password', {
                   required: "Can't be empty",
                   minLength: {
@@ -123,7 +123,7 @@ const SignUpForm = ({ onLogin }) => {
                     message: 'Password must be at least 8 characters long',
                   },
                   pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z])(?!.*\u200B)(?!.*\u200C)(?!.*\u200D)(?!.*\uFEFF).{8,}$/,
+                    value: /^(?!.*<.*?>)(?!.*javascript:)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
                     message:
                       'Password must contain both uppercase and lowercase letters',
                   },
@@ -134,7 +134,7 @@ const SignUpForm = ({ onLogin }) => {
                   errors.password?.message.includes('empty')
                     ? 'absolute top-0 right-[3.06rem]'
                     : 'pt-1 text-[0.9rem] text-wrap'
-                } font-light whitespace-nowrap leading-[1.8rem] leading-snug`}
+                } font-light whitespace-nowrap leading-[1.8rem]`}
               >
                 {errors.password?.message}
               </p>
@@ -146,7 +146,7 @@ const SignUpForm = ({ onLogin }) => {
                 placeholder='Repeat password'
                 className={`text-bm bg-darkBlue border-b ${
                   errors.repeatPassword ? 'border-red' : 'border-lightBlue'
-                } w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white hover:cursor-pointer placeholder:opacity-50`}
+                } w-full placeholder:font-outfit placeholder:font-light placeholder:text-bm h-[2.3125rem] pl-[1rem] pb-[1.12rem] caret-red text-white focus:outline-none focus:border-white cursor-pointer placeholder:opacity-50`}
                 {...register('repeatPassword', {
                   required: "Can't be empty",
                   minLength: {
@@ -154,7 +154,7 @@ const SignUpForm = ({ onLogin }) => {
                     message: 'Password must be at least 8 characters long',
                   },
                   pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z])(?!.*\u200B)(?!.*\u200C)(?!.*\u200D)(?!.*\uFEFF).{8,}$/,
+                    value: /^(?!.*<.*?>)(?!.*javascript:)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
                     message:
                       'Password must contain both uppercase and lowercase letters',
                   },
