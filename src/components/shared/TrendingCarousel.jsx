@@ -1,4 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "./TrendingCarousel.css";
 import { Bookmark } from "./Bookmark";
@@ -8,7 +9,14 @@ export const TrendingCarousel = ({ trendingMovies }) => {
     <div className="carousel-container">
       
       <Swiper
-        spaceBetween={28} 
+        modules={[Autoplay]} // Add Autoplay module
+        spaceBetween={28}
+        loop={true} 
+        autoplay={{
+          delay: 1500, 
+          disableOnInteraction: false, 
+        }}
+
         breakpoints={{
           320: { slidesPerView: 1.5 }, 
           768: { slidesPerView: 1.5 }, 
