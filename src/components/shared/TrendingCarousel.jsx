@@ -7,27 +7,25 @@ import { Bookmark } from "./Bookmark";
 export const TrendingCarousel = ({ trendingMovies }) => {
   return (
     <div className="carousel-container">
-      
       <Swiper
-        modules={[Autoplay]} 
+        modules={[Autoplay]}
         spaceBetween={28}
-        loop={true} 
+        loop={true}
         autoplay={{
-          delay: 2000, 
-          disableOnInteraction: false, 
+          delay: 2000,
+          disableOnInteraction: false,
         }}
         speed={1000}
-
         breakpoints={{
-          320: { slidesPerView: 1.5 }, 
-          768: { slidesPerView: 1.5 }, 
-          1024: { slidesPerView: 2.5 }, 
+          320: { slidesPerView: 1.5 },
+          768: { slidesPerView: 1.5 },
+          1024: { slidesPerView: 2.5 },
         }}
       >
         {trendingMovies.map((Card) => (
-          <SwiperSlide  key={Card.id}>
+          <SwiperSlide key={Card.id}>
             <div className="relative group bg-dark/25 cursor-pointer">
-            <Bookmark movieId={Card.id} bookmarks={Card.bookmarks} />
+              <Bookmark movieId={Card.id} bookmarks={Card.bookmarks} />
               <picture>
                 <source
                   media="(min-width: 320px) and (max-width: 767px)"
@@ -68,7 +66,6 @@ export const TrendingCarousel = ({ trendingMovies }) => {
                   <li className="flex pl-3 pr-3 items-center">
                     {Card.category === "Movie" ? (
                       <svg
-                       
                         width="16"
                         height="16"
                         viewBox="0 0 12 12"
@@ -83,7 +80,6 @@ export const TrendingCarousel = ({ trendingMovies }) => {
                       </svg>
                     ) : Card.category === "TV Series" ? (
                       <svg
-                        
                         width="16"
                         height="16"
                         viewBox="0 0 12 12"
@@ -126,7 +122,9 @@ export const TrendingCarousel = ({ trendingMovies }) => {
                 <div className="ml-3 mr-4">
                   <img src="/assets/icon-play.svg" alt="play" />
                 </div>
-                <p className="text-hm text-white font-medium font-outfit">Play</p>
+                <p className="text-hm text-white font-medium font-outfit">
+                  Play
+                </p>
               </button>
             </div>
           </SwiperSlide>

@@ -21,7 +21,7 @@ export default {
         bs: '0.813rem',
       },
       fontWeight: {
-        ligth: '300',
+        light: '300',
         medium: '400',
       },
     },
