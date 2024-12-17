@@ -1,22 +1,31 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
-  apiAddNewMovie,
   apiGetMovieCategoriesAndRatings,
+  apiUpdateMovie,
 } from '../../api/movies';
 import { ImageInput } from './ImageInput';
 import { ImageCropper } from './ImageCropper';
 
-export const Modal = ({ open, onClose, onSave, movie }) => {
+export const EditModal = ({ open, onClose, onSave, movie }) => {
   const [categories, setCategories] = useState([]);
   const [ratings, setRatings] = useState([]);
   const [image, setImage] = useState('');
-  const [currentPage, setCurrentPage] = useState('choose-img');
+  const [currentPage, setCurrentPage] = useState('img-cropped');
   const [imgAfterCrop, setImgAfterCrop] = useState('');
   const [noImageError, setNoImageError] = useState('');
+  const setImageValue = () => {
+    if (movie.thumbnail.regular.medium.includes('medium.jpg')) {
+      console.log('ne data url');
+    } else {
+      setImgAfterCrop(movie.thumbnail.regular.medium);
+      setImage(movie.thumbnail.regular.medium);
+    }
+  };
 
   useEffect(() => {
     getCategoriesAndRatings();
+    setImageValue();
   }, []);
 
   async function getCategoriesAndRatings() {
@@ -29,22 +38,22 @@ export const Modal = ({ open, onClose, onSave, movie }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      title: movie?.title,
-      year: movie?.year,
-      category: movie?.category,
-      isTrending: movie?.isTrending,
-      rating: movie?.rating,
-    },
-  });
+    setValue,
+  } = useForm();
+
+  setValue('title', movie.title);
+  setValue('rating', movie.rating);
+  setValue('category', movie.category);
+  setValue('isTrending', movie.isTrending);
+  setValue('year', movie.year);
 
   async function handleSave(formData) {
     if (!imgAfterCrop) {
       setNoImageError('Please select a poster image');
       return null;
     }
-    const movie = {
+
+    const movieToPatch = {
       title: formData.title,
       thumbnail: {
         trending: {
@@ -60,14 +69,17 @@ export const Modal = ({ open, onClose, onSave, movie }) => {
       year: formData.year,
       category: formData.category,
       rating: formData.rating,
-      isBookmarked: false,
       isTrending: formData.isTrending,
-      bookmarks: [],
     };
 
-    const res = await apiAddNewMovie(movie);
-    onSave(res.id);
-    onClose();
+    const res = await apiUpdateMovie(movieToPatch, movie.id);
+
+    if (res.error) {
+      console.log(res.error);
+    } else {
+      onSave(res.id);
+      onClose();
+    }
   }
 
   const onImageSelected = (selectedImg) => {
@@ -110,6 +122,12 @@ export const Modal = ({ open, onClose, onSave, movie }) => {
     setImage('');
   };
 
+  const handleChangeImage = () => {
+    setCurrentPage('choose-img');
+    setImage('');
+    setImgAfterCrop('');
+  };
+
   return (
     /** overlejus */
     <div
@@ -131,7 +149,7 @@ export const Modal = ({ open, onClose, onSave, movie }) => {
           className="body-sm flex flex-col gap-3 max-w-md w-full"
         >
           <div>
-            <h2 className="heading-md">Add New Movie</h2>
+            <h2 className="heading-md">Edit Movie</h2>
           </div>
           {/* Movie title */}
           <div className="flex flex-col gap-1">
@@ -143,6 +161,7 @@ export const Modal = ({ open, onClose, onSave, movie }) => {
               id="title"
               type="text"
               placeholder="Movie title"
+              autoComplete="off"
               {...register('title', {
                 required: 'Please enter movie title',
                 maxLength: 50,
@@ -191,10 +210,11 @@ export const Modal = ({ open, onClose, onSave, movie }) => {
               className="bg-darkBlue body-sm"
               id="year"
               type="number"
+              placeholder="Movie title"
               {...register('year', {
                 required: 'Please select movie year',
                 min: 1935,
-                max: 2024,
+                max: new Date().getFullYear(),
                 value: new Date().getFullYear(),
               })}
             />
@@ -254,10 +274,7 @@ export const Modal = ({ open, onClose, onSave, movie }) => {
                   <img src={imgAfterCrop} alt="cropped" />
                   <div className="flex gap-2 justify-center">
                     <p
-                      onClick={() => {
-                        setCurrentPage('choose-img');
-                        setImage('');
-                      }}
+                      onClick={handleChangeImage}
                       className="p-2 cursor-pointer hover:text-red"
                     >
                       Change Image
@@ -266,7 +283,7 @@ export const Modal = ({ open, onClose, onSave, movie }) => {
                       onClick={() => setCurrentPage('crop-img')}
                       className="p-2 cursor-pointer hover:text-red"
                     >
-                      Crop again
+                      Crop
                     </p>
                   </div>
                 </div>

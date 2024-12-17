@@ -103,6 +103,11 @@ export const apiRemoveBookmark = async (userId, movieId) => {
   }
 };
 
+/**
+ *
+ * @param {*} userId
+ * @returns objektų masyvas
+ */
 export const apiGetBookmarkedMovies = async (userId) => {
   try {
     const allMovies = await axios.get(API_MOVIES_URL);
@@ -117,6 +122,10 @@ export const apiGetBookmarkedMovies = async (userId) => {
   }
 };
 
+/**
+ *
+ * @returns objektų masyvas
+ */
 export const apiGetAllMovies = async () => {
   try {
     const res = await axios.get(API_MOVIES_URL);
@@ -126,6 +135,10 @@ export const apiGetAllMovies = async () => {
   }
 };
 
+/**
+ *
+ * @returns objektas - kategorijų ir reitingų masyvai
+ */
 export const apiGetMovieCategoriesAndRatings = async () => {
   try {
     const res = await axios.get(API_MOVIES_URL);
@@ -149,6 +162,30 @@ export const apiGetMovieCategoriesAndRatings = async () => {
 export const apiAddNewMovie = async (movie) => {
   try {
     const res = await axios.post(API_MOVIES_URL, movie);
+    return res.data;
+  } catch (e) {
+    return { error: e };
+  }
+};
+
+/**
+ * Ištrina filmą pagal id
+ * @param {*} movieId
+ * @returns objektas - deleted movie
+ */
+export const apiDeleteMovie = async (movieId) => {
+  try {
+    const res = await axios.delete(`${API_MOVIES_URL}/${movieId}`);
+    return res.data;
+  } catch (e) {
+    return { error: e };
+  }
+};
+
+export const apiUpdateMovie = async (movieData, movieId) => {
+  try {
+    const res = await axios.patch(`${API_MOVIES_URL}/${movieId}`, movieData);
+
     return res.data;
   } catch (e) {
     return { error: e };

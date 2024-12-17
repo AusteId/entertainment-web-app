@@ -27,8 +27,8 @@ export default function BookmarkedPage() {
 
   const getBookmarked = async (userId) => {
     const movies = await apiGetBookmarked(userId);
-    setMovies(movies);
-    setFilteredMovies(movies);
+    setMovies(movies.toReversed());
+    setFilteredMovies(movies.toReversed());
   };
 
   const handleSearch = (textString) => {
