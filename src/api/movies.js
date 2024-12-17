@@ -105,36 +105,36 @@ export const apiGetBookmarkedMovies = async (userId) => {
 };
 
 /**
- * Funkcija setina filmo ratingą
- * @param {*} movieId - ID filmo
- * @param {*} rating - naujas reitingas
+ * Function to set the movie rating
+ * @param {*} movieId - Movie ID
+ * @param {*} rating - New rating
  * @returns 
  */
 export const apiSetRating = async (movieId, userId, rating) => {
   try {
-    // Получаем текущие данные о фильме
+    // Get current movie data
     const { data: movie } = await axios.get(`${API_MOVIES_URL}/${movieId}`);
 
-    // Проверяем, существует ли уже рейтинг для этого пользователя
+    // Check if there is already a rating for this user
     const existingRatingIndex = movie.ratings.findIndex((r) => r.userId === userId);
     
     if (existingRatingIndex !== -1) {
-      // Если рейтинг для пользователя уже существует, обновляем его
+      // If the user already has a rating, update it
       movie.ratings[existingRatingIndex].rating = rating;
     } else {
-      // Если рейтинга для этого пользователя нет, добавляем новый
+      // If there is no rating for this user, add a new one
       movie.ratings.push({ userId, rating });
     }
 
-    // Обновляем данные фильма на сервере
+    // Update movie data on the server
     const { data: updatedMovie } = await axios.patch(`${API_MOVIES_URL}/${movieId}`, {
       ratings: movie.ratings,
     });
 
-    // Возвращаем обновленные данные фильма
+    // Return updated movie data
     return updatedMovie;
   } catch (error) {
-    console.error("Ошибка при обновлении рейтинга:", error);
-    return { error: 'Не удалось обновить рейтинг' };
+    console.error("Error updating rating:", error);
+    return { error: 'Failed to update rating' };
   }
 };

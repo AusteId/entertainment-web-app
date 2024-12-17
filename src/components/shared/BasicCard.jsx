@@ -1,66 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import "./BasicCard.css";
 import { Bookmark } from "./Bookmark";
 import RenderRating from './RenderRating';
-import { apiSetRating } from '../../api/movies'; // Импортируем функцию для обновления рейтинга
+import { useUserContext } from '../../service/UserContextProvider'; // import user context
+import { useRating } from './RatingHandler';  // hook for rating
 
 export const BasicCard = ({ Card }) => {
-  const [rating, setRating] = useState(0);  // Рейтинг пользователя
-  const [averageRating, setAverageRating] = useState(0);  // Средний рейтинг
-  const [isLoading, setIsLoading] = useState(true);  // Стейт загрузки
-  const [isError, setIsError] = useState(false);  // Стейт ошибки
-  const [userId, setUserId] = useState(null); // Состояние для хранения userId
-
-  // Получаем userId из localStorage (или другого хранилища)
-  useEffect(() => {
-    const storedUserId = localStorage.getItem('userId');  // Предполагаем, что userId сохранен в localStorage
-    if (storedUserId) {
-      setUserId(storedUserId); // Устанавливаем userId из localStorage
-    }
-  }, []); // Этот useEffect выполнится только при монтировании компонента
-
-  // Функция для расчета среднего рейтинга
-  useEffect(() => {
-    if (Card.ratings && Card.ratings.length > 0) {
-      const totalRating = Card.ratings.reduce((acc, ratingObj) => {
-        const ratingValues = Object.values(ratingObj);
-        return acc + ratingValues[0];
-      }, 0);
-  
-      const avgRating = totalRating / Card.ratings.length;
-      setAverageRating(avgRating);  
-    }
-    setIsLoading(false);  
-  }, [Card]);  
-
-  const handleRatingClick = async (newRating) => {
-    if (!userId) {
-      console.error('User not authenticated');
-      return;
-    }
-
-    setRating(newRating);
-
-    try {
-      const updatedMovie = await apiSetRating(Card.id, userId, newRating);
-
-      if (updatedMovie && updatedMovie.ratings) {
-        const updatedRatings = updatedMovie.ratings;
-        
-        const totalRating = updatedRatings.reduce((acc, ratingObj) => {
-          const ratingValues = Object.values(ratingObj);
-          return acc + ratingValues[0];
-        }, 0);
-
-        const newAvgRating = totalRating / updatedRatings.length;  
-        setAverageRating(newAvgRating);  
-      } else {
-        console.error('Failed to update rating');
-      }
-    } catch (error) {
-      console.error('Error updating rating:', error);
-    }
-  };
+  const { userId } = useUserContext();
+  // hook for evaluation
+  const { rating, averageRating, isLoading, isError, handleRatingClick } = useRating(Card, userId);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -118,27 +66,30 @@ export const BasicCard = ({ Card }) => {
           </button>
         </div>
         <div className="list-text-color">
-          <ul className="flex text-bs font-light font-outfit">
-            <li className="body-s">{Card.year}</li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="3" height="3" viewBox="0 0 3 3" fill="none" className="oval-gap">
-                <circle opacity="0.5" cx="1.5" cy="1.5" r="1.5" fill="white" />
-              </svg>
-            </li>
-            <li className="body-s flex">
-              {Card.category}
-            </li>
-            <li>
-              <RenderRating
-                rating={rating}  
-                onRatingChange={handleRatingClick}  
-              />
-            </li>
-            <li className="body-s ml-1 text-white">
-              {averageRating > 0 ? averageRating.toFixed(1) : "0"}
-            </li>
-          </ul>
-        </div>
+  <ul className="flex text-bs font-light font-outfit">
+    <li className="body-s">{Card.year}</li>
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="3" height="3" viewBox="0 0 3 3" fill="none" className="oval-gap">
+        <circle cx="1.5" cy="1.5" r="1.5" fill="white" />
+      </svg>
+    </li>
+    <li className="body-s flex">
+      {Card.category}
+    </li>
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="3" height="3" viewBox="0 0 3 3" fill="none" className="oval-gap">
+        <circle cx="1.5" cy="1.5" r="1.5" fill="white" />
+      </svg>
+    </li>
+    <li className="body-s">{Card.rating}</li>
+    <li>
+      <RenderRating rating={rating} onRatingChange={handleRatingClick} />
+    </li>
+    <li className="body-s ml-1 text-white">
+      {averageRating > 0 ? averageRating.toFixed(1) : "0"}
+    </li>
+  </ul>
+</div>
       </div>
 
       <h2 className="heading-xs text-white font-medium font-outfit title-font">
@@ -147,5 +98,3 @@ export const BasicCard = ({ Card }) => {
     </div>
   );
 };
-// Проверьте в консоли браузера, что userId действительно сохраняется
-console.log(localStorage.getItem('userId'));  // Должно вывести актуальное значение userId

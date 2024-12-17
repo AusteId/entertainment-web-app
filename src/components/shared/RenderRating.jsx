@@ -1,6 +1,9 @@
+import React from 'react';
+
 const RenderRating = ({ rating = 0, onRatingChange }) => {
-  const ratingRounded = isNaN(rating) ? 0 : rating; // Если рейтинг не число, ставим 0
-  
+  // Ensure rating is a valid number and is within the 0-5 range
+  const ratingRounded = Math.min(5, Math.max(0, isNaN(rating) ? 0 : rating));
+
   const stars = [];
 
   for (let i = 1; i <= 5; i++) {
@@ -11,10 +14,10 @@ const RenderRating = ({ rating = 0, onRatingChange }) => {
         width="12"
         height="12"
         viewBox="0 0 12 12"
-        fill={i <= ratingRounded ? "#FC4747" : "#C0C0C0"} // Красные звезды для рейтинга, серые для пустых
+        fill={i <= ratingRounded ? "#FC4747" : "#C0C0C0"} // Red stars for filled, gray for empty
         onClick={() => {
           if (onRatingChange) {
-            onRatingChange(i); // Обновляем рейтинг
+            onRatingChange(i); // Update the rating on click
           }
         }}
         style={{ cursor: 'pointer' }}
