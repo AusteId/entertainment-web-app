@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage';
 import MoviesPage from './pages/MoviesPage';
 import TvSeriesPage from './pages/TvSeriesPage';
 import BookmarkedPage from './pages/BookmarkedPage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path='movies' element={<MoviesPage />} />
             <Route path='tv-series' element={<TvSeriesPage />} />
             <Route path='bookmarked' element={<BookmarkedPage />} />
+            <Route path='profile' element={<ProfilePage />} />
           </Route>
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
