@@ -9,13 +9,14 @@ export const TrendingCarousel = ({ trendingMovies }) => {
     <div className="carousel-container">
       
       <Swiper
-        modules={[Autoplay]} // Add Autoplay module
+        modules={[Autoplay]} 
         spaceBetween={28}
         loop={true} 
         autoplay={{
-          delay: 1500, 
+          delay: 2000, 
           disableOnInteraction: false, 
         }}
+        speed={1000}
 
         breakpoints={{
           320: { slidesPerView: 1.5 }, 
@@ -45,9 +46,9 @@ export const TrendingCarousel = ({ trendingMovies }) => {
                 />
               </picture>
               <div className="absolute bottom-0 left-0 p-4">
-                <ul className="flex font-light font-outfit text-white">
-                  <li className="pr-3">{Card.year}</li>
-                  <li className="flex items-center">
+                <ul className="text-bs flex items-center font-light font-outfit text-white  ">
+                  <li className="pr-2">{Card.year}</li>
+                  <li className="flex items-center ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="3"
@@ -67,7 +68,7 @@ export const TrendingCarousel = ({ trendingMovies }) => {
                   <li className="flex pl-3 pr-3 items-center">
                     {Card.category === "Movie" ? (
                       <svg
-                        className="mt-1"
+                       
                         width="16"
                         height="16"
                         viewBox="0 0 12 12"
@@ -82,7 +83,7 @@ export const TrendingCarousel = ({ trendingMovies }) => {
                       </svg>
                     ) : Card.category === "TV Series" ? (
                       <svg
-                        className="mt-1"
+                        
                         width="16"
                         height="16"
                         viewBox="0 0 12 12"
@@ -96,7 +97,7 @@ export const TrendingCarousel = ({ trendingMovies }) => {
                         />
                       </svg>
                     ) : null}
-                    <span className="pl-3">{Card.category}</span>
+                    <span className="pl-1">{Card.category}</span>
                   </li>
                   <li className="flex items-center">
                     <svg
@@ -115,9 +116,9 @@ export const TrendingCarousel = ({ trendingMovies }) => {
                       />
                     </svg>
                   </li>
-                  <li className="pl-3">{Card.rating}</li>
+                  <li className="pl-2">{Card.rating}</li>
                 </ul>
-                <h2 className="text-hm text-white font-bold font-medium font-outfit">
+                <h2 className="lg:text-hm md:text-hm text-hs text-white font-bold font-medium font-outfit">
                   {Card.title}
                 </h2>
               </div>

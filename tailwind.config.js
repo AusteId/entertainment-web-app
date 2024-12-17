@@ -18,7 +18,7 @@ export default {
         hm: '1.5rem',
         hs: '1.125rem',
         bm: '0.938rem',
-        bs: '0.813',
+        bs: '0.813rem',
       },
       fontWeight: {
         ligth: '300',
