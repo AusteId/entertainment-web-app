@@ -56,14 +56,20 @@ export const LoginForm = ({ onSignUp }) => {
                 required: "Can't be empty",
                 pattern: {
                   value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                  message: "Invalid email address",
+                 message: "Invalid email address",
                 },
               })}
             />
-            {errors.email && (
-              <p className="error_message">{errors.email.message}</p>
-            )}
-          </div>
+           {/* Display the required error message */}
+  {errors.email && errors.email.type === "required" && (
+    <p className="error_message required_error">{errors.email.message}</p>
+  )}
+  
+  {/* Display the pattern error message */}
+  {errors.email && errors.email.type === "pattern" && (
+    <p className="error_message pattern_error">{errors.email.message}</p>
+  )}
+</div>
           <div className={`input_box ${errors.password ? "error" : ""}`}>
             <input
               id="password"

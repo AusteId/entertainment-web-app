@@ -57,6 +57,7 @@ body {
   font-family: Outfit;
   font-weight: 300;
   font-size: 0.938rem;
+
 }
 
 .input_box input::placeholder {
@@ -73,21 +74,44 @@ body {
   color: #fc4747;
   font-size: 0.813rem;
   position: absolute;
-  top: 50%; /* Vertically center the message relative to the input */
-  right: 0; /* Align the message to the right of the input box */
+   top: 50%;/* Vertically center the message relative to the input */
+  right: 0%; /* Align the message to the right of the input box */
   transform: translateY(-50%); /* Adjust for vertical centering */
   margin-top: 0; /* Remove the top margin */
   margin-right: 3.125rem;
   padding-bottom: 0.625rem;
 }
-
-input:focus,
-textarea:focus {
-  border-color: white; /* Change border to white on focus */
-}
-.input_box.error input {
+.input_box.error input  {
   border-bottom: 0.063rem solid #fc4747; /* Make the border red */
+
 }
+
+.input_box.error input:focus {
+  border-color: white; /* White border on focus */
+  outline: none; /* Remove default focus outline */
+}
+
+/* If the input is focused but has no error, we can reset to default border */
+.input_box input:focus {
+  border-bottom: 0.063rem solid #ccc; /* Border back to default on focus */
+}
+
+
+
+
+ 
+
+.pattern_error {
+  position: absolute;
+  top: 60px; /* Adjust this to position the pattern error as desired */
+  left: 33px;
+  padding-bottom: 10px;
+  
+
+ 
+  
+}
+
 
 .text {
   font-weight: 300;
