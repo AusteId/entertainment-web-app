@@ -9,9 +9,6 @@ export const TrendingCarousel = ({ trendingMovies }) => {
       
       <Swiper
         spaceBetween={28} 
-        autoplay={{
-          delay: 30, 
-        }}
         breakpoints={{
           320: { slidesPerView: 1.5 }, 
           768: { slidesPerView: 1.5 }, 
