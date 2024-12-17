@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { apiGetMovieCategoriesAndRatings } from '../../api/movies';
+import { ImageInput } from './ImageInput';
+import { ImageCropper } from './ImageCropper';
 
 export const Modal = ({ open, onClose, onYes, movie }) => {
   const [categories, setCategories] = useState([]);
   const [ratings, setRatings] = useState([]);
   const [isTrending, setIsTrending] = useState(false);
+  const [image, setImage] = useState('');
+  const [currentPage, setCurrentPage] = useState('choose-img');
+  const [imgAfterCrop, setImgAfterCrop] = useState('');
 
   useEffect(() => {
     getCategoriesAndRatings();
@@ -34,10 +39,14 @@ export const Modal = ({ open, onClose, onYes, movie }) => {
     console.log(formData);
   }
 
-  const handleTrendingCheck = (e) => {
-    setIsTrending(!isTrending);
-    console.log(e);
+  const onImageSelected = (selectedImg) => {
+    setImage(selectedImg);
+    setCurrentPage('crop-img');
   };
+
+  const onCropDone = (imgCroppedArea) => {};
+
+  const onCropCancel = () => {};
 
   return (
     /** overlejus */
@@ -52,14 +61,14 @@ export const Modal = ({ open, onClose, onYes, movie }) => {
         // reikia sustabdyti is tevo
         // paveldeta onclik funkcija
         onClick={(e) => e.stopPropagation()}
-        className={`bg-darkBlue rounded-xl shadow p-3 transition-all text-lg z-50 max-w-sm ${
+        className={`bg-darkBlue rounded-xl shadow p-3 transition-all text-lg z-50 min-w-md ${
           open ? 'scale-100 opacity-100' : 'scale-125 opacity-0'
         }`}
       >
         <form
           noValidate
           onSubmit={handleSubmit(handleSave)}
-          className='body-sm flex flex-col gap-3 max-w-screen-sm'
+          className='body-sm flex flex-col gap-3 max-w-md w-full'
         >
           <div>
             <h2 className='heading-md'>Add New Movie</h2>
@@ -133,12 +142,7 @@ export const Modal = ({ open, onClose, onYes, movie }) => {
             <label htmlFor='title' className='heading-xs'>
               Is trending?
             </label>
-            <Checkbox />
             <input
-              onChange={(e) => {
-                isTrending.onChange(e);
-                handleTrendingCheck(e);
-              }}
               type='checkbox'
               id='isTrending'
               {...register('isTrending')}
@@ -171,7 +175,25 @@ export const Modal = ({ open, onClose, onYes, movie }) => {
               </div>
             </>
           )}
+          {/* Image cropper */}
+          <div>
+            <p>Recommended poster size 940x460</p>{' '}
+            <div className='w-full h-[80%] flex items-center justify-center'>
+              {currentPage === 'choose-img' ? (
+                <ImageInput onImageSelected={onImageSelected} />
+              ) : currentPage === 'crop-img' ? (
+                <ImageCropper
+                  image={image}
+                  onCropDone={onCropDone}
+                  onCropCancel={onCropCancel}
+                />
+              ) : (
+                <div>opa</div>
+              )}
+            </div>
+          </div>
 
+          {/* End image cropper */}
           <div className='flex gap-3 items-center justify-center mt-3'>
             <button
               type='submit'
