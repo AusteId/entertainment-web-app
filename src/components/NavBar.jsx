@@ -68,6 +68,7 @@ const DropdownMenu = ({ isOpen, onLogout, onClose }) => {
 // Avatar component with logout functionality
 const Avatar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [showLogoutPrompt, setShowLogoutPrompt] = useState(false);
   const { setUserLoggedOut } = useUserContext();
   const dropdownRef = useRef(null);
 
@@ -85,9 +86,15 @@ const Avatar = () => {
   }, [handleClickOutside]);
 
   const handleLogout = () => {
-    setUserLoggedOut();
+    setShowLogoutPrompt(true);
     setIsDropdownOpen(false);
   };
+
+  const confirmLogout = () => {
+    setUserLoggedOut();
+    setShowLogoutPrompt(false);
+  };
+  const cancelLogout = () => setShowLogoutPrompt(false);
 
   return (
     <div className="relative group">
@@ -110,6 +117,31 @@ const Avatar = () => {
         onLogout={handleLogout}
         onClose={() => setIsDropdownOpen(false)}
       />
+      {showLogoutPrompt && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div
+            className="bg-darkBlue p-6 rounded-lg shadow-lg"
+            style={{ width: '300px', border: '2px solid #5A698F' }}
+          >
+            <h3 className="text-white text-lg font-semibold mb-4">Confirm Logout</h3>
+            <p className="text-lightBlue mb-6">Are you sure you want to log out?</p>
+            <div className="flex justify-end space-x-2">
+              <button
+                onClick={cancelLogout}
+                className="px-4 py-2 bg-lightBlue text-white rounded hover:bg-dark transition"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmLogout}
+                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
