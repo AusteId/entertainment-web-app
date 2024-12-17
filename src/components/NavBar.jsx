@@ -118,23 +118,23 @@ const Avatar = () => {
         onClose={() => setIsDropdownOpen(false)}
       />
       {showLogoutPrompt && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="fixed inset-0 flex items-center justify-center">
           <div
-            className="bg-darkBlue p-6 rounded-lg shadow-lg"
+            className="bg-darkBlue p-6 rounded-lg"
             style={{ width: '300px', border: '2px solid #5A698F' }}
           >
-            <h3 className="text-white text-lg font-semibold mb-4">Confirm Logout</h3>
+            <h3 className="text-white text-lg font-medium font-outfit mb-4">Confirm Logout</h3>
             <p className="text-lightBlue mb-6">Are you sure you want to log out?</p>
             <div className="flex justify-end space-x-2">
               <button
                 onClick={cancelLogout}
-                className="px-4 py-2 bg-lightBlue text-white rounded hover:bg-dark transition"
+                className="px-4 py-2 bg-lightBlue text-white rounded hover:bg-dark"
               >
                 Cancel
               </button>
               <button
                 onClick={confirmLogout}
-                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+                className="px-4 py-2 text-white rounded hover:bg-dark"
               >
                 Logout
               </button>
