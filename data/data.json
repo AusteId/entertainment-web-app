@@ -24,6 +24,26 @@
       "id": "5da5",
       "email": "jonas1@pastas.lt",
       "password": "19513fdc9da4fb72a4a05eb66917548d3c90ff94d5419e1f2363eea89dfee1dd"
+    },
+    {
+      "id": "c5ef",
+      "email": "algis2@pastas.lt",
+      "password": "24508d8f33df593268ceaaa17f014b5968bfda03049b80e73591d066749c6562"
+    },
+    {
+      "id": "667d",
+      "email": "algis3@pastas.lt",
+      "password": "24508d8f33df593268ceaaa17f014b5968bfda03049b80e73591d066749c6562"
+    },
+    {
+      "id": "4996",
+      "email": "algis1@pastas.lt",
+      "password": "080cfb28774ed18541de2422e2ff03f55b8b42727bb0f39ac86db8ae2a9afb10"
+    },
+    {
+      "id": "609e",
+      "email": "algis0@pastas.lt",
+      "password": "080cfb28774ed18541de2422e2ff03f55b8b42727bb0f39ac86db8ae2a9afb10"
     }
   ],
   "movies": [
@@ -46,7 +66,14 @@
       "isBookmarked": false,
       "isTrending": true,
       "id": "4832",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": [],
+      "ratings": [
+        {
+          "userId": "667d",
+          "rating": 2
+        }
+      ]
     },
     {
       "title": "Bottom Gear",
@@ -67,7 +94,8 @@
       "isBookmarked": false,
       "isTrending": true,
       "id": "2a4b",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": []
     },
     {
       "title": "Undiscovered Cities",
@@ -88,7 +116,9 @@
       "isBookmarked": false,
       "isTrending": true,
       "id": "4850",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": [],
+      "ratings": []
     },
     {
       "title": "1998",
@@ -111,7 +141,8 @@
       "id": "f35c",
       "bookmarks": [
         "5da5"
-      ]
+      ],
+      "userRatings": []
     },
     {
       "title": "Dark Side of the Moon",
@@ -132,7 +163,8 @@
       "isBookmarked": true,
       "isTrending": true,
       "id": "5b19",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": []
     },
     {
       "title": "The Great Lands",
@@ -149,7 +181,10 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "d8bc",
-      "bookmarks": []
+      "bookmarks": [
+        "c5ef"
+      ],
+      "userRatings": []
     },
     {
       "title": "The Diary",
@@ -166,7 +201,17 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "124f",
-      "bookmarks": []
+      "bookmarks": [
+        "c5ef"
+      ],
+      "userRatings": [],
+      "ratings": [
+        4,
+        4,
+        5,
+        5,
+        5
+      ]
     },
     {
       "title": "Earth’s Untouched",
@@ -179,13 +224,15 @@
       },
       "year": 2017,
       "category": "Movie",
-      "rating": "18+",
+      "rating": 4,
       "isBookmarked": true,
       "isTrending": false,
       "id": "0bd2",
       "bookmarks": [
         "5da5"
-      ]
+      ],
+      "userRatings": [],
+      "ratings": []
     },
     {
       "title": "No Land Beyond",
@@ -202,7 +249,10 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "bbde",
-      "bookmarks": []
+      "bookmarks": [
+        "c5ef"
+      ],
+      "userRatings": []
     },
     {
       "title": "During the Hunt",
@@ -215,11 +265,13 @@
       },
       "year": 2016,
       "category": "TV Series",
-      "rating": "PG",
+      "rating": 4,
       "isBookmarked": false,
       "isTrending": false,
       "id": "a4aa",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": [],
+      "ratings": []
     },
     {
       "title": "Autosport the Series",
@@ -237,8 +289,10 @@
       "isTrending": false,
       "id": "4235",
       "bookmarks": [
-        "5da5"
-      ]
+        "5da5",
+        "c5ef"
+      ],
+      "userRatings": []
     },
     {
       "title": "Same Answer II",
@@ -255,7 +309,9 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "d220",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": [],
+      "ratings": []
     },
     {
       "title": "Below Echo",
@@ -274,7 +330,8 @@
       "id": "bc03",
       "bookmarks": [
         "5da5"
-      ]
+      ],
+      "userRatings": []
     },
     {
       "title": "The Rockies",
@@ -291,7 +348,9 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "610b",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": [],
+      "ratings": []
     },
     {
       "title": "Relentless",
@@ -308,7 +367,10 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "5eae",
-      "bookmarks": []
+      "bookmarks": [
+        "c5ef"
+      ],
+      "userRatings": []
     },
     {
       "title": "Community of Ours",
@@ -325,7 +387,8 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "881f",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": []
     },
     {
       "title": "Van Life",
@@ -342,7 +405,8 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "3c97",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": []
     },
     {
       "title": "The Heiress",
@@ -359,7 +423,8 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "05fc",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": []
     },
     {
       "title": "Off the Track",
@@ -376,7 +441,8 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "950e",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": []
     },
     {
       "title": "Whispering Hill",
@@ -393,7 +459,8 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "c6e8",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": []
     },
     {
       "title": "112",
@@ -410,7 +477,8 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "44ef",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": []
     },
     {
       "title": "Lone Heart",
@@ -427,7 +495,8 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "6b42",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": []
     },
     {
       "title": "Production Line",
@@ -446,7 +515,8 @@
       "id": "f989",
       "bookmarks": [
         "5da5"
-      ]
+      ],
+      "userRatings": []
     },
     {
       "title": "Dogs",
@@ -465,7 +535,8 @@
       "id": "15b1",
       "bookmarks": [
         "5da5"
-      ]
+      ],
+      "userRatings": []
     },
     {
       "title": "Asia in 24 Days",
@@ -482,7 +553,8 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "52de",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": []
     },
     {
       "title": "The Tasty Tour",
@@ -499,7 +571,8 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "d42f",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": []
     },
     {
       "title": "Darker",
@@ -516,7 +589,8 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "b8d6",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": []
     },
     {
       "title": "Unresolved Cases",
@@ -533,7 +607,8 @@
       "isBookmarked": false,
       "isTrending": false,
       "id": "e010",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": []
     },
     {
       "title": "Mission: Saturn",
@@ -550,7 +625,8 @@
       "isBookmarked": true,
       "isTrending": false,
       "id": "cfbf",
-      "bookmarks": []
+      "bookmarks": [],
+      "userRatings": []
     }
   ]
 }

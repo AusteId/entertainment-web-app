@@ -103,3 +103,38 @@ export const apiGetBookmarkedMovies = async (userId) => {
     return { error: e };
   }
 };
+
+/**
+ * Funkcija setina filmo ratingą
+ * @param {*} movieId - ID filmo
+ * @param {*} rating - naujas reitingas
+ * @returns 
+ */
+export const apiSetRating = async (movieId, userId, rating) => {
+  try {
+    // Получаем текущие данные о фильме
+    const { data: movie } = await axios.get(`${API_MOVIES_URL}/${movieId}`);
+
+    // Проверяем, существует ли уже рейтинг для этого пользователя
+    const existingRatingIndex = movie.ratings.findIndex((r) => r.userId === userId);
+    
+    if (existingRatingIndex !== -1) {
+      // Если рейтинг для пользователя уже существует, обновляем его
+      movie.ratings[existingRatingIndex].rating = rating;
+    } else {
+      // Если рейтинга для этого пользователя нет, добавляем новый
+      movie.ratings.push({ userId, rating });
+    }
+
+    // Обновляем данные фильма на сервере
+    const { data: updatedMovie } = await axios.patch(`${API_MOVIES_URL}/${movieId}`, {
+      ratings: movie.ratings,
+    });
+
+    // Возвращаем обновленные данные фильма
+    return updatedMovie;
+  } catch (error) {
+    console.error("Ошибка при обновлении рейтинга:", error);
+    return { error: 'Не удалось обновить рейтинг' };
+  }
+};
