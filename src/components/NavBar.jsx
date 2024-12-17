@@ -26,8 +26,9 @@ const NavIcon = ({ to, icon, alt }) => (
       `group relative flex items-center justify-center ${isActive ? 'filter brightness-[4]' : ''}`
     }
   >
+    {/* Icon */}
     <div
-      className='bg-lightBlue transition duration-500 group-hover:bg-red w-[1rem] h-[1rem] md:w-[1.25rem] md:h-[1.25rem]'
+      className='transition duration-500 bg-lightBlue w-[1rem] h-[1rem] md:w-[1.25rem] md:h-[1.25rem] hover:bg-red'
       style={{
         mask: `url('/assets/${icon}') center/contain no-repeat`,
         WebkitMask: `url('/assets/${icon}') center/contain no-repeat`,
@@ -35,8 +36,8 @@ const NavIcon = ({ to, icon, alt }) => (
       aria-label={alt}
     />
     
-    {/* Text that will appear on hover to the right of the icon */}
-    <span className='absolute left-full ml-3 text-md text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+    {/* Hover text */}
+    <span className='absolute left-full ml-[-1.5rem] mt-[2.5rem] md:mt-[3rem] xl:mt-[3.5rem] xl:ml-[-2.25rem] text-s md:text-lg xl:text-xl 2xl:text-2xl z-50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none'>
       {alt}
     </span>
   </NavLink>
@@ -68,7 +69,6 @@ const DropdownMenu = ({ isOpen, onLogout, onClose }) => {
 // Avatar component with logout functionality
 const Avatar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [showLogoutPrompt, setShowLogoutPrompt] = useState(false);
   const { setUserLoggedOut } = useUserContext();
   const dropdownRef = useRef(null);
 
@@ -86,15 +86,9 @@ const Avatar = () => {
   }, [handleClickOutside]);
 
   const handleLogout = () => {
-    setShowLogoutPrompt(true);
+    setUserLoggedOut();
     setIsDropdownOpen(false);
   };
-
-  const confirmLogout = () => {
-    setUserLoggedOut();
-    setShowLogoutPrompt(false);
-  };
-  const cancelLogout = () => setShowLogoutPrompt(false);
 
   return (
     <div className="relative group">
@@ -106,42 +100,12 @@ const Avatar = () => {
         />
       </NavLink>
       
-      {/* Text that will appear on hover to the right of the avatar */}
-      <span className='absolute left-full ml-[-2rem] xl:ml-1 text-md text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
-        Avatar
-      </span>
-
       {/* Dropdown Menu */}
       <DropdownMenu
         isOpen={isDropdownOpen}
         onLogout={handleLogout}
         onClose={() => setIsDropdownOpen(false)}
       />
-      {showLogoutPrompt && (
-        <div className="fixed inset-0 flex items-center justify-center">
-          <div
-            className="bg-darkBlue p-6 rounded-lg"
-            style={{ width: '300px', border: '2px solid #5A698F' }}
-          >
-            <h3 className="text-white text-lg font-medium font-outfit mb-4">Sign Out</h3>
-            <p className="text-lightBlue mb-6">This will sign you out from the website. Are you sure you want to Sign Out?</p>
-            <div className="flex justify-end space-x-2">
-              <button
-                onClick={cancelLogout}
-                className="px-4 py-2 bg-lightBlue text-white rounded hover:bg-dark"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={confirmLogout}
-                className="px-4 py-2 text-white rounded hover:bg-dark"
-              >
-                Confirm
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
