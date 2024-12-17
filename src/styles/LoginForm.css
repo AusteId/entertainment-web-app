@@ -1,31 +1,68 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  display: flex;
-  justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: #10141e;
+  /* margin-top: -200px; */
 }
 
 .box {
   width: 25rem;
-  height: 23.25rem;
+
+  height: 23.3125rem;
   background-color: #161d2f;
   color: #fff;
   border-radius: 1.25rem;
 }
-h1 {
+
+.heading-login {
   font-size: 2rem;
   padding: 0.625rem;
-  padding-left: 2.5rem;
-  padding-top: 2.5rem;
+
+  padding-left: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 5px;
+
   font-family: Outfit;
   font-weight: 300;
+}
+.input_box {
+  position: relative;
+  width: 100%;
+
+  height: 2.25rem;
+  margin: 1.5rem 0;
+
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  font-family: Outfit;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+.input_box input {
+  width: 83%;
+  height: 2.25rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 0.063rem solid #5a698f;
+  color: #fff;
+
+  padding-bottom: 1.13rem;
+  padding-left: 1rem;
+  padding-right: 8.75rem;
+  caret-color: #fc4747;
+  padding-top: 0.313rem;
+  cursor: pointer;
+  font-family: Outfit;
+  font-weight: 300;
+  font-size: 0.938rem;
+}
+
+.input_box input::placeholder {
+  font-size: 0.938rem;
+  font-family: Outfit;
+  opacity: 0.5;
 }
 
 .button:hover {
@@ -43,41 +80,6 @@ h1 {
   margin-right: 3.125rem;
   padding-bottom: 0.625rem;
 }
-.input_box {
-  position: relative;
-  width: 100%;
-  height: 1.875rem;
-  margin: 1.875rem 0;
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  font-family: Outfit;
-  font-weight: 300;
-}
-
-.input_box input {
-  width: 80%;
-  height: 100%;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  border-bottom: 0.063rem solid #5a698f;
-  color: #fff;
-  padding-bottom: 1.125rem;
-  padding-left: 0.625rem;
-  padding-right: 8.75rem;
-  caret-color: #fc4747;
-  padding-top: 0.313rem;
-  cursor: pointer;
-  font-family: Outfit;
-  font-weight: 300;
-  font-size: 0.938rem;
-}
-
-.input_box input::placeholder {
-  font-size: 0.938rem;
-  font-family: Outfit;
-}
 
 input:focus,
 textarea:focus {
@@ -86,38 +88,6 @@ textarea:focus {
 .input_box.error input {
   border-bottom: 0.063rem solid #fc4747; /* Make the border red */
 }
-.button {
-  width: 80%;
-  margin-left: 2.5rem;
-  height: 2.5rem;
-  border-radius: 0.313rem;
-  border: none;
-  background-color: #fc4747;
-  color: #fff;
-  cursor: pointer;
-  margin-top: 0.313rem;
-  font-size: 0.938rem;
-  transition: background-color 0.3s ease;
-  font-family: Outfit;
-  font-weight: 300;
-}
-
-.singup {
-  text-align: center;
-  margin-top: 1.875rem;
-  font-size: 0.938rem;
-  margin-left: 5.31rem;
-  font-family: Outfit;
-  font-weight: 300;
-}
-.signup_link {
-  color: #fc4747;
-  text-decoration: none;
-  font-size: 0.938rem;
-  margin-left: 0.313rem;
-  font-weight: 300;
-  font-family: Outfit;
-}
 
 .text {
   font-weight: 300;
@@ -125,11 +95,65 @@ textarea:focus {
   font-size: 0.938rem;
   display: flex;
   text-align: center;
-
   justify-content: center;
   color: #fc4747;
   height: 0.313rem;
   margin-top: 0.313rem;
   margin-bottom: -0.625rem;
   padding-top: 0.625rem;
+}
+
+/*logo*/
+/* Default padding */
+.logo-login {
+  padding-top: 3rem;
+  padding-bottom: 3.65rem;
+  margin-bottom: -3.688rem;
+}
+
+/* Medium devices (md breakpoint) */
+@media (min-width: 768px) {
+  .logo-login {
+    padding-top: 5rem;
+    padding-bottom: 4.53rem;
+    margin-bottom: -3.988rem;
+  }
+}
+
+/* Large devices (lg breakpoint) */
+@media (min-width: 1024px) {
+  .logo-login {
+    padding-top: 4.9rem;
+    padding-bottom: 5.37rem;
+    margin-bottom: -5.388rem;
+  }
+}
+
+/* Extra large devices (xl breakpoint) */
+@media (min-width: 1280px) {
+  .logo-login {
+    padding-top: 4.9rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .box {
+    width: 100%; /* Adjust width for small screens */
+    height: 22.813rem;
+    width: 20.438rem;
+    border-radius: 0.63rem;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .heading-login {
+    padding-top: 1.5rem;
+    padding-left: 1.5rem;
+  }
+}
+
+input:-webkit-autofill {
+  background-color: transparent !important; /* Remove autofill background */
+  color: white !important; /* Ensure text color matches */
+  -webkit-text-fill-color: white !important; /* Ensure autofilled text is white */
+  transition: background-color 5000s ease-in-out 0s; /* Prevent quick style flash */
 }
