@@ -29,9 +29,9 @@ export const Search = ({ onSearch }) => {
 
   return (
     <div className='w-full flex items-center gap-[0.5rem]'>
-      <img src={search} alt='search icon' />
+      <img src={search} alt='search icon' className='w-[1.5rem] md:w-[2rem] '/>
       <input
-        className='py-2 bg-dark w-full xl:w-[68rem] 2xl:w-[84rem] cursor-pointer outline-none heading-md border-b border-b-dark focus:border-b-lightBlue focus:border-b focus:outline-none caret-red'
+        className='py-2 bg-dark w-full xl:w-[68rem] 2xl:w-[84rem] cursor-pointer outline-none heading-md border-b border-b-dark focus:border-b-lightBlue focus:border-b focus:outline-none caret-red placeholder:text-[1rem] placeholder:font-light placeholder:opacity-50 pb-[0.5rem] text-[1rem] font-outfit md:text-hm font-thin md:placeholder:text-hm'
         id='search'
         aria-label='Search for movies or TV series'
         value={value}
