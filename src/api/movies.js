@@ -17,7 +17,13 @@ export const apiGetHomeMovies = async (userId) => {
     const recommended = res.data.filter(
       (movie) => !movie.isTrending && !movie.bookmarks.includes(userId)
     );
-    return { trendingMovies: trending, recommendedMovies: recommended };
+
+    return {
+      trendingMovies: trending,
+      recommendedMovies: recommended.sort(
+        (a, b) => b.bookmarks.length - a.bookmarks.length
+      ),
+    };
   } catch (e) {
     return { error: 'Unexpected error' };
   }
@@ -130,6 +136,20 @@ export const apiGetMovieCategoriesAndRatings = async () => {
       if (!ratArray.includes(item.rating)) ratArray.push(item.rating);
     });
     return { categories: catArray, ratings: ratArray };
+  } catch (e) {
+    return { error: e };
+  }
+};
+
+/**
+ * Prideda naują filmą
+ * @param {*} movie - objektas
+ * @returns 201 ir filmo duomenis arba klaidą
+ */
+export const apiAddNewMovie = async (movie) => {
+  try {
+    const res = await axios.post(API_MOVIES_URL, movie);
+    return res.data;
   } catch (e) {
     return { error: e };
   }

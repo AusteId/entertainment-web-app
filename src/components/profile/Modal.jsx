@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { apiGetMovieCategoriesAndRatings } from '../../api/movies';
+import {
+  apiAddNewMovie,
+  apiGetMovieCategoriesAndRatings,
+} from '../../api/movies';
 import { ImageInput } from './ImageInput';
 import { ImageCropper } from './ImageCropper';
 
 export const Modal = ({ open, onClose, onYes, movie }) => {
   const [categories, setCategories] = useState([]);
   const [ratings, setRatings] = useState([]);
-  const [isTrending, setIsTrending] = useState(false);
   const [image, setImage] = useState('');
   const [currentPage, setCurrentPage] = useState('choose-img');
   const [imgAfterCrop, setImgAfterCrop] = useState('');
+  const [noImageError, setNoImageError] = useState('');
 
   useEffect(() => {
     getCategoriesAndRatings();
@@ -35,8 +38,35 @@ export const Modal = ({ open, onClose, onYes, movie }) => {
       rating: movie?.rating,
     },
   });
+
   async function handleSave(formData) {
-    console.log(formData);
+    if (!imgAfterCrop) {
+      setNoImageError('Please select a poster image');
+      return null;
+    }
+    const movie = {
+      title: formData.title,
+      thumbnail: {
+        trending: {
+          small: imgAfterCrop,
+          large: imgAfterCrop,
+        },
+        regular: {
+          small: imgAfterCrop,
+          medium: imgAfterCrop,
+          large: imgAfterCrop,
+        },
+      },
+      year: formData.year,
+      category: formData.category,
+      rating: formData.rating,
+      isBookmarked: false,
+      isTrending: formData.isTrending,
+      bookmarks: [],
+    };
+
+    const res = await apiAddNewMovie(movie);
+    onClose();
   }
 
   const onImageSelected = (selectedImg) => {
@@ -44,9 +74,40 @@ export const Modal = ({ open, onClose, onYes, movie }) => {
     setCurrentPage('crop-img');
   };
 
-  const onCropDone = (imgCroppedArea) => {};
+  const onCropDone = (imgCroppedArea) => {
+    const canvasEl = document.createElement('canvas');
 
-  const onCropCancel = () => {};
+    canvasEl.width = 720; //imgCroppedArea.width;
+    canvasEl.height = 440; //imgCroppedArea.height;
+
+    const context = canvasEl.getContext('2d');
+
+    let imageObj1 = new Image();
+    imageObj1.src = image;
+    imageObj1.onload = function () {
+      context.drawImage(
+        imageObj1,
+        imgCroppedArea.x,
+        imgCroppedArea.y,
+        imgCroppedArea.width,
+        imgCroppedArea.height,
+        0,
+        0,
+        canvasEl.width,
+        canvasEl.height
+      );
+      //context.scale(22, 14);
+      const dataURL = canvasEl.toDataURL('image/jpeg', 1);
+      setImgAfterCrop(dataURL);
+      setNoImageError('');
+      setCurrentPage('img-cropped');
+    };
+  };
+
+  const onCropCancel = () => {
+    setCurrentPage('choose-img');
+    setImage('');
+  };
 
   return (
     /** overlejus */
@@ -61,9 +122,7 @@ export const Modal = ({ open, onClose, onYes, movie }) => {
         // reikia sustabdyti is tevo
         // paveldeta onclik funkcija
         onClick={(e) => e.stopPropagation()}
-        className={`bg-darkBlue rounded-xl shadow p-3 transition-all text-lg z-50 min-w-md ${
-          open ? 'scale-100 opacity-100' : 'scale-125 opacity-0'
-        }`}
+        className={`bg-darkBlue rounded-xl shadow p-3 transition-all text-lg z-50 min-w-md`}
       >
         <form
           noValidate
@@ -75,7 +134,7 @@ export const Modal = ({ open, onClose, onYes, movie }) => {
           </div>
           {/* Movie title */}
           <div className='flex flex-col gap-1'>
-            <label htmlFor='title' className='heading-xs'>
+            <label htmlFor='title' className='heading-xs text-opacity-50'>
               Title
             </label>
             <input
@@ -101,7 +160,7 @@ export const Modal = ({ open, onClose, onYes, movie }) => {
           </div>
           {/* Movie category */}
           <div className='flex flex-col gap-1'>
-            <label htmlFor='category' className='heading-xs'>
+            <label htmlFor='category' className='heading-xs text-opacity-50'>
               Category
             </label>
             <select
@@ -110,7 +169,9 @@ export const Modal = ({ open, onClose, onYes, movie }) => {
             >
               <option value={''}>--select category--</option>
               {categories.map((category) => (
-                <option value={category}>{category}</option>
+                <option key={category} value={category}>
+                  {category}
+                </option>
               ))}
             </select>
             {errors.category && (
@@ -121,7 +182,7 @@ export const Modal = ({ open, onClose, onYes, movie }) => {
           </div>
           {/* Movie year */}
           <div className='flex gap-4'>
-            <label htmlFor='title' className='heading-xs'>
+            <label htmlFor='title' className='heading-xs text-opacity-50'>
               Release year
             </label>
             <input
@@ -139,7 +200,7 @@ export const Modal = ({ open, onClose, onYes, movie }) => {
           </div>
           {/* Trending */}
           <div className='flex gap-4 items-center'>
-            <label htmlFor='title' className='heading-xs'>
+            <label htmlFor='title' className='heading-xs text-opacity-50'>
               Is trending?
             </label>
             <input
@@ -150,16 +211,19 @@ export const Modal = ({ open, onClose, onYes, movie }) => {
           </div>
           {/* Movie rating */}
           <div className='flex flex-col gap-1'>
-            <label htmlFor='rating' className='heading-xs'>
+            <label htmlFor='rating' className='heading-xs text-opacity-50'>
               Rating
             </label>
             <select
+              id='rating'
               className='bg-darkBlue body-sm'
               {...register('rating', { required: 'Please select rating' })}
             >
               <option value={''}>--select rating--</option>
               {ratings.map((rating) => (
-                <option value={rating}>{rating}</option>
+                <option key={rating} value={rating}>
+                  {rating}
+                </option>
               ))}
             </select>
             {errors.rating && (
@@ -168,16 +232,13 @@ export const Modal = ({ open, onClose, onYes, movie }) => {
               </span>
             )}
           </div>
-          {isTrending && (
-            <>
-              <div>
-                <input type='file' accept='image/*' aria-label='Upload image' />
-              </div>
-            </>
-          )}
+
           {/* Image cropper */}
           <div>
-            <p>Recommended poster size 940x460</p>{' '}
+            <p className='body-sm text-red py-2 text-center'>
+              Recommended poster size 940x460
+            </p>
+            {noImageError && <p className='body-md text-red'>{noImageError}</p>}
             <div className='w-full h-[80%] flex items-center justify-center'>
               {currentPage === 'choose-img' ? (
                 <ImageInput onImageSelected={onImageSelected} />
@@ -188,7 +249,26 @@ export const Modal = ({ open, onClose, onYes, movie }) => {
                   onCropCancel={onCropCancel}
                 />
               ) : (
-                <div>opa</div>
+                <div className='flex flex-col gap-2'>
+                  <img src={imgAfterCrop} alt='cropped' />
+                  <div className='flex gap-2 justify-center'>
+                    <p
+                      onClick={() => {
+                        setCurrentPage('choose-img');
+                        setImage('');
+                      }}
+                      className='p-2 cursor-pointer hover:text-red'
+                    >
+                      Change Image
+                    </p>
+                    <p
+                      onClick={() => setCurrentPage('crop-img')}
+                      className='p-2 cursor-pointer hover:text-red'
+                    >
+                      Crop again
+                    </p>
+                  </div>
+                </div>
               )}
             </div>
           </div>
@@ -196,12 +276,14 @@ export const Modal = ({ open, onClose, onYes, movie }) => {
           {/* End image cropper */}
           <div className='flex gap-3 items-center justify-center mt-3'>
             <button
+              disabled={currentPage === 'crop-img'}
               type='submit'
               className='text-white bg-lightBlue rounded-lg hover:bg-white hover:text-lightBlue'
             >
               Save
             </button>
             <button
+              disabled={currentPage === 'crop-img'}
               type='button'
               onClick={onClose}
               className='bg-red text-white rounded-lg hover:bg-white hover:text-red'

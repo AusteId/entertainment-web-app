@@ -6,7 +6,6 @@ export const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
   const [zoom, setZoom] = useState(1);
 
   const [croppedArea, setCroppedArea] = useState(null);
-  const [aspectRatio, setAspectRatio] = useState(16 / 9);
 
   const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
     setCroppedArea(croppedAreaPixels);
@@ -17,7 +16,7 @@ export const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
       <div>
         <Cropper
           image={image}
-          aspect={aspectRatio}
+          aspect={11 / 7}
           crop={crop}
           zoom={zoom}
           onCropChange={setCrop}
@@ -26,24 +25,30 @@ export const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
           style={{
             containerStyle: {
               width: '100%',
-              height: '70%',
+              height: '58%',
               backgroundColor: '#fff',
             },
           }}
         />
       </div>
-      <button
-        className='rounded-lg'
-        onClick={() => {
-          onCropDone(croppedArea);
-        }}
-        type='button'
-      >
-        Crop
-      </button>{' '}
-      <button className='rounded-lg' type='button' onClick={onCropCancel}>
-        Cancel
-      </button>
+      <div className='flex gap-2 justify-center'>
+        <button
+          className='rounded-lg hover:bg-white hover:text-dark'
+          onClick={() => {
+            onCropDone(croppedArea);
+          }}
+          type='button'
+        >
+          Crop
+        </button>
+        <button
+          className='rounded-lg hover:bg-white hover:text-dark'
+          type='button'
+          onClick={onCropCancel}
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   );
 };
