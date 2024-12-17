@@ -47,17 +47,17 @@ const NavIcon = ({ to, icon, alt }) => (
 const DropdownMenu = ({ isOpen, onLogout, onClose }) => {
   return isOpen ? (
     <div
-      className="absolute right-0 mt-2 xl:left-[4rem] xl:bottom-0 bg-darkBlue text-darkBlue border-2 border-lightBlue rounded-2xl shadow-lg p-[0.5rem] flex flex-col space-y-2 w-40"
+      className="absolute right-0 mt-2 xl:left-[4rem] xl:bottom-0 bg-darkBlue text-white border-2 border-lightBlue rounded-xl shadow-lg p-[0.5rem] flex flex-col space-y-2 w-40"
     >
       <NavLink
         to="/profile"
-        className="text-sm bg-lightBlue hover:bg-white border border-dark rounded-lg p-2 text-center"
+        className="text-sm bg-lightBlue border border-dark rounded-xl p-2 text-center"
         onClick={onClose}
       >
         Profile
       </NavLink>
       <button
-        className="text-sm bg-lightBlue hover:bg-white border border-dark rounded-lg text-center"
+        className="text-sm bg-lightBlue border border-dark rounded-xl text-center"
         onClick={onLogout}
       >
         Sign Out
