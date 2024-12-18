@@ -6,6 +6,8 @@ import {
 } from '../../api/movies';
 import { ImageInput } from './ImageInput';
 import { ImageCropper } from './ImageCropper';
+import { resizeBase64Image } from '../../utils/base64Resize';
+import { imgToBase64 } from '../../utils/imgToBase64';
 
 export const EditModal = ({ open, onClose, onSave, movie }) => {
   const [categories, setCategories] = useState([]);
@@ -14,9 +16,17 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
   const [currentPage, setCurrentPage] = useState('img-cropped');
   const [imgAfterCrop, setImgAfterCrop] = useState('');
   const [noImageError, setNoImageError] = useState('');
+
+  //********* thumbnails */
+  const [trendingLarge, setTrendingLarge] = useState('');
+  const [regularMedium, setRegularMedium] = useState('');
+  //****************** */
+
   const setImageValue = () => {
     if (movie.thumbnail.regular.medium.includes('medium.jpg')) {
-      console.log('ne data url');
+      // reikia paversti base64
+      // const base64 = imgToBase64(movie.thumbnail.regular.medium);
+      // console.log(base64);
     } else {
       setImgAfterCrop(movie.thumbnail.regular.medium);
       setImage(movie.thumbnail.regular.medium);
@@ -24,9 +34,38 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
   };
 
   useEffect(() => {
+    if (movie.thumbnail.regular.large.includes('large.jpg')) {
+      getLocalImage(movie.thumbnail.regular.large);
+    }
     getCategoriesAndRatings();
     setImageValue();
   }, []);
+
+  async function getLocalImage(localImage) {
+    const res = await imgToBase64(localImage);
+    if (!res.error) {
+      const reader = new FileReader();
+      reader.readAsDataURL(res);
+      reader.onload = function (e) {
+        setImage(reader.result);
+
+        // resize for trending
+        const imgCroppedArea = { x: 1, y: 1, width: 470, height: 230 };
+        resizeBase64Image(
+          reader.result,
+          imgCroppedArea,
+          940,
+          460,
+          (resizedBase64) => {
+            setTrendingLarge(resizedBase64);
+          }
+        );
+
+        setRegularMedium(reader.result);
+        setImgAfterCrop(reader.result);
+      };
+    }
+  }
 
   async function getCategoriesAndRatings() {
     const res = await apiGetMovieCategoriesAndRatings();
@@ -58,11 +97,11 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
       thumbnail: {
         trending: {
           small: imgAfterCrop,
-          large: imgAfterCrop,
+          large: trendingLarge,
         },
         regular: {
           small: imgAfterCrop,
-          medium: imgAfterCrop,
+          medium: regularMedium,
           large: imgAfterCrop,
         },
       },
@@ -90,8 +129,8 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
   const onCropDone = (imgCroppedArea) => {
     const canvasEl = document.createElement('canvas');
 
-    canvasEl.width = 720; //imgCroppedArea.width;
-    canvasEl.height = 440; //imgCroppedArea.height;
+    canvasEl.width = 720;
+    canvasEl.height = 440;
 
     const context = canvasEl.getContext('2d');
 
@@ -112,6 +151,14 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
       //context.scale(22, 14);
       const dataURL = canvasEl.toDataURL('image/jpeg', 1);
       setImgAfterCrop(dataURL);
+      //trending large
+      resizeBase64Image(image, imgCroppedArea, 940, 460, (resizedBase64) => {
+        setTrendingLarge(resizedBase64);
+      });
+      // regular medium
+      resizeBase64Image(image, imgCroppedArea, 440, 280, (resizedBase64) => {
+        setRegularMedium(resizedBase64);
+      });
       setNoImageError('');
       setCurrentPage('img-cropped');
     };
@@ -146,22 +193,22 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
         <form
           noValidate
           onSubmit={handleSubmit(handleSave)}
-          className='body-sm flex flex-col gap-3 max-w-md w-full'
+          className="body-sm flex flex-col gap-3 max-w-md w-full"
         >
           <div>
-            <h2 className='heading-md'>Edit Movie</h2>
+            <h2 className="heading-md">Edit Movie</h2>
           </div>
           {/* Movie title */}
-          <div className='flex flex-col gap-1'>
-            <label htmlFor='title' className='heading-xs text-opacity-50'>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="title" className="heading-xs text-opacity-50">
               Title
             </label>
             <input
-              className='w-full rounded-lg p-1 bg-darkBlue body-sm'
-              id='title'
-              type='text'
-              placeholder='Movie title'
-              autoComplete='off'
+              className="w-full rounded-lg p-1 bg-darkBlue body-sm"
+              id="title"
+              type="text"
+              placeholder="Movie title"
+              autoComplete="off"
               {...register('title', {
                 required: 'Please enter movie title',
                 maxLength: {
@@ -175,19 +222,19 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
               })}
             />
             {errors.title && (
-              <span role='alert' className='text-red body-sm'>
+              <span role="alert" className="text-red body-sm">
                 {errors.title.message}
               </span>
             )}
           </div>
           {/* Movie category */}
-          <div className='flex flex-col gap-1'>
-            <label htmlFor='category' className='heading-xs text-opacity-50'>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="category" className="heading-xs text-opacity-50">
               Category
             </label>
             <select
-              id='category'
-              className='bg-darkBlue body-sm'
+              id="category"
+              className="bg-darkBlue body-sm"
               {...register('category', { required: 'Please select category' })}
             >
               <option value={''}>--select category--</option>
@@ -198,21 +245,21 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
               ))}
             </select>
             {errors.category && (
-              <span role='alert' className='text-red body-sm'>
+              <span role="alert" className="text-red body-sm">
                 {errors.category.message}
               </span>
             )}
           </div>
           {/* Movie year */}
-          <div className='flex gap-4'>
-            <label htmlFor='year' className='heading-xs text-opacity-50'>
+          <div className="flex gap-4">
+            <label htmlFor="year" className="heading-xs text-opacity-50">
               Release year
             </label>
             <input
-              className='bg-darkBlue body-sm'
-              id='year'
-              type='number'
-              placeholder='Movie title'
+              className="bg-darkBlue body-sm"
+              id="year"
+              type="number"
+              placeholder="Movie title"
               {...register('year', {
                 required: 'Please select movie year',
                 min: {
@@ -227,30 +274,30 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
               })}
             />
             {errors.year && (
-              <span role='alert' className='text-red body-sm'>
+              <span role="alert" className="text-red body-sm">
                 {errors.year.message}
               </span>
             )}
           </div>
           {/* Trending */}
-          <div className='flex gap-4 items-center'>
-            <label htmlFor='isTrending' className='heading-xs text-opacity-50'>
+          <div className="flex gap-4 items-center">
+            <label htmlFor="isTrending" className="heading-xs text-opacity-50">
               Is trending?
             </label>
             <input
-              type='checkbox'
-              id='isTrending'
+              type="checkbox"
+              id="isTrending"
               {...register('isTrending')}
             />
           </div>
           {/* Movie rating */}
-          <div className='flex flex-col gap-1'>
-            <label htmlFor='rating' className='heading-xs text-opacity-50'>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="rating" className="heading-xs text-opacity-50">
               Rating
             </label>
             <select
-              id='rating'
-              className='bg-darkBlue body-sm'
+              id="rating"
+              className="bg-darkBlue body-sm"
               {...register('rating', { required: 'Please select rating' })}
             >
               <option value={''}>--select rating--</option>
@@ -261,7 +308,7 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
               ))}
             </select>
             {errors.rating && (
-              <span role='alert' className='text-red body-sm'>
+              <span role="alert" className="text-red body-sm">
                 {errors.rating.message}
               </span>
             )}
@@ -269,11 +316,11 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
 
           {/* Image cropper */}
           <div>
-            <p className='body-sm text-red py-2 text-center'>
+            <p className="body-sm text-red py-2 text-center">
               Recommended poster size 940x460
             </p>
-            {noImageError && <p className='body-md text-red'>{noImageError}</p>}
-            <div className='w-full h-[80%] flex items-center justify-center'>
+            {noImageError && <p className="body-md text-red">{noImageError}</p>}
+            <div className="w-full h-[80%] flex items-center justify-center">
               {currentPage === 'choose-img' ? (
                 <ImageInput onImageSelected={onImageSelected} />
               ) : currentPage === 'crop-img' ? (
@@ -283,18 +330,18 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
                   onCropCancel={onCropCancel}
                 />
               ) : (
-                <div className='flex flex-col gap-2'>
-                  <img src={imgAfterCrop} alt='cropped' />
-                  <div className='flex gap-2 justify-center'>
+                <div className="flex flex-col gap-2">
+                  <img src={imgAfterCrop} alt="cropped" />
+                  <div className="flex gap-2 justify-center">
                     <p
                       onClick={handleChangeImage}
-                      className='p-2 cursor-pointer hover:text-red'
+                      className="p-2 cursor-pointer hover:text-red"
                     >
                       Change Image
                     </p>
                     <p
                       onClick={() => setCurrentPage('crop-img')}
-                      className='p-2 cursor-pointer hover:text-red'
+                      className="p-2 cursor-pointer hover:text-red"
                     >
                       Crop
                     </p>
@@ -305,19 +352,19 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
           </div>
 
           {/* End image cropper */}
-          <div className='flex gap-3 items-center justify-center mt-3'>
+          <div className="flex gap-3 items-center justify-center mt-3">
             <button
               disabled={currentPage === 'crop-img'}
-              type='submit'
-              className='text-white bg-lightBlue rounded-lg hover:bg-white hover:text-lightBlue'
+              type="submit"
+              className="text-white bg-lightBlue rounded-lg hover:bg-white hover:text-lightBlue"
             >
               Save
             </button>
             <button
               disabled={currentPage === 'crop-img'}
-              type='button'
+              type="button"
               onClick={onClose}
-              className='bg-red text-white rounded-lg hover:bg-white hover:text-red'
+              className="bg-red text-white rounded-lg hover:bg-white hover:text-red"
             >
               Cancel
             </button>
