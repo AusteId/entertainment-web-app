@@ -42,19 +42,7 @@
   margin-inline: 8px;
 }
 
-.thumbnail-img {
-  width: 280px;
-  height: 174px;
-}
-
-@media (max-width: 1023px) {
-  .thumbnail-img {
-    width: 220px;
-    height: 140px;
-  }
-}
-
-@media (max-width: 374px) {
+@media (max-width: 375px) {
   .title-font {
     font-family: Outfit;
     font-size: 14px;

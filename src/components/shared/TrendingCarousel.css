@@ -4,31 +4,7 @@ button {
     background-color: #ffffff33;
   }
 
-  
-  .carousel {
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
+  .carousel-container {
+    max-width: 1440px; 
   }
 
-  
-.carousel-item {
-  flex: 0 0 40%;
-  min-width: 40%;
-}
-
-
-@media (max-width: 1024px) {
-  .carousel-item {
-    flex: 0 0 66.66%;
-    min-width: 66.66%;
-  }
-}
-
-
-@media (max-width: 768px) {
-  .carousel-item {
-    flex: 0 0 66.66%;
-    min-width: 66.66%;
-  }
-}

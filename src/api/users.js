@@ -1,6 +1,6 @@
-import axios from "axios";
-import { API_USERS_URL } from "../helpers/constants";
-import { checkPassword } from "../utils/passwordHash";
+import axios from 'axios';
+import { API_USERS_URL } from '../helpers/constants';
+import { checkPassword } from '../utils/passwordHash';
 
 export const apiLoginUser = async (formData) => {
   try {
@@ -10,12 +10,12 @@ export const apiLoginUser = async (formData) => {
       const pass = await checkPassword(formData.password, user.password);
 
       if (!pass) {
-        return { error: "Incorrect email or password. Try again " };
+        return { error: 'Incorrect email or password. Try again ' };
       }
 
       return { id: user.id };
     } else {
-      return { error: "Incorrect email or password. Try again " };
+      return { error: 'Incorrect email or password. Try again ' };
     }
   } catch (e) {}
 };
@@ -39,6 +39,22 @@ export const getUserByEmail = async (email) => {
       return false;
     }
   } catch (e) {
-    return { error: "Unexpected error" };
+    return { error: 'Unexpected error' };
+  }
+};
+
+/**
+ * Naudotojas pagal id
+ * @param {*} userId
+ * @returns objektas - user
+ */
+export const apiGetUserById = async (userId) => {
+  try {
+    // Gaunam visus userius is db
+    const res = await axios.get(`${API_USERS_URL}/${userId}`);
+
+    return res.data;
+  } catch (e) {
+    return { error: 'Unexpected error' };
   }
 };

@@ -37,7 +37,7 @@ const NavIcon = ({ to, icon, alt }) => (
     />
     
     {/* Hover text */}
-    <span className='absolute left-full ml-3 text-xl z-50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none'>
+    <span className='absolute left-full ml-[-1.5rem] mt-[2.5rem] md:mt-[3rem] xl:mt-[3.5rem] xl:ml-[-2.25rem] text-s md:text-lg xl:text-xl 2xl:text-2xl z-50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none'>
       {alt}
     </span>
   </NavLink>
@@ -47,17 +47,17 @@ const NavIcon = ({ to, icon, alt }) => (
 const DropdownMenu = ({ isOpen, onLogout, onClose }) => {
   return isOpen ? (
     <div
-      className="absolute right-0 mt-2 xl:left-[4rem] xl:bottom-0 bg-darkBlue text-darkBlue border-2 border-lightBlue rounded-2xl shadow-lg p-[0.5rem] flex flex-col space-y-2 w-40"
+      className="absolute right-0 mt-2 xl:left-[4rem] xl:bottom-0 bg-darkBlue text-white border-2 border-lightBlue rounded-xl shadow-lg p-[0.5rem] flex flex-col space-y-2 w-40"
     >
       <NavLink
         to="/profile"
-        className="text-sm bg-lightBlue hover:bg-white border border-dark rounded-lg p-2 text-center"
+        className="hover:bg-red h-9 text-sm bg-lightBlue border border-dark rounded-xl p-2 text-center"
         onClick={onClose}
       >
         Profile
       </NavLink>
       <button
-        className="text-sm bg-lightBlue hover:bg-white border border-dark rounded-lg text-center"
+        className="hover:bg-red h-9 text-sm bg-lightBlue border border-dark rounded-xl text-center"
         onClick={onLogout}
       >
         Sign Out

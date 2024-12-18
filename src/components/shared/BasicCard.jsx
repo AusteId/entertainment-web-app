@@ -24,18 +24,13 @@ export const BasicCard = ({ Card }) => {
         <div className="relative group mb-2 bg-dark/25 cursor-pointer">
           <picture>
             <source
-              media="(max-width: 768px)"
+              media="(min-width: 320px) and (max-width: 767px)"
               srcSet={Card.thumbnail.regular.small}
               alt="thumbnail"
             />
             <source
-              media="(max-width: 1023px)"
+              media="(min-width: 768px) and (max-width: 1023px)"
               srcSet={Card.thumbnail.regular.medium}
-              alt="thumbnail"
-            />
-            <source
-              media="(min-width: 1024px)"
-              srcSet={Card.thumbnail.regular.large}
               alt="thumbnail"
             />
             <img
