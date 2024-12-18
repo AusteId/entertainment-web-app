@@ -51,13 +51,13 @@ const DropdownMenu = ({ isOpen, onLogout, onClose }) => {
     >
       <NavLink
         to="/profile"
-        className="text-sm bg-lightBlue border border-dark rounded-xl p-2 text-center"
+        className="h-9 text-sm bg-lightBlue border border-dark rounded-xl p-2 text-center"
         onClick={onClose}
       >
         Profile
       </NavLink>
       <button
-        className="text-sm bg-lightBlue border border-dark rounded-xl text-center"
+        className="h-9 text-sm bg-lightBlue border border-dark rounded-xl text-center"
         onClick={onLogout}
       >
         Sign Out
