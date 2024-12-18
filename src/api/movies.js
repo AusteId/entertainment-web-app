@@ -43,6 +43,7 @@ export const apiGetMoviesByCategory = async (category) => {
     return { error: 'Unexpected error' };
   }
 };
+
 export const apiGetMovieById = async (movieId) => {
   try {
     const res = await axios.get(API_MOVIES_URL + `/${movieId}`);
@@ -51,8 +52,9 @@ export const apiGetMovieById = async (movieId) => {
     return { error: e };
   }
 };
+
 /**
- * Funkcija atrenka tuos filmus, kurios
+ * Funkcija atrenka tuos filmus, kuriuos
  * bookmarkino userId
  * @param {*} userId
  * @returns filmu masyvas
@@ -119,6 +121,41 @@ export const apiGetBookmarkedMovies = async (userId) => {
     return bookmarked;
   } catch (e) {
     return { error: e };
+  }
+};
+
+/**
+ * Function to set the movie rating
+ * @param {*} movieId - Movie ID
+ * @param {*} rating - New rating
+ * @returns 
+ */
+export const apiSetRating = async (movieId, userId, rating) => {
+  try {
+    // Get current movie data
+    const { data: movie } = await axios.get(`${API_MOVIES_URL}/${movieId}`);
+
+    // Check if there is already a rating for this user
+    const existingRatingIndex = movie.ratings.findIndex((r) => r.userId === userId);
+    
+    if (existingRatingIndex !== -1) {
+      // If the user already has a rating, update it
+      movie.ratings[existingRatingIndex].rating = rating;
+    } else {
+      // If there is no rating for this user, add a new one
+      movie.ratings.push({ userId, rating });
+    }
+
+    // Update movie data on the server
+    const { data: updatedMovie } = await axios.patch(`${API_MOVIES_URL}/${movieId}`, {
+      ratings: movie.ratings,
+    });
+
+    // Return updated movie data
+    return updatedMovie;
+  } catch (error) {
+    console.error("Error updating rating:", error);
+    return { error: 'Failed to update rating' };
   }
 };
 
