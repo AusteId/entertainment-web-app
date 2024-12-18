@@ -49,7 +49,13 @@ const SignUpForm = ({ onLogin }) => {
       } else {
         const { repeatPassword, ...userData } = data;
         const hashedPassword = await generateHash(data.password);
-        const newUser = { ...userData, password: hashedPassword };
+        const newUser = {
+          ...userData,
+          password: hashedPassword,
+          role: 'USER',
+          username: data.email,
+          avatar: '',
+        };
         await addUser(newUser);
         setUsers((prev) => [...prev, newUser]);
         reset();
@@ -95,7 +101,7 @@ const SignUpForm = ({ onLogin }) => {
                     value:
                       /^(?=.{1,254}$)(?=.{1,64}@)(?!\.)(?!.*\.\.)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]{1,253}\.[A-Za-z]{2,}$/,
                     message: 'Invalid email address',
-                  }
+                  },
                 })}
               />
               <p
@@ -123,7 +129,8 @@ const SignUpForm = ({ onLogin }) => {
                     message: 'Password must be at least 8 characters long',
                   },
                   pattern: {
-                    value: /^(?!.*<.*?>)(?!.*javascript:)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
+                    value:
+                      /^(?!.*<.*?>)(?!.*javascript:)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
                     message:
                       'Password must contain both uppercase and lowercase letters',
                   },
@@ -154,7 +161,8 @@ const SignUpForm = ({ onLogin }) => {
                     message: 'Password must be at least 8 characters long',
                   },
                   pattern: {
-                    value: /^(?!.*<.*?>)(?!.*javascript:)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
+                    value:
+                      /^(?!.*<.*?>)(?!.*javascript:)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
                     message:
                       'Password must contain both uppercase and lowercase letters',
                   },
@@ -171,7 +179,7 @@ const SignUpForm = ({ onLogin }) => {
               </p>
             </div>
             <div className='pb-[1.5rem] px-[1.5rem] text-center'>
-              <Button type={'submit'} >Create an account</Button>
+              <Button type={'submit'}>Create an account</Button>
             </div>
           </form>
           <div
