@@ -9,6 +9,7 @@ const navItems = [
   { to: '/bookmarked', icon: 'icon-nav-bookmark.svg', label: 'Bookmark' },
 ];
 
+
 // Logo component
 const Logo = () => (
   <img
