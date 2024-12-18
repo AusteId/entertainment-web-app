@@ -42,12 +42,16 @@ export default function HomePage() {
   };
 
   return (
-    <div className='w-full flex flex-col gap-4 body-md p-4 xl:mt-[2rem]'>
-      <Search onSearch={(searchString) => handleSearch(searchString)} className=""/>
-      <h2 className='text-[1.25rem] md:text-hl p-0 text-white font-outfit font-thin tracking-[-0.0195rem] self-start'>
-        Trending
-      </h2>
-      <TrendingCarousel trendingMovies={trending} />
+    <div className="w-full flex flex-col gap-4 body-md p-4 xl:mt-[2rem]">
+      <Search onSearch={(searchString) => handleSearch(searchString)} />
+      {searchText === '' && (
+        <>
+          <h2 className="text-[1.25rem] md:text-hl p-0 text-white font-outfit font-thin tracking-[-0.0195rem] self-start">
+            Trending
+          </h2>
+          <TrendingCarousel trendingMovies={trending} />
+        </>
+      )}
       <MoviesList movies={filteredRecommended} searchText={searchText} />
     </div>
   );
