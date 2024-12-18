@@ -79,16 +79,21 @@ export const BasicCard = ({ Card }) => {
             <li className="body-s">{Card.rating}</li>
           </ul>
 
-          <h2 className="heading-xs text-white font-medium font-outfit title-font">
+          <h2 className=" heading-xs text-white font-medium font-outfit title-font">
             {Card.title}
-            <span className={averageRating > 0 ? 'text-gray text-sm inline-flex items-center ml-2' : 'inline-flex items-center ml-2'}>
+            
+          </h2>
+
+          <div className="flex ">
+            <RenderRating rating={rating} onRatingChange={handleRatingClick} />
+            <span className={averageRating > 0 ? 'font-medium text-gray text-sm inline-flex items-center ml-2' : 'inline-flex items-center ml-2'}>
               {averageRating > 0 ? averageRating.toFixed(1) : ""}
               {averageRating > 0 && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 10 10"
                   fill="#FC4747"
                   className="ml-[0.2rem]"
                 >
@@ -96,10 +101,6 @@ export const BasicCard = ({ Card }) => {
                 </svg>
               )}
             </span>
-          </h2>
-
-          <div>
-            <RenderRating rating={rating} onRatingChange={handleRatingClick} />
           </div>
         </div>
       </div>
