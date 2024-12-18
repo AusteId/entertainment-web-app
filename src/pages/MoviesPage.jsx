@@ -16,8 +16,8 @@ export default function MoviesPage() {
 
   const getMovies = async (category) => {
     const series = await apiGetMoviesByCategory(category);
-    setMovies(series);
-    setFilteredMovies(series);
+    setMovies(series.toReversed());
+    setFilteredMovies(series.toReversed());
   };
 
   const handleSearch = (textString) => {
