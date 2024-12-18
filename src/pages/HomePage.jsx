@@ -27,15 +27,17 @@ export default function HomePage() {
 
   const handleSearch = (textString) => {
     if (textString) {
-      setFilteredRecommended([
-        ...recommended.filter((movie) =>
-          movie.title.toLowerCase().includes(textString.toLowerCase())
-        ),
-      ]);
+      const combinedMovies = [
+        ...trending,
+        ...recommended
+      ];
+      const filteredMovies = combinedMovies.filter((movie) =>
+        movie.title.toLowerCase().includes(textString.toLowerCase())
+      );
+      setFilteredRecommended(filteredMovies);
     } else {
       setFilteredRecommended([...recommended]);
     }
-
     setSearchText(textString);
   };
 
