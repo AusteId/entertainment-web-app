@@ -149,9 +149,10 @@ export const Modal = ({ open, onClose, onSave, movie }) => {
                   value: 50,
                   message: 'Movie title should not exceed 50 characters length',
                 },
-                validate: (val) =>
-                  val?.match(/\p{L}/gu)?.join('') === val ||
-                  'Title must contain only valid unicode letters',
+                pattern: {
+                  value: /^[0-9a-zA-ZÀ-ž\s]+$/,
+                  message: 'Movie title can contain alphanumeric characters',
+                },
               })}
             />
             {errors.title && (
