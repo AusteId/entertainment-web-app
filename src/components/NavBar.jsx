@@ -66,9 +66,41 @@ const DropdownMenu = ({ isOpen, onLogout, onClose }) => {
   ) : null;
 };
 
+// Confirmation Modal for Sign Out
+const ConfirmationModal = ({ show, onConfirm, onCancel }) => {
+  if (!show) return null;
+
+  return (
+    <div className="fixed inset-0 flex justify-center items-center bg-darkBlue bg-opacity-70 z-50 transition-opacity duration-300 opacity-100">
+      <div className="bg-darkBlue p-8 rounded-xl border-4 border-lightBlue shadow-xl max-w-sm w-full">
+        <h3 className="text-2xl text-white font-semibold mb-6 text-center">
+          Are you sure you want to log out?
+        </h3>
+        <div className="flex justify-between gap-4">
+          <button
+            className="w-full py-1 px-4 bg-lightBlue hover:bg-red text-white rounded-lg text-sm font-semibold transition duration-300 ease-in-out transform hover:scale-105"
+            onClick={onConfirm}
+          >
+            Confirm
+          </button>
+          <button
+            className="w-full py-1 px-4 bg-lightBlue hover:bg-red text-white rounded-lg text-sm font-semibold transition duration-300 ease-in-out transform hover:scale-105"
+            onClick={onCancel}
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+
 // Avatar component with logout functionality
 const Avatar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { setUserLoggedOut } = useUserContext();
   const dropdownRef = useRef(null);
 
@@ -86,8 +118,17 @@ const Avatar = () => {
   }, [handleClickOutside]);
 
   const handleLogout = () => {
-    setUserLoggedOut();
+    setIsModalOpen(true);
     setIsDropdownOpen(false);
+  };
+
+  const confirmLogout = () => {
+    setUserLoggedOut();
+    setIsModalOpen(false);
+  };
+
+  const cancelLogout = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -105,6 +146,13 @@ const Avatar = () => {
         isOpen={isDropdownOpen}
         onLogout={handleLogout}
         onClose={() => setIsDropdownOpen(false)}
+      />
+
+      {/* Confirmation Modal */}
+      <ConfirmationModal
+        show={isModalOpen}
+        onConfirm={confirmLogout}
+        onCancel={cancelLogout}
       />
     </div>
   );
