@@ -2,12 +2,11 @@ import React from 'react';
 import "./BasicCard.css";
 import { Bookmark } from "./Bookmark";
 import RenderRating from './RenderRating';
-import { useUserContext } from '../../service/UserContextProvider'; // import user context
-import { useRating } from './RatingHandler';  // hook for rating
+import { useUserContext } from '../../service/UserContextProvider';
+import { useRating } from './RatingHandler';
 
 export const BasicCard = ({ Card }) => {
   const { userId } = useUserContext();
-  // hook for evaluation
   const { rating, averageRating, isLoading, isError, handleRatingClick } = useRating(Card, userId);
 
   if (isLoading) {
@@ -89,7 +88,6 @@ export const BasicCard = ({ Card }) => {
             {Card.title}
             <span className={averageRating > 0 ? 'text-gray text-sm inline-flex items-center ml-2' : 'inline-flex items-center ml-2'}>
               {averageRating > 0 ? averageRating.toFixed(1) : ""}
-              {/* Conditionally render the SVG when there's a rating */}
               {averageRating > 0 && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +95,7 @@ export const BasicCard = ({ Card }) => {
                   height="12"
                   viewBox="0 0 12 12"
                   fill="#FC4747"
-                  className="ml-1"  // Adds a little space between the number and the icon
+                  className="ml-[0.2rem]"
                 >
                   <path d="M6 9l-3 2 1-4-3-3h4l1-4 1 4h4l-3 3 1 4-3-2z" />
                 </svg>
@@ -105,7 +103,6 @@ export const BasicCard = ({ Card }) => {
             </span>
           </h2>
 
-          {/* Просто отображаем компонент RenderRating под названием карточки */}
           <div>
             <RenderRating rating={rating} onRatingChange={handleRatingClick} />
           </div>
