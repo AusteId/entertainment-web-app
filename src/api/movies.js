@@ -198,7 +198,14 @@ export const apiGetMovieCategoriesAndRatings = async () => {
  */
 export const apiAddNewMovie = async (movie) => {
   try {
-    const res = await axios.post(API_MOVIES_URL, movie);
+    // Ensure bookmarks and ratings are initialized as empty arrays if not provided
+    const movieWithDefaults = {
+      ...movie,
+      ratings: movie.ratings || [],
+    };
+
+    // Add the movie with the default values for bookmarks and ratings
+    const res = await axios.post(API_MOVIES_URL, movieWithDefaults);
     return res.data;
   } catch (e) {
     return { error: e };
