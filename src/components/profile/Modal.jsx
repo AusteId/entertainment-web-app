@@ -145,12 +145,13 @@ export const Modal = ({ open, onClose, onSave, movie }) => {
               placeholder='Movie title'
               {...register('title', {
                 required: 'Please enter movie title',
-                maxLength: 50,
-                pattern: {
-                  value: /[a-zA-Z0-9À-ž\s]/i,
-                  message:
-                    'Movie title can only contain alphanumeric characters',
+                maxLength: {
+                  value: 50,
+                  message: 'Movie title should not exceed 50 characters length',
                 },
+                validate: (val) =>
+                  val?.match(/\p{L}/gu)?.join('') === val ||
+                  'Title must contain only valid unicode letters',
               })}
             />
             {errors.title && (
@@ -193,11 +194,22 @@ export const Modal = ({ open, onClose, onSave, movie }) => {
               type='number'
               {...register('year', {
                 required: 'Please select movie year',
-                min: 1935,
-                max: new Date().getFullYear(),
+                min: {
+                  value: 1935,
+                  message: "Don't upload movies from silent film era",
+                },
+                max: {
+                  value: new Date().getFullYear(),
+                  message: "Don't upload movies from future",
+                },
                 value: new Date().getFullYear(),
               })}
             />
+            {errors.year && (
+              <span role='alert' className='text-red body-sm'>
+                {errors.year.message}
+              </span>
+            )}
           </div>
           {/* Trending */}
           <div className='flex gap-4 items-center'>
