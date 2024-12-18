@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import Button from "../components/shared/Button";
 import { useUserContext } from "../service/UserContextProvider";
 
@@ -11,6 +12,7 @@ import logo from "/assets/logo.svg";
 export const LoginForm = ({ onSignUp }) => {
   const userData = useUserContext();
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -24,6 +26,7 @@ export const LoginForm = ({ onSignUp }) => {
         setError(userId.error);
       } else {
         userData.setUserLoggedIn(userId.id);
+        navigate("/");
       }
     } catch (e) {
       setError(e);
