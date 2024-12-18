@@ -1,9 +1,19 @@
 {
   "users": [
     {
-      "id": "8bc1",
-      "email": "user0@pastas.lt",
-      "password": "3a987cf9dc1701dc9c4c8c4c6a18e04433a15a59604b7de160526ba7748267aa"
+      "id": "0609",
+      "email": "user1@pastas.lt",
+      "password": "9662599c8dcfc9a3c7abc709a08f87bc12d30f0253909e137c2b55de688ddf67"
+    },
+    {
+      "id": "a1ef",
+      "email": "user2@pastas.lt",
+      "password": "9662599c8dcfc9a3c7abc709a08f87bc12d30f0253909e137c2b55de688ddf67"
+    },
+    {
+      "id": "f759",
+      "email": "user3@pastas.lt",
+      "password": "9662599c8dcfc9a3c7abc709a08f87bc12d30f0253909e137c2b55de688ddf67"
     }
   ],
   "movies": [
@@ -27,7 +37,20 @@
       "isTrending": true,
       "id": "4832",
       "bookmarks": [],
-      "ratings": []
+      "ratings": [
+        {
+          "userId": "0609",
+          "rating": 3
+        },
+        {
+          "userId": "a1ef",
+          "rating": 2
+        },
+        {
+          "userId": "f759",
+          "rating": 1
+        }
+      ]
     },
     {
       "title": "Bottom Gear",
@@ -49,7 +72,12 @@
       "isTrending": true,
       "id": "2a4b",
       "bookmarks": [],
-      "ratings": []
+      "ratings": [
+        {
+          "userId": "f759",
+          "rating": 1
+        }
+      ]
     },
     {
       "title": "Undiscovered Cities",

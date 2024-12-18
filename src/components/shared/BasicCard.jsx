@@ -65,36 +65,52 @@ export const BasicCard = ({ Card }) => {
             <p className="heading-xs text-white font-outfit play-text">Play</p>
           </button>
         </div>
-        <div className="list-text-color">
-  <ul className="flex text-bs font-light font-outfit">
-    <li className="body-s">{Card.year}</li>
-    <li>
-      <svg xmlns="http://www.w3.org/2000/svg" width="3" height="3" viewBox="0 0 3 3" fill="none" className="oval-gap">
-        <circle cx="1.5" cy="1.5" r="1.5" fill="white" />
-      </svg>
-    </li>
-    <li className="body-s flex">
-      {Card.category}
-    </li>
-    <li>
-      <svg xmlns="http://www.w3.org/2000/svg" width="3" height="3" viewBox="0 0 3 3" fill="none" className="oval-gap">
-        <circle cx="1.5" cy="1.5" r="1.5" fill="white" />
-      </svg>
-    </li>
-    <li className="body-s">{Card.rating}</li>
-    <li>
-      <RenderRating rating={rating} onRatingChange={handleRatingClick} />
-    </li>
-    <li className="body-s ml-1 text-white">
-      {averageRating > 0 ? averageRating.toFixed(1) : "0"}
-    </li>
-  </ul>
-</div>
-      </div>
 
-      <h2 className="heading-xs text-white font-medium font-outfit title-font">
-        {Card.title}
-      </h2>
+        <div className="list-text-color">
+          <ul className="flex text-bs font-light font-outfit">
+            <li className="body-s">{Card.year}</li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="3" height="3" viewBox="0 0 3 3" fill="none" className="oval-gap">
+                <circle cx="1.5" cy="1.5" r="1.5" fill="white" />
+              </svg>
+            </li>
+            <li className="body-s flex">
+              {Card.category}
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="3" height="3" viewBox="0 0 3 3" fill="none" className="oval-gap">
+                <circle cx="1.5" cy="1.5" r="1.5" fill="white" />
+              </svg>
+            </li>
+            <li className="body-s">{Card.rating}</li>
+          </ul>
+
+          <h2 className="heading-xs text-white font-medium font-outfit title-font">
+            {Card.title}
+            <span className={averageRating > 0 ? 'text-gray text-sm inline-flex items-center ml-2' : 'inline-flex items-center ml-2'}>
+              {averageRating > 0 ? averageRating.toFixed(1) : ""}
+              {/* Conditionally render the SVG when there's a rating */}
+              {averageRating > 0 && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="#FC4747"
+                  className="ml-1"  // Adds a little space between the number and the icon
+                >
+                  <path d="M6 9l-3 2 1-4-3-3h4l1-4 1 4h4l-3 3 1 4-3-2z" />
+                </svg>
+              )}
+            </span>
+          </h2>
+
+          {/* Просто отображаем компонент RenderRating под названием карточки */}
+          <div>
+            <RenderRating rating={rating} onRatingChange={handleRatingClick} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

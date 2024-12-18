@@ -9,22 +9,26 @@ export const useRating = (Card, userId) => {
 
   // Function for calculating the average rating
   useEffect(() => {
+    // Ensure that Card.ratings exists and has items
     if (Card.ratings && Card.ratings.length > 0) {
       const totalRating = Card.ratings.reduce((acc, ratingObj) => {
         return acc + ratingObj.rating;
       }, 0);
-  
+
       const avgRating = totalRating / Card.ratings.length;
-      setAverageRating(avgRating);  
+      setAverageRating(avgRating);
+    } else {
+      setAverageRating(0);  // Default to 0 if no ratings
     }
+
     setIsLoading(false);
-    
+
     // Get the current user's rating from the API (if available)
     const userRating = Card.ratings.find(ratingObj => ratingObj.userId === userId);
     if (userRating) {
       setRating(userRating.rating);  // Set the user rating from the API data
     }
-  }, [Card, userId]);
+  }, [Card, userId]);  // Dependencies to track changes in Card or userId
 
   const handleRatingClick = async (newRating) => {
     if (!userId) {
@@ -41,7 +45,7 @@ export const useRating = (Card, userId) => {
         const updatedRatings = updatedMovie.ratings;
 
         const totalRating = updatedRatings.reduce((acc, ratingObj) => {
-          return acc + ratingObj.rating;  // Correct access to the rating value
+          return acc + ratingObj.rating;
         }, 0);
 
         const newAvgRating = totalRating / updatedRatings.length;
