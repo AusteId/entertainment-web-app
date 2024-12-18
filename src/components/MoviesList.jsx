@@ -1,5 +1,6 @@
 import { BasicCard } from './shared/BasicCard';
 import { useLocation } from 'react-router';
+import './MoviesList.css'
 
 const MoviesList = ({ movies = [], searchText }) => {
   const location = useLocation();
@@ -42,7 +43,7 @@ const MoviesList = ({ movies = [], searchText }) => {
     <section className='flex flex-col'>
       {location.pathname === '/bookmarked' && searchText === '' ? (
         <>
-          <h2 className='text-[1.25rem] md:text-hl p-0 text-white font-outfit font-thin tracking-[-0.0195rem] pb-[1.5rem] xl:pb-[2.37rem] self-start'>
+          <h2 className='h2-heading'>
             Bookmarked Movies
           </h2>
           {countMovies < 1 && (
@@ -50,14 +51,14 @@ const MoviesList = ({ movies = [], searchText }) => {
               You have not bookmarked any Movies yet
             </p>
           )}
-          <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[0.94rem] md:gap-x-[1.81rem] xl:gap-x-[2.5rem] gap-y-[1rem] md:gap-y-[1.5rem] xl:gap-y-[2rem] self-center'>
+          <div className='movie-grid'>
             {movies
               .filter((movie) => movie.category === 'Movie')
               .map((movie) => (
                 <BasicCard key={movie.id} Card={movie} />
               ))}
           </div>
-          <h2 className='text-[1.25rem] md:text-hl p-0 text-white font-outfit  font-thin tracking-[-0.0195rem] pb-[1.5rem] self-start'>
+          <h2 className='h2-heading'>
             Bookmarked TV Series
           </h2>
           {countSeries < 1 && (
@@ -65,7 +66,7 @@ const MoviesList = ({ movies = [], searchText }) => {
               You have not bookmarked any TV Series yet
             </p>
           )}
-          <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[0.94rem] md:gap-x-[1.81rem] xl:gap-x-[2.5rem] gap-y-[1rem] md:gap-y-[1.5rem] xl:gap-y-[2rem] self-center'>
+          <div className='movie-grid'>
             {movies
               .filter((movie) => movie.category === 'TV Series')
               .map((movie) => (
@@ -75,10 +76,10 @@ const MoviesList = ({ movies = [], searchText }) => {
         </>
       ) : (
         <>
-          <h1 className='text-[1.25rem] md:text-hl p-0 text-white font-outfit font-extralight tracking-[-0.0195rem] md:tracking-[-0.03125rem] pb-[1.5rem] xl:pb-[2.37rem] self-start'>
+          <h1 className='list-heading'>
             {listHeading}
           </h1>
-          <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[0.94rem] md:gap-x-[1.81rem] xl:gap-x-[2.5rem] gap-y-[1rem] md:gap-y-[1.5rem] xl:gap-y-[2rem] self-center'>
+          <div className='movie-grid'>
             {movies.map((movie) => (
               <BasicCard key={movie.id} Card={movie} />
             ))}

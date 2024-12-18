@@ -2,16 +2,18 @@
   display: none;
 }
 
-/* Show button only on desktop screens */
-@media (min-width: 1024px) {
+/* Show button and darker image only on desktop screens */
+@media (min-width: 1440px) {
   .desktop-only {
     display: flex;
     width: 117px;
     height: 48px;
     background-color: rgba(255, 255, 255, 0.2);
   }
+  .group:hover .hover-img {
+    filter: brightness(0.5);
+  }
 }
-
 .list-text-color ul li:nth-child(even) {
   margin-top: 8px;
 }

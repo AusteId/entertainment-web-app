@@ -36,7 +36,7 @@ export const BasicCard = ({ Card }) => {
             <img
               src={Card.thumbnail.regular.large}
               alt="thumbnail"
-              className="rounded-md thumbnail-img lg:group-hover:brightness-50 duration-200"
+              className="rounded-md thumbnail-img hover-img"
             />
           </picture>
           <button

@@ -1,0 +1,51 @@
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.94rem 1rem;
+    justify-content: center;
+  }
+  .list-heading {
+    font-size: 1.25rem;
+    padding: 0;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 200;
+    letter-spacing: -0.0195rem;
+    padding-bottom: 1.5rem;
+    align-self: start;
+  }
+  .h2-heading {
+    font-size: 1.25rem;
+    padding: 0;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    letter-spacing: -0.0195rem;
+    padding-bottom: 1.5rem;
+    align-self: start;
+  }
+  
+  @media (min-width: 768px) {
+    .movie-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.81rem 1.5rem;
+    }
+    .list-heading {
+      font-size: var(--hl);
+      letter-spacing: -0.03125rem;
+    }
+    .h2-heading {
+      font-size: var(--hl);
+    }
+  }
+  
+  @media (min-width: 1440px) {
+    .movie-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.5rem 2rem;
+    }
+    .list-heading {
+      padding-bottom: 2.37rem;
+    }
+  }
+ 
