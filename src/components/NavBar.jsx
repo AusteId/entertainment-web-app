@@ -3,11 +3,12 @@ import { NavLink } from 'react-router';
 import { useUserContext } from '../service/UserContextProvider';
 
 const navItems = [
-  { to: '/#', icon: 'icon-nav-home.svg', alt: 'Home' },
-  { to: '/movies', icon: 'icon-nav-movies.svg', alt: 'Movies' },
-  { to: '/tv-series', icon: 'icon-nav-tv-series.svg', alt: 'Series' },
-  { to: '/bookmarked', icon: 'icon-nav-bookmark.svg', alt: 'Bookmark' },
+  { to: '/#', icon: 'icon-nav-home.svg', label: 'Home' },
+  { to: '/movies', icon: 'icon-nav-movies.svg', label: 'Movies' },
+  { to: '/tv-series', icon: 'icon-nav-tv-series.svg', label: 'Series' },
+  { to: '/bookmarked', icon: 'icon-nav-bookmark.svg', label: 'Bookmark' },
 ];
+
 
 // Logo component
 const Logo = () => (
@@ -19,12 +20,13 @@ const Logo = () => (
 );
 
 // NavIcon component with text on hover
-const NavIcon = ({ to, icon, alt }) => (
+const NavIcon = ({ to, icon, label }) => (
   <NavLink
     to={to}
     className={({ isActive }) =>
       `group relative flex items-center justify-center ${isActive ? 'filter brightness-[4]' : ''}`
     }
+    aria-label={label}
   >
     {/* Icon */}
     <div
@@ -33,12 +35,14 @@ const NavIcon = ({ to, icon, alt }) => (
         mask: `url('/assets/${icon}') center/contain no-repeat`,
         WebkitMask: `url('/assets/${icon}') center/contain no-repeat`,
       }}
-      aria-label={alt}
+      role='img'
+      aria-hidden='true'
+     
     />
     
     {/* Hover text */}
-    <span className='absolute left-full ml-[-1.5rem] mt-[2.5rem] md:mt-[3rem] xl:mt-[3.5rem] xl:ml-[-2.25rem] text-s md:text-lg xl:text-xl 2xl:text-2xl z-50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none'>
-      {alt}
+    <span className='sr-only'>
+      {label}
     </span>
   </NavLink>
 );
@@ -169,8 +173,8 @@ const Navbar = () => (
 
       {/* Nav Icons */}
       <div className='flex items-center space-x-[1.25rem] md:space-x-[2rem] xl:space-x-0 xl:flex-col xl:pt-[5rem] xl:space-y-[3rem]'>
-        {navItems.map(({ to, icon, alt }) => (
-          <NavIcon key={to} to={to} icon={icon} alt={alt} />
+        {navItems.map(({ to, icon, label }) => (
+          <NavIcon key={to} to={to} icon={icon} label={label} />
         ))}
       </div>
 
