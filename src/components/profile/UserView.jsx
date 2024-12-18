@@ -25,7 +25,7 @@ export const UserView = ({ user }) => {
 
   return (
     <div className='px-2 md:px-3 lg:px-4'>
-      <div className='flex flex-col md:flex-row items-center justify-between'>
+      <div className='flex flex-col md:flex-row items-center justify-between lg:mt-5'>
         <h1 className='heading-lg'>Hello, {currUser.username}</h1>
         {currUser.role === 'ADMIN' && (
           <Link to={'/admin'}>
