@@ -18,17 +18,23 @@ export const ImageInput = ({ onImageSelected }) => {
   };
 
   return (
-    <div>
+    <div className='w-full flex justify-between'>
       <input
-        className='invisible'
+        id='hiddenInput'
+        className='invisible w-1/3'
         type='file'
         accept='image/*'
         ref={inputRef}
         onChange={handleOnChange}
       />
-      <button type='button' onClick={onChooseImage} className='rounded-lg'>
+      <button
+        type='button'
+        onClick={onChooseImage}
+        className='rounded-lg heading-xs hover:bg-white hover:text-dark'
+      >
         Choose Image
       </button>
+      <input id='empty' className='invisible w-1/3' disabled />
     </div>
   );
 };
