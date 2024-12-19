@@ -25,7 +25,7 @@ export const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
           style={{
             containerStyle: {
               width: '100%',
-              height: '58%',
+              height: '56%',
               backgroundColor: '#fff',
             },
           }}

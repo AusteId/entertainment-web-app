@@ -372,7 +372,11 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
           </div>
 
           {/* End image cropper */}
-          <div className='flex gap-3 items-center justify-center mt-3'>
+          <div
+            className={`${
+              currentPage === 'crop-img' ? 'invisible' : 'visible'
+            } flex gap-3 items-center justify-center mt-3`}
+          >
             <button
               disabled={currentPage === 'crop-img'}
               type='submit'
