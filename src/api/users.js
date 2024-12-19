@@ -58,3 +58,12 @@ export const apiGetUserById = async (userId) => {
     return { error: 'Unexpected error' };
   }
 };
+
+export const apiUpdateUser = async (userId, data) => {
+  try {
+    const res = await axios.patch(`${API_USERS_URL}/${userId}`, data);
+    return res.data;
+  } catch (e) {
+    return { error: e };
+  }
+};

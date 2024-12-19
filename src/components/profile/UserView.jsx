@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router';
+
+import avatar from '/assets/avatar.png';
+import { ImageInput } from './ImageInput';
+import { apiUpdateUser } from '../../api/users';
 
 export const UserView = ({ user }) => {
   const [currUser, setCurrUser] = useState(user);
+  const [userImage, setUserImage] = useState('');
+  const [currentPage, setCurrentPage] = useState('choose-img');
+  const inputRef = useRef();
 
   const {
     register,
@@ -13,14 +21,26 @@ export const UserView = ({ user }) => {
     defaultValues: {
       username: currUser.username,
       email: currUser.email,
-      oldPassword: '',
-      newPassword: '',
-      repeatPassword: '',
     },
   });
 
   const onSubmit = async (formData) => {
-    console.log(formData);
+    const userData = { username: formData.username };
+    const res = await apiUpdateUser(currUser.id, userData);
+    if (!res.error) {
+      setCurrUser({ ...currUser, username: res.username });
+      toast.success('User data updated successfully!');
+    }
+  };
+
+  const onImageSelected = (selectedImg) => {
+    setUserImage(selectedImg);
+
+    setCurrentPage('crop-img');
+  };
+
+  const handleImageClick = (imgSelected) => {
+    inputRef.current.click();
   };
 
   return (
@@ -37,11 +57,7 @@ export const UserView = ({ user }) => {
       </div>
       <div className='heading-md max-w-md mx-auto'>
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <h2 className='text-center my-5'>
-              You can change your username and password
-            </h2>
-          </div>
+          <div className='my-5 flex items-center justify-center'></div>
           <div className='flex flex-col gap-4 items-center'>
             {/* Username ******************************************/}
             <div className='flex flex-col gap-2'>
@@ -65,7 +81,7 @@ export const UserView = ({ user }) => {
                 </div>
               </div>
               {errors.username && (
-                <span className='text-sm text-right text-rose-500' role='alert'>
+                <span className='text-sm text-right text-red' role='alert'>
                   {errors.username.message}
                 </span>
               )}
@@ -90,93 +106,7 @@ export const UserView = ({ user }) => {
                 </div>
               </div>
             </div>
-            {/* Old Password ******************************************/}
-            <div className='flex flex-col gap-2'>
-              <div className='grid grid-cols-9 items-center gap-2'>
-                <div className='col-span-3 justify-self-end'>
-                  <label className='text-sm opacity-70' htmlFor='oldPassword'>
-                    Old password
-                  </label>
-                </div>
-                <div className='col-span-6'>
-                  <input
-                    className='w-full p-2 rounded-lg border border-white border-opacity-50 bg-darkBlue'
-                    aria-invalid={errors.oldPassword ? 'true' : 'false'}
-                    type='password'
-                    id='oldPassword'
-                    autoComplete='off'
-                    placeholder='**********'
-                    {...register('oldPassword', {
-                      required: 'Username field cannot be empty',
-                    })}
-                  />
-                </div>
-              </div>
-              {errors.oldPassword && (
-                <span className='text-sm text-right text-rose-500' role='alert'>
-                  {errors.oldPassword.message}
-                </span>
-              )}
-            </div>
-            {/* New Password ******************************************/}
-            <div className='flex flex-col gap-2'>
-              <div className='grid grid-cols-9 items-center gap-2'>
-                <div className='col-span-3 justify-self-end'>
-                  <label className='text-sm opacity-70' htmlFor='newPassword'>
-                    New password
-                  </label>
-                </div>
-                <div className='col-span-6'>
-                  <input
-                    className='w-full p-2 rounded-lg border border-white border-opacity-50 bg-darkBlue'
-                    aria-invalid={errors.newPassword ? 'true' : 'false'}
-                    type='text'
-                    id='newPassword'
-                    autoComplete='off'
-                    placeholder='**********'
-                    {...register('newPassword', {
-                      required: 'Username field cannot be empty',
-                    })}
-                  />
-                </div>
-              </div>
-              {errors.newPassword && (
-                <span className='text-sm text-right text-rose-500' role='alert'>
-                  {errors.newPassword.message}
-                </span>
-              )}
-            </div>
-            {/* Repeat password ******************************************/}
-            <div className='flex flex-col gap-2'>
-              <div className='grid grid-cols-9 items-center gap-2'>
-                <div className='col-span-3 justify-self-end'>
-                  <label
-                    className='text-sm opacity-70'
-                    htmlFor='repeatPassword'
-                  >
-                    Repeat password
-                  </label>
-                </div>
-                <div className='col-span-6'>
-                  <input
-                    className='w-full p-2 rounded-lg border border-white border-opacity-50 bg-darkBlue'
-                    aria-invalid={errors.repeatPassword ? 'true' : 'false'}
-                    type='text'
-                    id='repeatPassword'
-                    autoComplete='off'
-                    placeholder='**********'
-                    {...register('repeatPassword', {
-                      required: 'Username field cannot be empty',
-                    })}
-                  />
-                </div>
-              </div>
-              {errors.repeatPassword && (
-                <span className='text-sm text-right text-rose-500' role='alert'>
-                  {errors.repeatPassword.message}
-                </span>
-              )}
-            </div>
+
             <button className='rounded-xl text-md hover:bg-lightBlue shadow-md'>
               Update
             </button>
