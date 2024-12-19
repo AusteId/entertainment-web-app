@@ -106,9 +106,9 @@ export const BasicCard = ({ Card }) => {
             
           </h2>
 
-          <div className="flex ">
+          <div className="flex">
             <RenderRating rating={rating} onRatingChange={handleRatingClick} />
-            <span className={averageRating > 0 ? 'font-medium text-gray text-sm inline-flex items-center ml-2' : 'inline-flex items-center ml-2'}>
+            <span className={averageRating > 0 ? 'text-[0.75 rem] sm:text-[1rem] md:text-[1rem] lg:text-[1rem] font-medium text-gray text-sm inline-flex items-center ml-1' : 'inline-flex items-center ml-1'}>
               {averageRating > 0 ? averageRating.toFixed(1) : ""}
               {averageRating > 0 && (
                 <svg
