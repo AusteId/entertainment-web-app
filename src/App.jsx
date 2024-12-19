@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router';
 import UserContextProvider from './service/UserContextProvider';
-
+import './styles/scrollbar.css';
 // Layouts
 import { MainLayout } from './layouts/MainLayout';
 
