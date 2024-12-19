@@ -136,6 +136,13 @@ const SignUpForm = ({ onLogin }) => {
                     message:
                       'Password must contain both uppercase and lowercase letters',
                   },
+                  validate: (value) => {
+                    const zalgoRegex = /[\u0300-\u036F\u1AB0-\u1AFF\u1DC0-\u1DFF\u20D0-\u20FF]/;
+                    if (zalgoRegex.test(value)) {
+                      return 'Password cannot contain Zalgo text';
+                    }
+                    return true;
+                  }
                 })}
               />
               <p
