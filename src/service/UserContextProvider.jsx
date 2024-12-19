@@ -1,45 +1,71 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { apiGetUserById } from '../api/users';
 
-// pradine user steito busena
-const initUserState = {
+const defaultUserState = {
   userId: '',
+  avatar: '',
+  username: '',
   unBookmarkId: '',
 };
 
 export const UserContext = createContext();
 
-const getInitialUserState = () => {
-  const userId = localStorage.getItem('movieUserId');
-  if (userId) {
-    const user = { userId: userId, unBookmarkId: '' };
-    return user;
-  } else {
-    return initUserState;
-  }
-};
-
 const UserContextProvider = (props) => {
-  const [userData, setUserData] = useState(getInitialUserState);
+  const [userData, setUserData] = useState(() => {
+    const userId = localStorage.getItem('movieUserId');
+    return userId ? { userId, avatar: '', username: '', unBookmarkId: '' } : defaultUserState;
+  });
 
-  const setUserLoggedIn = (userId) => {
-    localStorage.removeItem('formLogin');
-    localStorage.setItem('movieUserId', userId);
-    setUserData({ ...userData, userId: userId });
+  const loadUserData = async (userId) => {
+    try {
+      const user = await apiGetUserById(userId);
+      if (user) {
+        setUserData((prevData) => ({
+          ...prevData,
+          userId: user.id,
+          avatar: user.avatar || '',
+          username: user.username || '',
+        }));
+      }
+    } catch (error) {
+      console.error('Error loading user data:', error);
+    }
   };
 
-  const setUserLoggedOut = () => {
+  useEffect(() => {
+    if (userData.userId) {
+      loadUserData(userData.userId);
+    }
+  }, [userData.userId]);
+
+  const login = (userId) => {
+    localStorage.removeItem('formLogin');
+    localStorage.setItem('movieUserId', userId);
+    setUserData((prevData) => ({ ...prevData, userId }));
+  };
+
+  const logout = () => {
     localStorage.removeItem('formLogin');
     localStorage.removeItem('movieUserId');
-    setUserData({ ...userData, userId: '' });
+    setUserData((prevData) => ({ ...prevData, userId: '' }));
   };
 
   const setUnBookmark = (movieId) => {
-    setUserData({ ...userData, unBookmarkId: movieId });
+    setUserData((prevData) => ({ ...prevData, unBookmarkId: movieId }));
+  };
+  const updateAvatar = (newAvatar) => {
+    setUserData((prevData) => ({ ...prevData, avatar: newAvatar }));
   };
 
   return (
     <UserContext.Provider
-      value={{ ...userData, setUserLoggedIn, setUserLoggedOut, setUnBookmark }}
+      value={{
+        ...userData,
+        login,
+        logout,
+        setUnBookmark,
+        updateAvatar,
+      }}
     >
       {props.children}
     </UserContext.Provider>
