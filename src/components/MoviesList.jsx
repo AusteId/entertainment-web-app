@@ -57,7 +57,7 @@ const MoviesList = ({ movies = [], searchText }) => {
                 <BasicCard key={movie.id} Card={movie} />
               ))}
           </div>
-          <h2 className='mt-2 text-[1.25rem] md:text-hl p-0 text-white font-outfit  font-thin tracking-[-0.0195rem] pb-[1.5rem] self-start'>
+          <h2 className='mt-2 text-[1.25rem] md:text-hl p-0 text-white font-outfit  font-thin tracking-[-0.0195rem] pb-[1.5rem] xl:pb-[2.37rem]  self-start'>
             Bookmarked TV Series
           </h2>
           {countSeries < 1 && (

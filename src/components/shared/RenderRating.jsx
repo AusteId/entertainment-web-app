@@ -31,7 +31,7 @@ const RenderRating = ({ rating = 0, onRatingChange }) => {
   }
 
   return (
-    <div className="rating-stars flex items-center">
+    <div className="w-[4.75rem] sm:w-[5.5rem] md:w-[6rem] lg:w-[7rem] rating-stars flex items-center">
       {stars}
     </div>
   );
