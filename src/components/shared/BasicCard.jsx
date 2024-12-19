@@ -19,7 +19,7 @@ export const BasicCard = ({ Card }) => {
 
   return (
     <div key={Card.id}>
-      <div className="relative">
+      <div className="relative ">
         <Bookmark movieId={Card.id} bookmarks={Card.bookmarks} />
         <div className="relative group mb-2 bg-dark/25 cursor-pointer">
           <picture>
