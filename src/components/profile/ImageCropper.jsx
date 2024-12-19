@@ -12,7 +12,7 @@ export const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
   };
 
   return (
-    <div>
+    <div className='z-50'>
       <div>
         <Cropper
           image={image}
@@ -33,7 +33,7 @@ export const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
       </div>
       <div className='flex gap-2 justify-center'>
         <button
-          className='rounded-lg hover:bg-white hover:text-dark'
+          className='rounded-lg hover:bg-white hover:text-dark heading-xs'
           onClick={() => {
             onCropDone(croppedArea);
           }}
@@ -42,7 +42,7 @@ export const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
           Crop
         </button>
         <button
-          className='rounded-lg hover:bg-white hover:text-dark'
+          className='rounded-lg hover:bg-white hover:text-dark heading-xs'
           type='button'
           onClick={onCropCancel}
         >

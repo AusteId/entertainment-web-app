@@ -167,11 +167,11 @@ export const Modal = ({ open, onClose, onSave }) => {
           </div>
           {/* Movie title */}
           <div className='flex flex-col gap-1'>
-            <label htmlFor='title' className='heading-xs text-opacity-50'>
+            <label htmlFor='title' className='body-md text-opacity-50'>
               Title
             </label>
             <input
-              className='w-full rounded-lg p-1 bg-darkBlue body-sm'
+              className='w-full rounded-lg p-1 bg-darkBlue heading-xs'
               id='title'
               type='text'
               placeholder='Movie title'
@@ -194,13 +194,13 @@ export const Modal = ({ open, onClose, onSave }) => {
             )}
           </div>
           {/* Movie category */}
-          <div className='flex flex-col gap-1'>
-            <label htmlFor='category' className='heading-xs text-opacity-50'>
+          <div className='flex gap-2'>
+            <label htmlFor='category' className='body-md text-opacity-50'>
               Category
             </label>
             <select
               id='category'
-              className='bg-darkBlue body-sm'
+              className='bg-darkBlue heading-xs'
               {...register('category', { required: 'Please select category' })}
             >
               <option value={''}>--select category--</option>
@@ -218,11 +218,11 @@ export const Modal = ({ open, onClose, onSave }) => {
           </div>
           {/* Movie year */}
           <div className='flex gap-4'>
-            <label htmlFor='year' className='heading-xs text-opacity-50'>
+            <label htmlFor='year' className='body-md text-opacity-50'>
               Release year
             </label>
             <input
-              className='bg-darkBlue body-sm w-20'
+              className='bg-darkBlue heading-xs w-20'
               id='year'
               type='number'
               {...register('year', {
@@ -245,7 +245,7 @@ export const Modal = ({ open, onClose, onSave }) => {
           </div>
           {/* Trending */}
           <div className='flex gap-4 items-center'>
-            <label htmlFor='isTrending' className='heading-xs text-opacity-50'>
+            <label htmlFor='isTrending' className='body-md text-opacity-50'>
               Is trending?
             </label>
             <input
@@ -255,13 +255,13 @@ export const Modal = ({ open, onClose, onSave }) => {
             />
           </div>
           {/* Movie rating */}
-          <div className='flex flex-col gap-1'>
-            <label htmlFor='rating' className='heading-xs text-opacity-50'>
+          <div className='flex gap-3'>
+            <label htmlFor='rating' className='body-md text-opacity-50'>
               Rating
             </label>
             <select
               id='rating'
-              className='bg-darkBlue body-sm'
+              className='bg-darkBlue heading-xs'
               {...register('rating', { required: 'Please select rating' })}
             >
               <option value={''}>--select rating--</option>
@@ -302,13 +302,13 @@ export const Modal = ({ open, onClose, onSave }) => {
                         setCurrentPage('choose-img');
                         setImage('');
                       }}
-                      className='p-2 cursor-pointer hover:text-red'
+                      className='p-2 cursor-pointer hover:text-red heading-xs'
                     >
                       Change Image
                     </p>
                     <p
                       onClick={() => setCurrentPage('crop-img')}
-                      className='p-2 cursor-pointer hover:text-red'
+                      className='p-2 cursor-pointer hover:text-red heading-xs'
                     >
                       Crop again
                     </p>
@@ -323,7 +323,7 @@ export const Modal = ({ open, onClose, onSave }) => {
             <button
               disabled={currentPage === 'crop-img'}
               type='submit'
-              className='text-white bg-lightBlue rounded-lg hover:bg-white hover:text-lightBlue'
+              className='text-white heading-xs bg-lightBlue rounded-lg hover:bg-white hover:text-dark'
             >
               Save
             </button>
@@ -331,7 +331,7 @@ export const Modal = ({ open, onClose, onSave }) => {
               disabled={currentPage === 'crop-img'}
               type='button'
               onClick={onClose}
-              className='bg-red text-white rounded-lg hover:bg-white hover:text-red'
+              className='bg-red heading-xs text-white rounded-lg hover:bg-white hover:text-red'
             >
               Cancel
             </button>
