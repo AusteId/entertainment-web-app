@@ -29,7 +29,7 @@ export const BasicCard = ({ Card }) => {
               alt="thumbnail"
             />
             <source
-              media="(min-width: 768px) and (max-width: 1023px)"
+              media="(min-width: 768px) and (max-width: 1279px)"
               srcSet={Card.thumbnail.regular.medium}
               alt="thumbnail"
             />
