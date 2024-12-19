@@ -50,7 +50,7 @@ const MoviesList = ({ movies = [], searchText }) => {
               You have not bookmarked any Movies yet
             </p>
           )}
-          <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[0.94rem] md:gap-x-[1.81rem] xl:gap-x-[2.5rem] gap-y-[1rem] md:gap-y-[1.5rem] xl:gap-y-[2rem] self-center'>
+          <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[0.94rem] md:gap-x-[1.81rem] xl:gap-x-[2.5rem] gap-y-[1rem] md:gap-y-[1.5rem] xl:gap-y-[2rem] '>
             {movies
               .filter((movie) => movie.category === 'Movie')
               .map((movie) => (
@@ -65,7 +65,7 @@ const MoviesList = ({ movies = [], searchText }) => {
               You have not bookmarked any TV Series yet
             </p>
           )}
-          <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[0.94rem] md:gap-x-[1.81rem] xl:gap-x-[2.5rem] gap-y-[1rem] md:gap-y-[1.5rem] xl:gap-y-[2rem] self-center'>
+          <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-[0.94rem] md:gap-x-[1.81rem] xl:gap-x-[2.5rem] gap-y-[1rem] md:gap-y-[1.5rem] xl:gap-y-[2rem] '>
             {movies
               .filter((movie) => movie.category === 'TV Series')
               .map((movie) => (

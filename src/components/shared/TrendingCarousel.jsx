@@ -66,8 +66,8 @@ export const TrendingCarousel = ({ trendingMovies }) => {
                   <li className="flex pl-3 pr-3 items-center">
                     {Card.category === "Movie" ? (
                       <svg
-                        width="16"
-                        height="16"
+                        width="12"
+                        height="12"
                         viewBox="0 0 12 12"
                         xmlns="http://www.w3.org/2000/svg"
                       >
@@ -80,8 +80,8 @@ export const TrendingCarousel = ({ trendingMovies }) => {
                       </svg>
                     ) : Card.category === "TV Series" ? (
                       <svg
-                        width="16"
-                        height="16"
+                        width="12"
+                        height="12"
                         viewBox="0 0 12 12"
                         xmlns="http://www.w3.org/2000/svg"
                       >
