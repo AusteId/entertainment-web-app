@@ -164,7 +164,7 @@ const Avatar = () => {
 
 // Navbar component
 const Navbar = () => (
-  <div className='flex flex-col sticky top-0 xl:ml-[2rem] xl:mr-[1rem] xl:flex-row w-full xl:w-[6rem] z-50'>
+  <div className='flex flex-col sticky top-0 xl:ml-[1rem] xl:mr-[1rem] xl:flex-row w-full xl:w-[6rem] z-50'>
     <nav className='bg-darkBlue sticky top-0 xl:sticky xl:top-8 xl:left-0 xl:h-[calc(100vh-4rem)] xl:mt-[2rem] xl:mb-[2rem] flex items-center justify-between p-4 sm:p-5 md:rounded-2xl md:m-[1.5rem] xl:p-0 xl:pt-[0rem] xl:w-[6rem] xl:flex-col xl:m-0'>
       {/* Logo */}
       <div className='flex justify-center items-center xl:mt-[2rem]'>
