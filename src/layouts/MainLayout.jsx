@@ -7,12 +7,12 @@ export const MainLayout = () => {
   const userData = useUserContext();
 
   return (
-    <main className='max-w-[1440px] h-screen mx-auto'>
+    <main className='max-w-[1440px] h-screen mx-auto overflow-x-hidden'>
       {userData.userId ? (
         <>
           <div className='flex flex-col xl:flex-row'>
             <Navbar />
-            <div className='flex-1'>
+            <div className='flex-1 overflow-x-hidden'>
               <Outlet />
             </div>
           </div>
