@@ -93,11 +93,15 @@ const Avatar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { avatar: userAvatar, setUserLoggedOut } = useUserContext();
   const dropdownRef = useRef(null);
+  const avatarRef = useRef(null);
 
   const toggleDropdown = useCallback(() => setIsDropdownOpen(prev => !prev), []);
   
   const handleClickOutside = useCallback((event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    if (
+      dropdownRef.current && !dropdownRef.current.contains(event.target) && 
+      avatarRef.current && !avatarRef.current.contains(event.target)
+    ) {
       setIsDropdownOpen(false);
     }
   }, []);
