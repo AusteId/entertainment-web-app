@@ -46,7 +46,7 @@ export default function BookmarkedPage() {
   };
 
   return (
-    <div className="w-full flex flex-col gap-2 body-md p-4">
+    <div className="w-full flex flex-col gap-2 body-md p-4 lg:mt-8">
       <Search onSearch={(searchString) => handleSearch(searchString)} />
       <MoviesList movies={filteredMovies} searchText={searchText} />
     </div>
