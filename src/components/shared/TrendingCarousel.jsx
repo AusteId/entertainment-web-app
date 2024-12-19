@@ -1,8 +1,8 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
-import "./TrendingCarousel.css";
-import { Bookmark } from "./Bookmark";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import './TrendingCarousel.css';
+import { Bookmark } from './Bookmark';
 
 export const TrendingCarousel = ({ trendingMovies }) => {
   return (
@@ -10,7 +10,7 @@ export const TrendingCarousel = ({ trendingMovies }) => {
       <Swiper
         modules={[Autoplay]}
         spaceBetween={28}
-        loop={true}
+        loop={trendingMovies >= 4}
         autoplay={{
           delay: 2000,
           disableOnInteraction: false,
@@ -64,7 +64,7 @@ export const TrendingCarousel = ({ trendingMovies }) => {
                     </svg>
                   </li>
                   <li className="flex pl-3 pr-3 items-center">
-                    {Card.category === "Movie" ? (
+                    {Card.category === 'Movie' ? (
                       <svg
                         width="12"
                         height="12"
@@ -78,7 +78,7 @@ export const TrendingCarousel = ({ trendingMovies }) => {
                           opacity=".75"
                         />
                       </svg>
-                    ) : Card.category === "TV Series" ? (
+                    ) : Card.category === 'TV Series' ? (
                       <svg
                         width="12"
                         height="12"
@@ -114,7 +114,7 @@ export const TrendingCarousel = ({ trendingMovies }) => {
                   </li>
                   <li className="pl-2">{Card.rating}</li>
                 </ul>
-                <h2 className="lg:text-hm md:text-hm text-hs text-white font-bold font-medium font-outfit">
+                <h2 className="lg:text-hm md:text-hm text-hs text-white font-medium font-outfit">
                   {Card.title}
                 </h2>
               </div>

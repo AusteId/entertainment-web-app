@@ -8,6 +8,7 @@ import { ImageInput } from './ImageInput';
 import { ImageCropper } from './ImageCropper';
 import { resizeBase64Image } from '../../utils/base64Resize';
 import { imgToBase64 } from '../../utils/imgToBase64';
+import { editBase64 } from '../../utils/editBase64';
 
 export const EditModal = ({ open, onClose, onSave, movie }) => {
   const [categories, setCategories] = useState([]);
@@ -26,13 +27,14 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
   //****************** */
 
   const setImageValue = () => {
-    if (movie.thumbnail.regular.medium.includes('medium.jpg')) {
-      // reikia paversti base64
-      // const base64 = imgToBase64(movie.thumbnail.regular.medium);
-      // console.log(base64);
-    } else {
+    if (!movie.thumbnail.regular.medium.includes('medium.jpg')) {
       setImgAfterCrop(movie.thumbnail.regular.medium);
       setImage(movie.thumbnail.regular.medium);
+      setTrendingLarge(movie.thumbnail.trending.large);
+      setTrendingSmall(movie.thumbnail.trending.small);
+      setRegularLarge(movie.thumbnail.regular.large);
+      setRegularMedium(movie.thumbnail.regular.medium);
+      setRegularSmall(movie.thumbnail.regular.small);
     }
   };
 
@@ -50,38 +52,27 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
       const reader = new FileReader();
       reader.readAsDataURL(res);
       reader.onload = function (e) {
-        setImage(reader.result);
-
-        // resize for trending
-        const imgCroppedArea = { x: 1, y: 1, width: 470, height: 230 };
-        resizeBase64Image(
-          reader.result,
-          imgCroppedArea,
-          940,
-          460,
-          (resizedBase64) => {
-            setTrendingLarge(resizedBase64);
-          }
+        // trending large
+        editBase64(reader.result, 940, 460).then((resized) =>
+          setTrendingLarge(resized)
         );
-
-        // trending small 480x280
-        resizeBase64Image(image, imgCroppedArea, 480, 280, (resizedBase64) => {
-          setTrendingSmall(resizedBase64);
-        });
-        // regular large 560x348
-        resizeBase64Image(image, imgCroppedArea, 560, 348, (resizedBase64) => {
-          setRegularLarge(resizedBase64);
-        });
+        // trending small
+        editBase64(reader.result, 480, 280).then((resized) =>
+          setTrendingSmall(resized)
+        );
+        // regular large
+        editBase64(reader.result, 560, 348).then((resized) =>
+          setRegularLarge(resized)
+        );
         // regular medium
-        resizeBase64Image(image, imgCroppedArea, 440, 280, (resizedBase64) => {
-          setRegularMedium(resizedBase64);
-        });
-
-        // regular small 328x220
-        resizeBase64Image(image, imgCroppedArea, 328, 220, (resizedBase64) => {
-          setRegularSmall(resizedBase64);
-        });
-
+        editBase64(reader.result, 440, 280).then((resized) =>
+          setRegularMedium(resized)
+        );
+        // regular small
+        editBase64(reader.result, 328, 220).then((resized) =>
+          setRegularSmall(resized)
+        );
+        setImage(reader.result);
         setImgAfterCrop(reader.result);
       };
     }
@@ -168,17 +159,32 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
         canvasEl.width,
         canvasEl.height
       );
-      //context.scale(22, 14);
+
       const dataURL = canvasEl.toDataURL('image/jpeg', 1);
       setImgAfterCrop(dataURL);
+
       //trending large
       resizeBase64Image(image, imgCroppedArea, 940, 460, (resizedBase64) => {
         setTrendingLarge(resizedBase64);
+      });
+      // trending small 480x280
+      resizeBase64Image(image, imgCroppedArea, 480, 280, (resizedBase64) => {
+        setTrendingSmall(resizedBase64);
+      });
+      // regular large 560x348
+      resizeBase64Image(image, imgCroppedArea, 560, 348, (resizedBase64) => {
+        setRegularLarge(resizedBase64);
       });
       // regular medium
       resizeBase64Image(image, imgCroppedArea, 440, 280, (resizedBase64) => {
         setRegularMedium(resizedBase64);
       });
+
+      // regular small 328x220
+      resizeBase64Image(image, imgCroppedArea, 328, 220, (resizedBase64) => {
+        setRegularSmall(resizedBase64);
+      });
+
       setNoImageError('');
       setCurrentPage('img-cropped');
     };
@@ -213,22 +219,22 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
         <form
           noValidate
           onSubmit={handleSubmit(handleSave)}
-          className='body-sm flex flex-col gap-3 max-w-md w-full'
+          className="body-sm flex flex-col gap-3 max-w-md w-full"
         >
           <div>
-            <h2 className='heading-md'>Edit Movie</h2>
+            <h2 className="heading-md">Edit Movie</h2>
           </div>
           {/* Movie title */}
-          <div className='flex flex-col gap-1'>
-            <label htmlFor='title' className='body-md text-opacity-50'>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="title" className="body-md text-opacity-50">
               Title
             </label>
             <input
-              className='w-full rounded-lg p-1 bg-darkBlue heading-xs'
-              id='title'
-              type='text'
-              placeholder='Movie title'
-              autoComplete='off'
+              className="w-full rounded-lg p-1 bg-darkBlue heading-xs"
+              id="title"
+              type="text"
+              placeholder="Movie title"
+              autoComplete="off"
               {...register('title', {
                 required: 'Please enter movie title',
                 maxLength: {
@@ -236,25 +242,25 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
                   message: 'Movie title should not exceed 50 characters length',
                 },
                 pattern: {
-                  value: /^[0-9a-zA-ZÀ-ž:'\s]+$/,
+                  value: /^[0-9a-zA-ZÀ-ž'-:\s]+$/,
                   message: 'Movie title can contain alphanumeric characters',
                 },
               })}
             />
             {errors.title && (
-              <span role='alert' className='text-red body-sm'>
+              <span role="alert" className="text-red body-sm">
                 {errors.title.message}
               </span>
             )}
           </div>
           {/* Movie category */}
-          <div className='flex gap-2'>
-            <label htmlFor='category' className='body-md text-opacity-50'>
+          <div className="flex gap-2">
+            <label htmlFor="category" className="body-md text-opacity-50">
               Category
             </label>
             <select
-              id='category'
-              className='bg-darkBlue heading-xs'
+              id="category"
+              className="bg-darkBlue heading-xs"
               {...register('category', { required: 'Please select category' })}
             >
               <option value={''}>--select category--</option>
@@ -265,21 +271,21 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
               ))}
             </select>
             {errors.category && (
-              <span role='alert' className='text-red body-sm'>
+              <span role="alert" className="text-red body-sm">
                 {errors.category.message}
               </span>
             )}
           </div>
           {/* Movie year */}
-          <div className='flex gap-4'>
-            <label htmlFor='year' className='body-md text-opacity-50'>
+          <div className="flex gap-4">
+            <label htmlFor="year" className="body-md text-opacity-50">
               Release year
             </label>
             <input
-              className='bg-darkBlue heading-xs'
-              id='year'
-              type='number'
-              placeholder='Movie title'
+              className="bg-darkBlue heading-xs"
+              id="year"
+              type="number"
+              placeholder="Movie title"
               {...register('year', {
                 required: 'Please select movie year',
                 min: {
@@ -294,30 +300,30 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
               })}
             />
             {errors.year && (
-              <span role='alert' className='text-red body-sm'>
+              <span role="alert" className="text-red body-sm">
                 {errors.year.message}
               </span>
             )}
           </div>
           {/* Trending */}
-          <div className='flex gap-4 items-center'>
-            <label htmlFor='isTrending' className='body-md text-opacity-50'>
+          <div className="flex gap-4 items-center">
+            <label htmlFor="isTrending" className="body-md text-opacity-50">
               Is trending?
             </label>
             <input
-              type='checkbox'
-              id='isTrending'
+              type="checkbox"
+              id="isTrending"
               {...register('isTrending')}
             />
           </div>
           {/* Movie rating */}
-          <div className='flex gap-3'>
-            <label htmlFor='rating' className='body-md text-opacity-50'>
+          <div className="flex gap-3">
+            <label htmlFor="rating" className="body-md text-opacity-50">
               Rating
             </label>
             <select
-              id='rating'
-              className='bg-darkBlue heading-xs'
+              id="rating"
+              className="bg-darkBlue heading-xs"
               {...register('rating', { required: 'Please select rating' })}
             >
               <option value={''}>--select rating--</option>
@@ -328,7 +334,7 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
               ))}
             </select>
             {errors.rating && (
-              <span role='alert' className='text-red body-sm'>
+              <span role="alert" className="text-red body-sm">
                 {errors.rating.message}
               </span>
             )}
@@ -336,11 +342,11 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
 
           {/* Image cropper */}
           <div>
-            <p className='body-sm text-red py-2 text-center'>
+            <p className="body-sm text-red py-2 text-center">
               Recommended poster size 940x460
             </p>
-            {noImageError && <p className='body-md text-red'>{noImageError}</p>}
-            <div className='w-full h-[80%] flex items-center justify-center'>
+            {noImageError && <p className="body-md text-red">{noImageError}</p>}
+            <div className="w-full h-[80%] flex items-center justify-center">
               {currentPage === 'choose-img' ? (
                 <ImageInput onImageSelected={onImageSelected} />
               ) : currentPage === 'crop-img' ? (
@@ -350,18 +356,18 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
                   onCropCancel={onCropCancel}
                 />
               ) : (
-                <div className='flex flex-col gap-2'>
-                  <img src={imgAfterCrop} alt='cropped' />
-                  <div className='flex gap-2 justify-center'>
+                <div className="flex flex-col gap-2">
+                  <img src={imgAfterCrop} alt="cropped" />
+                  <div className="flex gap-2 justify-center">
                     <p
                       onClick={handleChangeImage}
-                      className='p-2 cursor-pointer hover:text-red heading-xs'
+                      className="p-2 cursor-pointer hover:text-red heading-xs"
                     >
                       Change Image
                     </p>
                     <p
                       onClick={() => setCurrentPage('crop-img')}
-                      className='p-2 cursor-pointer hover:text-red heading-xs'
+                      className="p-2 cursor-pointer hover:text-red heading-xs"
                     >
                       Crop
                     </p>
@@ -379,16 +385,16 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
           >
             <button
               disabled={currentPage === 'crop-img'}
-              type='submit'
-              className='text-white heading-xs bg-lightBlue rounded-lg hover:bg-white hover:text-dark'
+              type="submit"
+              className="text-white heading-xs bg-lightBlue rounded-lg hover:bg-white hover:text-dark"
             >
               Save
             </button>
             <button
               disabled={currentPage === 'crop-img'}
-              type='button'
+              type="button"
               onClick={onClose}
-              className='bg-red heading-xs text-white rounded-lg hover:bg-white hover:text-red'
+              className="bg-red heading-xs text-white rounded-lg hover:bg-white hover:text-red"
             >
               Cancel
             </button>

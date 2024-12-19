@@ -16,18 +16,22 @@ export function resizeBase64Image(
     canvas.width = width;
     canvas.height = height;
 
-    // uzpildom pagal naudotojo apkirkima
-    ctx.drawImage(
-      img,
-      imgCroppedArea.x,
-      imgCroppedArea.y,
-      imgCroppedArea.width,
-      imgCroppedArea.height,
-      0,
-      0,
-      width,
-      height
-    );
+    // uzpildom pagal naudotojo apkirkima arba default
+    if (imgCroppedArea) {
+      ctx.drawImage(
+        img,
+        imgCroppedArea.x,
+        imgCroppedArea.y,
+        imgCroppedArea.width,
+        imgCroppedArea.height,
+        0,
+        0,
+        width,
+        height
+      );
+    } else {
+      ctx.drawImage(img, 0, 0, width, height);
+    }
 
     // drobe -> base64
     const resizedBase64 = canvas.toDataURL();

@@ -32,6 +32,7 @@ export const UserView = ({ user }) => {
     const res = await apiUpdateUser(currUser.id, userData);
     if (!res.error) {
       setCurrUser({ ...currUser, username: res.username, avatar: cropped });
+      setUserDataChanged(false);
       toast.success('User data updated successfully!');
     }
   };
@@ -51,7 +52,7 @@ export const UserView = ({ user }) => {
     }
   };
 
-  const handleImageClick = (imgSelected) => {
+  const handleImageClick = () => {
     inputRef.current.click();
   };
 
@@ -101,29 +102,29 @@ export const UserView = ({ user }) => {
   };
 
   return (
-    <div className='px-2 md:px-3 lg:px-4'>
-      <div className='flex flex-col md:flex-row items-center justify-between lg:mt-5'>
-        <h1 className='heading-lg'>Hello, {currUser.username}</h1>
+    <div className="px-2 md:px-3 lg:px-4">
+      <div className="flex flex-col md:flex-row items-center justify-between lg:mt-5">
+        <h1 className="heading-lg">Hello, {currUser.username}</h1>
         {currUser.role === 'ADMIN' && (
           <Link to={'/admin'}>
-            <h2 className='heading-xs border border-lightBlue hover:bg-dark text-red py-2 px-4 rounded-xl bg-darkBlue'>
+            <h2 className="heading-xs border border-lightBlue hover:bg-dark text-red py-2 px-4 rounded-xl bg-darkBlue">
               Admin Panel
             </h2>
           </Link>
         )}
       </div>
-      <div className='heading-md max-w-md mx-auto'>
-        <div className='flex flex-col'>
+      <div className="heading-md max-w-md mx-auto p-4 border border-lightBlue rounded-xl mt-5">
+        <div className="flex flex-col items-center justify-center">
           <input
-            id='hiddenInputAvatar'
-            className='invisible w-0'
-            type='file'
-            accept='image/*'
+            id="hiddenInputAvatar"
+            className="invisible w-0"
+            type="file"
+            accept="image/*"
             ref={inputRef}
             onChange={handleOnChange}
           />
           <img
-            className='rounded-full w-60 cursor-pointer'
+            className="rounded-full w-60 cursor-pointer"
             src={`${
               cropped ? cropped : currUser.avatar ? currUser.avatar : avatar
             }`}
@@ -139,24 +140,24 @@ export const UserView = ({ user }) => {
           )}
         </div>
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
-          <div className='my-5 flex items-center justify-center'></div>
-          <div className='flex flex-col gap-4 items-center'>
+          <div className="my-5 flex items-center justify-center"></div>
+          <div className="flex flex-col gap-4 items-center">
             {/* Username ******************************************/}
-            <div className='flex flex-col gap-2'>
-              <div className='grid grid-cols-9 items-center gap-2'>
-                <div className='col-span-3 justify-self-end'>
-                  <label className='text-sm opacity-70' htmlFor='username'>
+            <div className="flex flex-col gap-2">
+              <div className="grid grid-cols-9 items-center gap-2">
+                <div className="col-span-3 justify-self-end">
+                  <label className="text-sm opacity-70" htmlFor="username">
                     Username
                   </label>
                 </div>
-                <div className='col-span-6'>
+                <div className="col-span-6">
                   <input
-                    className='w-full p-2 rounded-lg border border-white border-opacity-50 bg-darkBlue'
+                    className="w-full p-2 rounded-lg border border-white border-opacity-50 bg-darkBlue"
                     // aria-invalid={errors.username ? 'true' : 'false'}
-                    type='text'
-                    id='username'
+                    type="text"
+                    id="username"
                     onKeyUp={handleUsernameChange}
-                    autoComplete='off'
+                    autoComplete="off"
                     {...register('username', {
                       required: 'Username field cannot be empty',
                     })}
@@ -164,26 +165,26 @@ export const UserView = ({ user }) => {
                 </div>
               </div>
               {errors.username && (
-                <span className='text-sm text-right text-red' role='alert'>
+                <span className="text-sm text-right text-red" role="alert">
                   {errors.username.message}
                 </span>
               )}
             </div>
             {/* Email ******************************************/}
-            <div className='flex flex-col gap-2'>
-              <div className='grid grid-cols-9 items-center gap-2'>
-                <div className='col-span-3 justify-self-end'>
-                  <label className='text-sm opacity-70' htmlFor='email'>
+            <div className="flex flex-col gap-2">
+              <div className="grid grid-cols-9 items-center gap-2">
+                <div className="col-span-3 justify-self-end">
+                  <label className="text-sm opacity-70" htmlFor="email">
                     Email
                   </label>
                 </div>
-                <div className='col-span-6'>
+                <div className="col-span-6">
                   <input
                     disabled
-                    className='w-full p-2 rounded-lg border border-white border-opacity-50 bg-darkBlue opacity-50'
-                    type='text'
-                    id='email'
-                    autoComplete='on'
+                    className="w-full p-2 rounded-lg border border-white border-opacity-50 bg-darkBlue opacity-50"
+                    type="text"
+                    id="email"
+                    autoComplete="on"
                     {...register('email')}
                   />
                 </div>

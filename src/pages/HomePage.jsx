@@ -27,10 +27,7 @@ export default function HomePage() {
 
   const handleSearch = (textString) => {
     if (textString) {
-      const combinedMovies = [
-        ...trending,
-        ...recommended
-      ];
+      const combinedMovies = [...trending, ...recommended];
       const filteredMovies = combinedMovies.filter((movie) =>
         movie.title.toLowerCase().includes(textString.toLowerCase())
       );
@@ -52,6 +49,7 @@ export default function HomePage() {
           <TrendingCarousel trendingMovies={trending} />
         </>
       )}
+
       <MoviesList movies={filteredRecommended} searchText={searchText} />
     </div>
   );
