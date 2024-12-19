@@ -3,8 +3,6 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router';
 
-import avatar from '/assets/avatar.png';
-import { ImageInput } from './ImageInput';
 import { apiUpdateUser } from '../../api/users';
 
 export const UserView = ({ user }) => {
