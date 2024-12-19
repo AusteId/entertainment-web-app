@@ -11,6 +11,9 @@
     background-color: rgba(255, 255, 255, 0.2);
   }
 }
+picture img {
+width: 100%;
+}
 
 .list-text-color ul li:nth-child(even) {
   margin-top: 8px;

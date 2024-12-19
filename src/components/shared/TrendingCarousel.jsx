@@ -19,7 +19,7 @@ export const TrendingCarousel = ({ trendingMovies }) => {
         breakpoints={{
           320: { slidesPerView: 1.5 },
           768: { slidesPerView: 1.5 },
-          1024: { slidesPerView: 2.5 },
+          1280: { slidesPerView: 2.5 },
         }}
       >
         {trendingMovies.map((Card) => (
@@ -33,7 +33,7 @@ export const TrendingCarousel = ({ trendingMovies }) => {
                   alt="thumbnail"
                 />
                 <source
-                  media="(min-width: 768px) and (max-width: 1023px)"
+                  media="(min-width: 768px) and (max-width: 1279px)"
                   srcSet={Card.thumbnail.trending.large}
                   alt="thumbnail"
                 />
