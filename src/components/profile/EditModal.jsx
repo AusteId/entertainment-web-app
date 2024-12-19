@@ -19,7 +19,10 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
 
   //********* thumbnails */
   const [trendingLarge, setTrendingLarge] = useState('');
+  const [trendingSmall, setTrendingSmall] = useState('');
+  const [regularLarge, setRegularLarge] = useState('');
   const [regularMedium, setRegularMedium] = useState('');
+  const [regularSmall, setRegularSmall] = useState('');
   //****************** */
 
   const setImageValue = () => {
@@ -61,7 +64,24 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
           }
         );
 
-        setRegularMedium(reader.result);
+        // trending small 480x280
+        resizeBase64Image(image, imgCroppedArea, 480, 280, (resizedBase64) => {
+          setTrendingSmall(resizedBase64);
+        });
+        // regular large 560x348
+        resizeBase64Image(image, imgCroppedArea, 560, 348, (resizedBase64) => {
+          setRegularLarge(resizedBase64);
+        });
+        // regular medium
+        resizeBase64Image(image, imgCroppedArea, 440, 280, (resizedBase64) => {
+          setRegularMedium(resizedBase64);
+        });
+
+        // regular small 328x220
+        resizeBase64Image(image, imgCroppedArea, 328, 220, (resizedBase64) => {
+          setRegularSmall(resizedBase64);
+        });
+
         setImgAfterCrop(reader.result);
       };
     }
@@ -193,22 +213,22 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
         <form
           noValidate
           onSubmit={handleSubmit(handleSave)}
-          className="body-sm flex flex-col gap-3 max-w-md w-full"
+          className='body-sm flex flex-col gap-3 max-w-md w-full'
         >
           <div>
-            <h2 className="heading-md">Edit Movie</h2>
+            <h2 className='heading-md'>Edit Movie</h2>
           </div>
           {/* Movie title */}
-          <div className="flex flex-col gap-1">
-            <label htmlFor="title" className="heading-xs text-opacity-50">
+          <div className='flex flex-col gap-1'>
+            <label htmlFor='title' className='heading-xs text-opacity-50'>
               Title
             </label>
             <input
-              className="w-full rounded-lg p-1 bg-darkBlue body-sm"
-              id="title"
-              type="text"
-              placeholder="Movie title"
-              autoComplete="off"
+              className='w-full rounded-lg p-1 bg-darkBlue body-sm'
+              id='title'
+              type='text'
+              placeholder='Movie title'
+              autoComplete='off'
               {...register('title', {
                 required: 'Please enter movie title',
                 maxLength: {
@@ -216,25 +236,25 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
                   message: 'Movie title should not exceed 50 characters length',
                 },
                 pattern: {
-                  value: /^[0-9a-zA-ZÀ-ž\s]+$/,
+                  value: /^[0-9a-zA-ZÀ-ž:'\s]+$/,
                   message: 'Movie title can contain alphanumeric characters',
                 },
               })}
             />
             {errors.title && (
-              <span role="alert" className="text-red body-sm">
+              <span role='alert' className='text-red body-sm'>
                 {errors.title.message}
               </span>
             )}
           </div>
           {/* Movie category */}
-          <div className="flex flex-col gap-1">
-            <label htmlFor="category" className="heading-xs text-opacity-50">
+          <div className='flex flex-col gap-1'>
+            <label htmlFor='category' className='heading-xs text-opacity-50'>
               Category
             </label>
             <select
-              id="category"
-              className="bg-darkBlue body-sm"
+              id='category'
+              className='bg-darkBlue body-sm'
               {...register('category', { required: 'Please select category' })}
             >
               <option value={''}>--select category--</option>
@@ -245,21 +265,21 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
               ))}
             </select>
             {errors.category && (
-              <span role="alert" className="text-red body-sm">
+              <span role='alert' className='text-red body-sm'>
                 {errors.category.message}
               </span>
             )}
           </div>
           {/* Movie year */}
-          <div className="flex gap-4">
-            <label htmlFor="year" className="heading-xs text-opacity-50">
+          <div className='flex gap-4'>
+            <label htmlFor='year' className='heading-xs text-opacity-50'>
               Release year
             </label>
             <input
-              className="bg-darkBlue body-sm"
-              id="year"
-              type="number"
-              placeholder="Movie title"
+              className='bg-darkBlue body-sm'
+              id='year'
+              type='number'
+              placeholder='Movie title'
               {...register('year', {
                 required: 'Please select movie year',
                 min: {
@@ -274,30 +294,30 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
               })}
             />
             {errors.year && (
-              <span role="alert" className="text-red body-sm">
+              <span role='alert' className='text-red body-sm'>
                 {errors.year.message}
               </span>
             )}
           </div>
           {/* Trending */}
-          <div className="flex gap-4 items-center">
-            <label htmlFor="isTrending" className="heading-xs text-opacity-50">
+          <div className='flex gap-4 items-center'>
+            <label htmlFor='isTrending' className='heading-xs text-opacity-50'>
               Is trending?
             </label>
             <input
-              type="checkbox"
-              id="isTrending"
+              type='checkbox'
+              id='isTrending'
               {...register('isTrending')}
             />
           </div>
           {/* Movie rating */}
-          <div className="flex flex-col gap-1">
-            <label htmlFor="rating" className="heading-xs text-opacity-50">
+          <div className='flex flex-col gap-1'>
+            <label htmlFor='rating' className='heading-xs text-opacity-50'>
               Rating
             </label>
             <select
-              id="rating"
-              className="bg-darkBlue body-sm"
+              id='rating'
+              className='bg-darkBlue body-sm'
               {...register('rating', { required: 'Please select rating' })}
             >
               <option value={''}>--select rating--</option>
@@ -308,7 +328,7 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
               ))}
             </select>
             {errors.rating && (
-              <span role="alert" className="text-red body-sm">
+              <span role='alert' className='text-red body-sm'>
                 {errors.rating.message}
               </span>
             )}
@@ -316,11 +336,11 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
 
           {/* Image cropper */}
           <div>
-            <p className="body-sm text-red py-2 text-center">
+            <p className='body-sm text-red py-2 text-center'>
               Recommended poster size 940x460
             </p>
-            {noImageError && <p className="body-md text-red">{noImageError}</p>}
-            <div className="w-full h-[80%] flex items-center justify-center">
+            {noImageError && <p className='body-md text-red'>{noImageError}</p>}
+            <div className='w-full h-[80%] flex items-center justify-center'>
               {currentPage === 'choose-img' ? (
                 <ImageInput onImageSelected={onImageSelected} />
               ) : currentPage === 'crop-img' ? (
@@ -330,18 +350,18 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
                   onCropCancel={onCropCancel}
                 />
               ) : (
-                <div className="flex flex-col gap-2">
-                  <img src={imgAfterCrop} alt="cropped" />
-                  <div className="flex gap-2 justify-center">
+                <div className='flex flex-col gap-2'>
+                  <img src={imgAfterCrop} alt='cropped' />
+                  <div className='flex gap-2 justify-center'>
                     <p
                       onClick={handleChangeImage}
-                      className="p-2 cursor-pointer hover:text-red"
+                      className='p-2 cursor-pointer hover:text-red'
                     >
                       Change Image
                     </p>
                     <p
                       onClick={() => setCurrentPage('crop-img')}
-                      className="p-2 cursor-pointer hover:text-red"
+                      className='p-2 cursor-pointer hover:text-red'
                     >
                       Crop
                     </p>
@@ -352,19 +372,19 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
           </div>
 
           {/* End image cropper */}
-          <div className="flex gap-3 items-center justify-center mt-3">
+          <div className='flex gap-3 items-center justify-center mt-3'>
             <button
               disabled={currentPage === 'crop-img'}
-              type="submit"
-              className="text-white bg-lightBlue rounded-lg hover:bg-white hover:text-lightBlue"
+              type='submit'
+              className='text-white bg-lightBlue rounded-lg hover:bg-white hover:text-lightBlue'
             >
               Save
             </button>
             <button
               disabled={currentPage === 'crop-img'}
-              type="button"
+              type='button'
               onClick={onClose}
-              className="bg-red text-white rounded-lg hover:bg-white hover:text-red"
+              className='bg-red text-white rounded-lg hover:bg-white hover:text-red'
             >
               Cancel
             </button>

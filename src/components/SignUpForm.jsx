@@ -5,6 +5,7 @@ import { addUser } from '../api/post';
 import { generateHash } from '../utils/passwordHash';
 import Button from './shared/Button';
 import logo from '/assets/logo.svg';
+import toast from 'react-hot-toast';
 
 const SignUpForm = ({ onLogin }) => {
   const {
@@ -60,6 +61,7 @@ const SignUpForm = ({ onLogin }) => {
         setUsers((prev) => [...prev, newUser]);
         reset();
         setErrorMessage('');
+        toast.success('You have successfully signed up. Please login!');
         onLogin();
       }
     } catch (error) {
