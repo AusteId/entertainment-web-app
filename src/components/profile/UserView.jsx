@@ -28,6 +28,7 @@ export const UserView = ({ user }) => {
   });
 
   const onSubmit = async (formData) => {
+    if (!cropped) setCropped(currUser.avatar);
     const userData = { username: formData.username, avatar: cropped };
     const res = await apiUpdateUser(currUser.id, userData);
     if (!res.error) {
