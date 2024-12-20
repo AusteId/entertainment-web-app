@@ -31,7 +31,7 @@ export const AvatarCropper = ({ image, onCropDone, onCropCancel }) => {
           }}
         />
       </div>
-      <div className='flex gap-2 justify-center mt-5'>
+      <div className='absolute left-0 right-0 bottom-96 my-auto mx-auto flex gap-2 justify-center mt-5'>
         <button
           className='rounded-lg hover:bg-white hover:text-dark heading-xs'
           onClick={() => {

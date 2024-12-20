@@ -82,6 +82,11 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
     const res = await apiGetMovieCategoriesAndRatings();
     setCategories(res.categories);
     setRatings(res.ratings);
+    setValue('title', movie.title);
+    setValue('rating', movie.rating);
+    setValue('category', movie.category);
+    setValue('isTrending', movie.isTrending);
+    setValue('year', movie.year);
   }
 
   const {
@@ -90,12 +95,6 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
     formState: { errors },
     setValue,
   } = useForm();
-
-  setValue('title', movie.title);
-  setValue('rating', movie.rating);
-  setValue('category', movie.category);
-  setValue('isTrending', movie.isTrending);
-  setValue('year', movie.year);
 
   async function handleSave(formData) {
     if (!imgAfterCrop) {
@@ -219,22 +218,22 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
         <form
           noValidate
           onSubmit={handleSubmit(handleSave)}
-          className="body-sm flex flex-col gap-3 max-w-md w-full"
+          className='body-sm flex flex-col gap-3 max-w-md w-full'
         >
           <div>
-            <h2 className="heading-md">Edit Movie</h2>
+            <h2 className='heading-md'>Edit Movie</h2>
           </div>
           {/* Movie title */}
-          <div className="flex flex-col gap-1">
-            <label htmlFor="title" className="body-md text-opacity-50">
+          <div className='flex flex-col gap-1'>
+            <label htmlFor='title' className='body-md text-opacity-50'>
               Title
             </label>
             <input
-              className="w-full rounded-lg p-1 bg-darkBlue heading-xs"
-              id="title"
-              type="text"
-              placeholder="Movie title"
-              autoComplete="off"
+              className='w-full rounded-lg p-1 bg-darkBlue heading-xs'
+              id='title'
+              type='text'
+              placeholder='Movie title'
+              autoComplete='off'
               {...register('title', {
                 required: 'Please enter movie title',
                 maxLength: {
@@ -248,19 +247,19 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
               })}
             />
             {errors.title && (
-              <span role="alert" className="text-red body-sm">
+              <span role='alert' className='text-red body-sm'>
                 {errors.title.message}
               </span>
             )}
           </div>
           {/* Movie category */}
-          <div className="flex gap-2">
-            <label htmlFor="category" className="body-md text-opacity-50">
+          <div className='flex gap-2'>
+            <label htmlFor='category' className='body-md text-opacity-50'>
               Category
             </label>
             <select
-              id="category"
-              className="bg-darkBlue heading-xs"
+              id='category'
+              className='bg-darkBlue heading-xs'
               {...register('category', { required: 'Please select category' })}
             >
               <option value={''}>--select category--</option>
@@ -271,21 +270,21 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
               ))}
             </select>
             {errors.category && (
-              <span role="alert" className="text-red body-sm">
+              <span role='alert' className='text-red body-sm'>
                 {errors.category.message}
               </span>
             )}
           </div>
           {/* Movie year */}
-          <div className="flex gap-4">
-            <label htmlFor="year" className="body-md text-opacity-50">
+          <div className='flex gap-4'>
+            <label htmlFor='year' className='body-md text-opacity-50'>
               Release year
             </label>
             <input
-              className="bg-darkBlue heading-xs"
-              id="year"
-              type="number"
-              placeholder="Movie title"
+              className='bg-darkBlue heading-xs'
+              id='year'
+              type='number'
+              placeholder='Movie title'
               {...register('year', {
                 required: 'Please select movie year',
                 min: {
@@ -300,30 +299,30 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
               })}
             />
             {errors.year && (
-              <span role="alert" className="text-red body-sm">
+              <span role='alert' className='text-red body-sm'>
                 {errors.year.message}
               </span>
             )}
           </div>
           {/* Trending */}
-          <div className="flex gap-4 items-center">
-            <label htmlFor="isTrending" className="body-md text-opacity-50">
+          <div className='flex gap-4 items-center'>
+            <label htmlFor='isTrending' className='body-md text-opacity-50'>
               Is trending?
             </label>
             <input
-              type="checkbox"
-              id="isTrending"
+              type='checkbox'
+              id='isTrending'
               {...register('isTrending')}
             />
           </div>
           {/* Movie rating */}
-          <div className="flex gap-3">
-            <label htmlFor="rating" className="body-md text-opacity-50">
+          <div className='flex gap-3'>
+            <label htmlFor='rating' className='body-md text-opacity-50'>
               Rating
             </label>
             <select
-              id="rating"
-              className="bg-darkBlue heading-xs"
+              id='rating'
+              className='bg-darkBlue heading-xs'
               {...register('rating', { required: 'Please select rating' })}
             >
               <option value={''}>--select rating--</option>
@@ -334,7 +333,7 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
               ))}
             </select>
             {errors.rating && (
-              <span role="alert" className="text-red body-sm">
+              <span role='alert' className='text-red body-sm'>
                 {errors.rating.message}
               </span>
             )}
@@ -342,11 +341,11 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
 
           {/* Image cropper */}
           <div>
-            <p className="body-sm text-red py-2 text-center">
+            <p className='body-sm text-red py-2 text-center'>
               Recommended poster size 940x460
             </p>
-            {noImageError && <p className="body-md text-red">{noImageError}</p>}
-            <div className="w-full h-[80%] flex items-center justify-center">
+            {noImageError && <p className='body-md text-red'>{noImageError}</p>}
+            <div className='w-full h-[80%] flex items-center justify-center'>
               {currentPage === 'choose-img' ? (
                 <ImageInput onImageSelected={onImageSelected} />
               ) : currentPage === 'crop-img' ? (
@@ -356,18 +355,18 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
                   onCropCancel={onCropCancel}
                 />
               ) : (
-                <div className="flex flex-col gap-2">
-                  <img src={imgAfterCrop} alt="cropped" />
-                  <div className="flex gap-2 justify-center">
+                <div className='flex flex-col gap-2'>
+                  <img src={imgAfterCrop} alt='cropped' />
+                  <div className='flex gap-2 justify-center'>
                     <p
                       onClick={handleChangeImage}
-                      className="p-2 cursor-pointer hover:text-red heading-xs"
+                      className='p-2 cursor-pointer hover:text-red heading-xs'
                     >
                       Change Image
                     </p>
                     <p
                       onClick={() => setCurrentPage('crop-img')}
-                      className="p-2 cursor-pointer hover:text-red heading-xs"
+                      className='p-2 cursor-pointer hover:text-red heading-xs'
                     >
                       Crop
                     </p>
@@ -385,16 +384,16 @@ export const EditModal = ({ open, onClose, onSave, movie }) => {
           >
             <button
               disabled={currentPage === 'crop-img'}
-              type="submit"
-              className="text-white heading-xs bg-lightBlue rounded-lg hover:bg-white hover:text-dark"
+              type='submit'
+              className='text-white heading-xs bg-lightBlue rounded-lg hover:bg-white hover:text-dark'
             >
               Save
             </button>
             <button
               disabled={currentPage === 'crop-img'}
-              type="button"
+              type='button'
               onClick={onClose}
-              className="bg-red heading-xs text-white rounded-lg hover:bg-white hover:text-red"
+              className='bg-red heading-xs text-white rounded-lg hover:bg-white hover:text-red'
             >
               Cancel
             </button>
