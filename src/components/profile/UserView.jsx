@@ -140,7 +140,7 @@ export const UserView = ({ user }) => {
           )}
         </div>
         <form 
-        className="mr-20"
+        className="mr-20 text-bm"
         noValidate onSubmit={handleSubmit(onSubmit)}>
           <div className="my-5 flex items-center justify-center"></div>
           <div className="flex flex-col gap-4 items-center">
