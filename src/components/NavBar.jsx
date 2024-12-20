@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { NavLink } from 'react-router';
 import { useUserContext } from '../service/UserContextProvider';
+import avatar from '/assets/image-avatar.png';
 
 const navItems = [
   { to: '/#', icon: 'icon-nav-home.svg', label: 'Home' },
@@ -9,15 +10,15 @@ const navItems = [
   { to: '/bookmarked', icon: 'icon-nav-bookmark.svg', label: 'Bookmark' },
 ];
 
-const Logo = () => (
+const Logo = React.memo(() => (
   <img
     src='/assets/logo.svg'
     alt='Logo'
     className='w-[1.5625rem] h-[1.25rem] md:w-[2rem] md:h-[1.6rem]'
   />
-);
+));
 
-const NavIcon = ({ to, icon, label }) => (
+const NavIcon = React.memo(({ to, icon, label }) => (
   <NavLink
     to={to}
     className={({ isActive }) =>
@@ -36,10 +37,11 @@ const NavIcon = ({ to, icon, label }) => (
     />
     <span className='sr-only'>{label}</span>
   </NavLink>
-);
+));
 
-const DropdownMenu = ({ isOpen, onLogout, onClose }) => {
-  return isOpen ? (
+const DropdownMenu = React.memo(({ isOpen, onLogout, onClose }) => {
+  if (!isOpen) return null;
+  return (
     <div className="absolute right-0 mt-2 xl:left-[4rem] xl:bottom-0 bg-darkBlue text-white border-2 border-lightBlue rounded-xl shadow-lg p-[0.5rem] flex flex-col space-y-2 w-40">
       <NavLink
         to="/profile"
@@ -55,11 +57,10 @@ const DropdownMenu = ({ isOpen, onLogout, onClose }) => {
         Sign Out
       </button>
     </div>
-  ) : null;
-};
+  );
+});
 
-
-const ConfirmationModal = ({ show, onConfirm, onCancel }) => {
+const ConfirmationModal = React.memo(({ show, onConfirm, onCancel }) => {
   if (!show) return null;
 
   return (
@@ -85,17 +86,17 @@ const ConfirmationModal = ({ show, onConfirm, onCancel }) => {
       </div>
     </div>
   );
-};
+});
 
 const Avatar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { setUserLoggedOut } = useUserContext();
+  const { avatar: userAvatar, setUserLoggedOut } = useUserContext();
   const dropdownRef = useRef(null);
   const avatarRef = useRef(null);
 
-  const toggleDropdown = () => setIsDropdownOpen(prev => !prev);
-
+  const toggleDropdown = useCallback(() => setIsDropdownOpen(prev => !prev), []);
+  
   const handleClickOutside = useCallback((event) => {
     if (
       dropdownRef.current && !dropdownRef.current.contains(event.target) && 
@@ -106,8 +107,9 @@ const Avatar = () => {
   }, []);
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    const handle = (e) => handleClickOutside(e);
+    document.addEventListener('mousedown', handle);
+    return () => document.removeEventListener('mousedown', handle);
   }, [handleClickOutside]);
 
   const handleLogout = () => {
@@ -125,23 +127,21 @@ const Avatar = () => {
   };
 
   return (
-    <div className="relative group">
-      <NavLink to="#" onClick={toggleDropdown} ref={avatarRef}>
+    <div className="relative group" ref={dropdownRef}>
+      <NavLink to="#" onClick={toggleDropdown}>
         <img
-          src="/assets/image-avatar.png"
+          src={userAvatar || avatar}
           alt="Avatar"
           className="rounded-full border border-white w-[1.5rem] h-[1.5rem] md:w-[2rem] md:h-[2rem] xl:w-[2.5rem] xl:h-[2.5rem]"
         />
       </NavLink>
       
-      <div ref={dropdownRef}>
-        <DropdownMenu
-          isOpen={isDropdownOpen}
-          onLogout={handleLogout}
-          onClose={() => setIsDropdownOpen(false)}
-        />
-      </div>
-
+      <DropdownMenu
+        isOpen={isDropdownOpen}
+        onLogout={handleLogout}
+        onClose={() => setIsDropdownOpen(false)}
+      />
+      
       <ConfirmationModal
         show={isModalOpen}
         onConfirm={confirmLogout}
