@@ -139,7 +139,9 @@ export const UserView = ({ user }) => {
             />
           )}
         </div>
-        <form noValidate onSubmit={handleSubmit(onSubmit)}>
+        <form 
+        className="mr-20"
+        noValidate onSubmit={handleSubmit(onSubmit)}>
           <div className="my-5 flex items-center justify-center"></div>
           <div className="flex flex-col gap-4 items-center">
             {/* Username ******************************************/}
